@@ -1,0 +1,10 @@
+pikaybh :
+  username: pikaybh    # user name : martin
+  name: Byung Hee Yoo        # user full name : Martin Luther King
+  url_full:             # Homepage url
+  url:
+  bio: 
+  picture: # assets/built/images/economy-author-logo.jpg   # author image
+  facebook:             # facebook ID
+  twitter:              # twitter ID
+  cover: False
