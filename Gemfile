@@ -36,3 +36,6 @@ gem "webrick", "~> 1.7"
 
 # admin
 gem 'jekyll-admin', group: :jekyll_plugins
+
+# multi languages plugin
+# gem 'jekyll-multiple-languages-plugin'

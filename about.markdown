@@ -4,15 +4,18 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+### BS
+---
+![단국대][단국대_로고]
+#### 건축공학과
+DKU(23'02 졸예)
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+### S/W skills
+---
+JS, python, ...
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+### 활동
+---
+포트폴리오에 있는 것들...
 
-
-[jekyll-organization]: https://github.com/jekyll
+[단국대_로고]: https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/Dankook_University_emblem.svg/100px-Dankook_University_emblem.svg.png
