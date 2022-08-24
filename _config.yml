@@ -38,6 +38,11 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://pikaybh.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 favicon: "" # the favicon for your site
 
+facebook: pikaybh
+twitter:
+instagram: pikaybh
+github: pikaybh
+
 # Yat date format
 # refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
 yat:
@@ -122,20 +127,21 @@ sitemap: true
 
 # Code badge setting
 # You can enable or disable the code badge and so on
-# code_badge:
+code_badge:
 #   enabled: "true"
 #   color: "#fff"
+  background_color: "silver"
 #   background_color: "#ff4e00"
 #   text_transform: "uppercase"  # ("uppercase", "lowercase", "capitalize")
 
 # If you want to link only specific pages in your header, uncomment
 # this and add the path to the pages in order as they should show up
 # header_pages:
-#   - index.html
-#   - archives.html
-#   - categories.html
-#   - tags.html
-#   - about.md
+  # - index.html
+  # - archives.html
+  # - categories.html
+  # - tags.html
+  # - about.md
 
 # Page default value
 # defaults:

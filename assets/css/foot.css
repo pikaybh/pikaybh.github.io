@@ -1,0 +1,26 @@
+ul {
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.svg-icon {
+    max-height: 18px;
+    max-width: 18px;
+}
+
+.footer-col-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-col {
+    flex-direction: row;
+    width: 300px;
+}
+
+@media only screen and (max-width: 600px) {
+    .footer-col-wrapper {
+        flex-direction: column;
+    }
+}
