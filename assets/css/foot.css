@@ -4,6 +4,10 @@ ul {
     list-style: none;
 }
 
+.footer2home {
+    color: #333333 !important;
+}
+
 .svg-icon {
     max-height: 18px;
     max-width: 18px;
