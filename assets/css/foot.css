@@ -20,6 +20,10 @@ ul {
 }
 
 @media only screen and (max-width: 600px) {
+    .footer-heading {
+        margin-bottom: 0;
+    }
+
     .footer-col-wrapper {
         flex-direction: column;
     }
