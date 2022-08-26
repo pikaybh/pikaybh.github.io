@@ -1,0 +1,5 @@
+@media only screen and (max-width: 600px) {
+    #goog-gt-tt {
+        max-width: 450px;
+    }
+}
