@@ -14,10 +14,12 @@ jobs:
       - name: Every time
         run: echo "This step will run in minute of 15"
 
-      - uses: actions/checkout@v2
+      # - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # Use GitHub Actions' cache to cache dependencies on servers
-      - uses: actions/cache@v1
+      # - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
