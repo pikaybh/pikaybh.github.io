@@ -5,14 +5,14 @@ on:
     branches:
       - master  # Here source code branch is `master`, it could be other branch
   schedule:
-    - cron:  '55 * * * *'
+    - cron:  '15 * * * *'
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Every time
-        run: echo "This step will run in minute of 55"
+        run: echo "This step will run in minute of 15"
 
       - uses: actions/checkout@v2
 
