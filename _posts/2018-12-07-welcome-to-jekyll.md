@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Welcome to Jekyll!
-subtitle: A awesome static site generator.
+subheading: A awesome static site generator.
 author: Jeffrey
 categories: jekyll
 banner:

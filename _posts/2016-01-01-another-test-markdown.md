@@ -20,13 +20,6 @@ $ \int\_a^b f(x)\,dx. $
 
 \\( \int\_a^b f(x)\,dx. \\)
 
-$$
-\begin{cases}
-\text{if true}\ foo \\
-\text{if false}\ bar
-\end{cases}
-$$
-
 $ \rho {\rm{FOD}} = \sum\limits{\sigma ,i} {(\delta _1 - \delta _2 n_i^\sigma )|\phi _i^\sigma ({\bf{r}})|^2} $
 
 $$ \rho {\rm{FOD}} = \sum\limits{\sigma ,i} {(\delta _1 - \delta _2 n_i^\sigma )|\phi _i^\sigma ({\bf{r}})|^2} $$
@@ -108,19 +101,6 @@ void insert(const char* key) {
 
 ```ruby
 p ":+1:"
-```
-
-``` diff
-+        'user_exists' => 'SELECT EXISTS(SELECT 1 FROM table WHERE username = (:username || \'@sample'))',
-+        'get_users' => 'SELECT split_part(username, \'@\', 1) FROM table WHERE (username ILIKE :search) OR (name ILIKE :search)',
-+        'get_password_hash_for_user' => 'SELECT split_part(password, \'{CRYPT}\', 2) FROM table WHERE username = (:username || \'@sample\')',
-+        'set_password_hash_for_user' => 'UPDATE table SET password =  \'{CRYPT}\' || :new_password_hash WHERE username = (:username || \'@sample\')',
-```
-
-Reload the Nginx:
-
-``` console
-$ sudo nginx -s reload
 ```
 
 |:                        |:                  :|: $$O_3 + C_2H_2 \rightarrow $$         :|||:  $$O_3 + C_2H_4 \rightarrow $$ :|||:       :| 
@@ -240,16 +220,6 @@ $\LaTeX{}$
 Bob -> Alice : hello
 @enduml
 
-## Mermaid
-
-```mermaid!
-graph LR
-  concurrent.futures --->| on top of | threading
-  concurrent.futures --->| on top of | multiprocessing
-  threading --->| on top of | \_thread
-  click concurrent.futures "https://docs.python.org/3.9/library/concurrent.futures.html" _blank
-```
-
 ## Video
 
 ![Flower](https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm)
@@ -295,10 +265,6 @@ FLAC file (".flac") :
 CAF file (".caf") :
 
 ![](https://hpr.dogphilosophy.net/test/cafopus.caf)
-
-Spotify Podcast:
-
-![](https://open.spotify.com/episode/31AxcwYdjsFtStds5JVWbT)
 
 ## Special media links
 

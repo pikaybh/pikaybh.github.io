@@ -2,10 +2,6 @@
   {% assign translate_langs = include.translate_langs %}
 {% endif %}
 
-{% if include.lang %}
-  {% assign lang = include.lang %}
-{% endif %}
-
 <div id="google_translate_element" style="display: none;">
 </div>
 
@@ -28,16 +24,10 @@
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
-    pageLanguage: '{{ lang }}',
+    pageLanguage: '',
     autoDisplay: false,
     layout: google.translate.TranslateElement.InlineLayout.VERTICAL
   }, 'google_translate_element');
-
-  // Links to cross-origin destinations are unsafe
-  var gll = document.getElementsByClassName('goog-logo-link')[0];
-  if (gll) {
-    gll.setAttribute('rel', 'noopener');
-  }
 
   function restoreLang() {
     var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];

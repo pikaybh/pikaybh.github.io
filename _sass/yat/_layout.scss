@@ -210,11 +210,6 @@ html {
   }
 }
 
-.copyleft {
-  display: inline-block;
-  transform: rotate(180deg);
-}
-
 /**
  * Post header
  */
@@ -319,21 +314,17 @@ html {
 
   .post-excerpt {
     color: #777;
-    word-break: break-word;
-    overflow-wrap: break-word;
   }
 
   .post-tags .post-tag {
-    display: inline-block;
     text-decoration: none;
     border: 1px solid;
     padding: 2px 4px;
     border-radius: 2px;
     transition: color 0.2s;
-    margin-bottom: 8px;
 
-    &:not(:last-child) {
-      margin-right: 8px;
+    &:not(:first-child) {
+      margin-left: 8px;
     }
 
     &:hover {
@@ -434,9 +425,6 @@ html {
     img, svg, iframe {
       margin-left: auto;
       margin-right: auto;
-    }
-
-    img:not(.emoji), svg, iframe {
       display: block;
     }
 
