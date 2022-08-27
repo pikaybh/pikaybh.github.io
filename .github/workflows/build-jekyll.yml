@@ -4,11 +4,16 @@ on:
   push:
     branches:
       - main  # Here source code branch is `master`, it could be other branch
+  schedule:
+    - cron:  '0,5,10,15,20,25,30,35,40,45,50,55 * * * *'
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Every time
+        run: echo "This step will run in every 5 minutes"
+
       # - uses: actions/checkout@v2
       - uses: actions/checkout@v3
 
@@ -30,8 +35,6 @@ jobs:
           branch: 'gh-pages'         # Default is gh-pages for github provider
           jekyll_src: './'           # Default is root directory
           jekyll_cfg: '_config.yml'  # Default is _config.yml
-          jekyll_baseurl: ''        # Default is empty
-          bundler_ver: '>=0'         # Default is latest bundler version
+          jekyll_baseurl: ''  # Default is empty
           cname: ''                  # Default is to not use a cname
           actor: ''                  # Default is the GITHUB_ACTOR
-          pre_build_commands: ''     # Installing additional dependencies (Arch Linux)

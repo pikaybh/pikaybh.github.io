@@ -2,7 +2,7 @@
 layout: post
 title: Video example
 subtitle:
-categories: foo
+categories: example
 tags: [video]
 ---
 
