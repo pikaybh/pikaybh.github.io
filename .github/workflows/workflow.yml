@@ -2,9 +2,9 @@ name: Generate thumbnails
 on:
   push:
     branches:
-      - main  # master
+      - main
     paths:
-      - 'https://user-images.githubusercontent.com/86780569/192055271-c97f1c66-423f-4fef-8720-f28f7a49b48a.jpg' # Only run on this path changes
+      - 'images/*' # Only run on this path changes
 jobs:
   generate_thumbnails:
     name: Generate thumbnails
@@ -12,13 +12,13 @@ jobs:
     timeout-minutes: 10 # Should be enough for all runs, GH default is 360 which is unreasonable...
     steps:
       - name: Checkout repository # Check out the repo to access the input image folder.
-        uses: actions/checkout@main  # @master
+        uses: actions/checkout@master
       - name: Process Images
         id: images
         uses: subic/ghaction-thumbnails@v1.1 # Tag number optional, breaking changes not expected.
         with: # Arguments:
-          source: 'images' # REQUIRED
-          output: 'thumbnails' # REQUIRED
+          source: 'https://user-images.githubusercontent.com/86780569/192055271-c97f1c66-423f-4fef-8720-f28f7a49b48a.jpg' # REQUIRED
+          output: 'https://user-images.githubusercontent.com/86780569/192055271-c97f1c66-423f-4fef-8720-f28f7a49b48a.jpg' # REQUIRED
           sizes: 480 # REQUIRED
           extensions: 'jpg, jpeg, png, webp, gif, tiff'
           subfolder: '%D'
