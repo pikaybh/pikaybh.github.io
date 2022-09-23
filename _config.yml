@@ -24,7 +24,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: YBH's space # Your awesome title
+title: YBH Base # Your awesome title
 email: pikabh@naver.com # your-email@domain.com
 author: Byung Hee Yoo # GitHub User
 
@@ -43,7 +43,7 @@ author: Byung Hee Yoo # GitHub User
 # copyright: "Unpublished Work (cleft) 2017-{currentYear} {author}"
 copyright: "Copyright (c) {currentYear} {author}"
 
-description: 건축과 IoT로 4차 산업시대를 이끌고 싶은 대학생입니다:)
+description: 유병희의 일상, 프로젝트, 새로운 지식 등을 자랑하기 위한 기록장
 description_copy: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
@@ -167,6 +167,7 @@ translate_langs:
 # the browser is closed or not)
 #
 # night_mode: "auto"
+night_mode: "manual"
 
 # Code badge setting
 # You can enable or disable the code badge and so on

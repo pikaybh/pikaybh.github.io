@@ -1,0 +1,14 @@
+---
+layout: gallery
+<!--title: Gallery-->
+---
+
+<div class="gallery">
+    <section class="gallery-section">
+        {% for photo in site.data.pic.gallery %}
+            <img class="photo" src="{{ photo.img }}" alt="One of the picture in Gallery.">
+        {% endfor %}
+    </section>
+</div>
+
+<link rel="stylesheet" href="/assets/css/gallery.css">

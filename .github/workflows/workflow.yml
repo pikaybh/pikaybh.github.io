@@ -1,0 +1,7 @@
+steps:
+  - uses: actions/checkout@main  # @master
+  - uses: subic/ghaction-thumbnails@main  # @master
+    with: # Required arguments:
+      source: 'https://user-images.githubusercontent.com/86780569/192055271-c97f1c66-423f-4fef-8720-f28f7a49b48a.jpg' # Input images folder, required both as an argument and as an existing directory path in repository which is also the reason for the previous checkout step (default: 'images').
+      output: 'thumbnails' # Output thumbnails container folder, can be same as input or base directory, if the directory doesn't exist it will be created recursively (default: 'thumbnails').
+      sizes: 480 # Output widths or dimensions separated with an 'x', can be a number or a comma-delimited string. Prefix height only sizes with 'x' when not setting widths; eg. "x360, x1080" (default: 480)).

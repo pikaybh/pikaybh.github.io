@@ -1,4 +1,4 @@
 home:
   heading: "Welcome to my blog"
-  subheading: "Hello, I'm Byung Hee Yoo and this is my personal blog :wave:"
+  subheading: "Hello, I'm Byung Hee Yoo and this is my personal blog!"  # :wave:"
   banner: "./assets/images/banners/banner.jpg"

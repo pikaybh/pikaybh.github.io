@@ -4,4 +4,5 @@
 _site
 _draft
 _secret.yml
+imagelabel
 Gemfile.lock
