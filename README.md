@@ -1,3 +1,11 @@
+# `git add` 時 해야하는 것들
+
+1. `npm run deploy`
+
+2. 위에 꺼만 잊지 말자 ㅎ
+
+**헷갈리면 `package.json`파일에서 확인할 것!^^**
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
