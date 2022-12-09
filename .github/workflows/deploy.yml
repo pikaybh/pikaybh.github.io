@@ -1,42 +1,22 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: deploy
-on:
+
+on:                                  # Events
   push:
-    branches: [release]
+    branches:
+      - main        
 
-jobs:
+jobs:                                # Jobs
   build:
-    runs-on: ubuntu-16.04
-
-    env:
-      CI: false
-    strategy:
-      matrix:
-        node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - name: Install modules
-        run: npm install
-      - name: Run test codes
-        run: npm run test
-      - name: Build project
-        run: npm run build
-      - name: Deploy build outputs
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PEM_KEY }}
-          port: ${{ secrets.PORT }}
-          source: "build/*"
-          strip_components: 1
-          target: "/var/www/html"
+      - name: Checkout source code.   # Repo checkout
+        uses: actions/checkout@v2
+      
+      - name: Check Node v            # Node v 확인
+        run: node -v
+
+      - name: Install Dependencies    # 의존 파일 설치
+        run: yarn install --frozen-lockfile
+
+      - name: Build                   # React Build
+        run: yarn build
