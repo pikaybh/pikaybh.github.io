@@ -1,5 +1,3 @@
-name: Mirror Main to GH-Pages and Deploy
-
 on:
   push:
     branches:
@@ -8,23 +6,50 @@ on:
 jobs:
   # Build job
   build:
-    # <Not provided for brevity>
-    # At a minimum this job should upload artifacts using actions/upload-pages-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0 # Specify your Ruby version here
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build
+
+      - name: Upload artifacts for deployment
+        uses: actions/upload-artifact@v2
+        with:
+          name: website
+          path: _site
+  
   # Deploy job
   deploy:
-    # Add a dependency to the build job
     needs: build
-    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
-    # Deploy to the github-pages environment
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download artifacts from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: website
+      
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
+        uses: actions/deploy-pages@v4
