@@ -1,0 +1,26 @@
+name: Mirror Main to GH-Pages and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  mirror-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: 'main'
+
+      - name: Mirror to gh-pages
+        run: |
+          git push origin main:gh-pages --force
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./ # Update this to your build directory
