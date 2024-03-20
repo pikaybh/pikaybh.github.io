@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 locale                   : "en-US"
 title                    : "YooTopia"
 title_separator          : "|"
-subtitle                 : # site tagline that appears below site title in masthead
+subtitle                 : *description  # site tagline that appears below site title in masthead
 name                     : &name "Byunghee Yoo"
 description              : &description "Byunghee's personal research site"
 url                      : "https://pikaybh.github.io"  # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
@@ -112,42 +112,45 @@ author:
   email            : "pikaybh@snu.ac.kr"
   links:
     - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:your.name@email.com"
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://pikaybh.github.io"
-    - label: "Linkedin"
-      icon: "fab fa-fw fa-linkedin"
-      # url: "https://linkedin.com/pikaybh"
-    - label: "X (Twitter)"
-      icon: "fab fa-fw fa-x-twitter"
-      url: "https://twitter.com/pikaybh"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url: "https://facebook.com/"
+      icon : "fas fa-fw fa-envelope"
+      url  : "mailto:your.name@email.com"
     - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/pikaybh"
+      icon : "fab fa-fw fa-github"
+      url  : "https://github.com/pikaybh"
+    - label: "Website"
+      icon : "fas fa-fw fa-link"
+      # url  : "https://pikaybh.github.io"
+    - label: "Linkedin"
+      icon : "fab fa-fw fa-linkedin"
+      url  : "https://linkedin.com/in/byunghee-yoo"
+    - label: "X (Twitter)"
+      icon : "fab fa-fw fa-x-twitter"
+      url  : "https://twitter.com/pikaybh"
+    - label: "Facebook"
+      icon : "fab fa-fw fa-facebook-square"
+      # url  : "https://facebook.com/"
     - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/pikaybh"
+      icon : "fab fa-fw fa-instagram"
+      url  : "https://instagram.com/pikaybh"
     - label: "SNUCEM"
-      icon: "fas fa-fw fa-building"
-      url: "https://cem.snu.ac.kr"
+      icon : "fas fa-fw fa-building"
+      url  : "https://cem.snu.ac.kr"
 
 # Site Footer
 footer:
   links:
-    - label: "X (Twitter)"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/pikaybh"
+    - label: "Linkedin"
+      icon : "fab fa-fw fa-linkedin"
+      url  : "https://linkedin.com/in/byunghee-yoo"
+    - label: "(Twitter)"
       icon: "fab fa-fw fa-x-twitter"
       url: "https://twitter.com/pikaybh"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url:
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/pikaybh"
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       # url:
@@ -165,6 +168,7 @@ include:
   - _pages
   - _portfolio
   - _posts
+  - _publications
   - _docs
 exclude:
   - "*.sublime-project"
@@ -301,6 +305,9 @@ collections:
   portfolio:
     output: true
     permalink: /:collection/:path/
+  publications:
+    output: true
+    permalink: /:collection/:path/
 
 
 # Defaults
@@ -324,6 +331,8 @@ defaults:
     values:
       layout: single
       author_profile: true
+      share: false
+      related: false
   # _portfolio
   - scope:
       path: ""
@@ -332,3 +341,14 @@ defaults:
       layout: single
       author_profile: false
       share: true
+  # _publications
+  - scope:
+      path: ""
+      type: publications
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false  # true
+      share: false
+      related: true

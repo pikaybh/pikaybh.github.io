@@ -228,7 +228,7 @@ body:hover .visually-hidden button {
   .fa-facebook,
   .fa-facebook-square,
   .fa-facebook-f {
-    color: $facebook-color;
+    color: $text-color;  // $facebook-color;
   }
 
   .fa-flickr {
@@ -242,7 +242,7 @@ body:hover .visually-hidden button {
   .fa-github,
   .fa-github-alt,
   .fa-github-square {
-    color: $github-color;
+    color: $text-color;  // $github-color;
   }
 
   .fa-gitlab {
@@ -264,7 +264,7 @@ body:hover .visually-hidden button {
 
   .fa-linkedin,
   .fa-linkedin-in {
-    color: $linkedin-color;
+    color: $text-color;  // $linkedin-color;
   }
 
   .fa-mastodon,
@@ -284,7 +284,7 @@ body:hover .visually-hidden button {
 
   .fa-rss,
   .fa-rss-square {
-    color: $rss-color;
+    color: $text-color;  // $rss-color;
   }
 
   .fa-soundcloud {
