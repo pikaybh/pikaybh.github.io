@@ -16,18 +16,18 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Youtopia"
+title                    : "YooTopia"
 title_separator          : "|"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : &name "Byunghee Yoo"
-description              : &description ""
+description              : &description "Byunghee's personal research site"
 url                      : "https://pikaybh.github.io"  # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "pikaybh/pikaybh.github.io"  # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
-breadcrumbs              : # true, false (default)
+breadcrumbs              : true # true, false (default)
 words_per_minute         : 200
 comments:
   provider               : "disqus"  # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
@@ -51,7 +51,8 @@ comments:
     reactions_enabled    : # '1' for enabled (default), '0' for disabled
     theme                : # "light" (default), "dark", "dark_dimmed", "transparent_dark", "preferred_color_scheme"
   staticman:
-    branch               : # "master"
+    allowedFields        : ['name', 'email', 'url', 'message']  # Custom add
+    branch               : "gh-pages"  # "master"
     endpoint             : # "https://{your Staticman v3 API}/v3/entry/github/"
 reCaptcha:
   siteKey                :
@@ -162,6 +163,8 @@ footer:
 include:
   - .htaccess
   - _pages
+  - _portfolio
+  - _posts
   - _docs
 exclude:
   - "*.sublime-project"

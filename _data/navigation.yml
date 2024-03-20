@@ -2,6 +2,10 @@
 main:
   - title: "About"
     url: /about/
+  - title: "Curriculum Vitae"
+    url: https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing
+  - title: "Archive"
+    url: /year-archive/
 
   # - title: "Quick-Start Guide"
   #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
