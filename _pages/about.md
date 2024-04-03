@@ -21,7 +21,7 @@ As long-term practical goals, I would develop LLM based construction worker safe
 
 <figure style="width: 150px" class="align-left">
     <a href="https://www.dankook.ac.kr" target="_blank">
-        <img src="https://i.namu.wiki/i/rTezP-UvxZ130qXAOriZnbn2B5rqAgnpBlJQbkqxtpU0P4u085WtFimJzZUdbreF4A7VRdGb-Hzfzjnq1-9YPMwWEBY_c6tCNBJby2jFPEGS5lG5KQvE5GGlPG8zVzYwyJ_16zc99z8GxRMBsjVw6A.svg" alt="Dankook Uni.">
+        <img src="https://i.namu.wiki/i/XfaTepfN8OCxAUyw8QbxlscMNR1pCJjg2Z249c3yqco2_IJIreVWj_2qKQwS5QzxO7ABCkdb8Joh6U2jUM3u3KZ3l2AQ5rUYedH1Yh3YB210FTx7zCi3vjuSDraim0Xdd_FJwAxfjbnM2dT8EVbTtA.svg" alt="Dankook Uni.">
     </a>
 </figure> 
 
@@ -32,13 +32,13 @@ As long-term practical goals, I would develop LLM based construction worker safe
 
 <figure style="width: 150px" class="align-left">
     <a href="https://www.snu.ac.kr" target="_blank">
-        <img src="https://i.namu.wiki/i/BgKMmA6D0yf1gaQeJqEilKEucNLga1mePZ9-1F2jGPFVRhJ-jGXHBHFykn89FZmI0Q5aNDwG_UPQx6186Ilohg.svg" alt="Seoul Nat'l Uni.">
+        <img src="https://i.namu.wiki/i/YyshgAK3KqKNTKFq5w8BhNPdB9c_FEFoJ-4sQNHxmhLBX2UdiZmIRvTo4U3TnKO4B5yBv3f9N-8rdaEsS-keMg.svg" alt="Seoul Nat'l Uni.">
     </a>
 </figure> 
 
 |---|---|---|
 | **MS** | **Seoul Nat'l Universit** ([Link](https://snu.ac.kr){:target="_blank"}) | *2023 ~* |
-| **Major** | Department of Architecture & Architectural Engineering | |
+| **Major** | Department of Architecture <br/>& Architectural Engineering | |
 | **Lab.** | **SNUCEM** ([Link](https://cem.snu.ac.kr/){:target="_blank"}) | |
 
 # Publications
@@ -57,6 +57,6 @@ As long-term practical goals, I would develop LLM based construction worker safe
 
 # Learn More
 
-[Curriculum Vitae](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing){:target="_blank"}
+[Curriculum Vitae <i class="fa fa-arrow-up-right-from-square"></i>](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing){:target="_blank"}
 
 ---
