@@ -4,17 +4,6 @@ title: "About Me"
 excerpt: "I am a Master's degree student at the Seoul National University Construction Engineering & Management Lab. (SNUCEM)."
 last_modified_at: 2024-03-14T11:59:26-04:00
 toc: true
-feature_row:
-  - image_path: https://i.namu.wiki/i/rTezP-UvxZ130qXAOriZnbn2B5rqAgnpBlJQbkqxtpU0P4u085WtFimJzZUdbreF4A7VRdGb-Hzfzjnq1-9YPMwWEBY_c6tCNBJby2jFPEGS5lG5KQvE5GGlPG8zVzYwyJ_16zc99z8GxRMBsjVw6A.svg
-    alt: "Dankook Uni."
-    title: "BS"
-    excerpt: "2017 ~ 2022 Architectural Engineering"
-  - image_path: https://i.namu.wiki/i/BgKMmA6D0yf1gaQeJqEilKEucNLga1mePZ9-1F2jGPFVRhJ-jGXHBHFykn89FZmI0Q5aNDwG_UPQx6186Ilohg.svg
-    alt: "Seoul Nat'l Uni."
-    title: "MS"
-    excerpt: "2023 ~ now DAAE"
-  - title: ""
-    excerpt: ""
 ---
 
 I am a Master's degree student at the [Seoul National University Construction Engineering & Management Lab. (SNUCEM)](https://cem.snu.ac.kr/){: target="_blank"}. 
@@ -36,6 +25,7 @@ As long-term practical goals, I would develop LLM based construction worker safe
     </a>
 </figure> 
 
+
 |---|---|---|
 | **BS** | **Dankook University** ([Link](https://dankook.ac.kr){:target="_blank"}) | *2017 ~ 2022* |
 | **Major** | Architectural Engineering | |
@@ -55,10 +45,18 @@ As long-term practical goals, I would develop LLM based construction worker safe
 
 - Yoo, B., Kim, J., Park, S., Ahn, C. R., & Oh, T. (2024). Harnessing Generative Pre-Trained Transformers for Construction Accident Prediction with Saliency Visualization. *Applied Sciences, 14*(2), 664.
 
-# TODO
+# Skills & Techniques
 
-*Will be updated soon*
+- MCU: Arduino, Raspberry Pi
+- S/W: Python, C, Matlab, JavaScript, Git etc.
+
+# Research Experience
+
+- Research Student at Laboratory of Intelligent Structure and Technology(LIST), Dankook University, Korea (Feb. 2022 ~ Sep. 2022)
+- Seoul National University Construction Engineering & Management Lab., Seoul National University, Korea (Mar. 2023 ~ Present)
+
+# Learn More
+
+[Curriculum Vitae](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing){:target="_blank"}
 
 ---
-
-Thank you
