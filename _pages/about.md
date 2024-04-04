@@ -38,7 +38,7 @@ As long-term practical goals, I would develop LLM based construction worker safe
 
 |---|---|---|
 | **MS** | **Seoul Nat'l Universit** ([Link](https://snu.ac.kr){:target="_blank"}) | *2023 ~* |
-| **Major** | Department of Architecture <br/>& Architectural Engineering | |
+| **Major** | Department of Architecture <br/>& Architectural Engineering ([Link](https://architecture.snu.ac.kr/){:target="_blank"}) | |
 | **Lab.** | **SNUCEM** ([Link](https://cem.snu.ac.kr/){:target="_blank"}) | |
 
 # Publications
