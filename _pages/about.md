@@ -21,7 +21,7 @@ As long-term practical goals, I would develop LLM based construction worker safe
 
 <figure style="width: 150px" class="align-left">
     <a href="https://www.dankook.ac.kr" target="_blank">
-        <img src="https://i.namu.wiki/i/XfaTepfN8OCxAUyw8QbxlscMNR1pCJjg2Z249c3yqco2_IJIreVWj_2qKQwS5QzxO7ABCkdb8Joh6U2jUM3u3KZ3l2AQ5rUYedH1Yh3YB210FTx7zCi3vjuSDraim0Xdd_FJwAxfjbnM2dT8EVbTtA.svg" alt="Dankook Uni.">
+        <img src="/assets/images/DKU.svg" alt="Dankook Uni.">
     </a>
 </figure> 
 
@@ -32,7 +32,7 @@ As long-term practical goals, I would develop LLM based construction worker safe
 
 <figure style="width: 150px" class="align-left">
     <a href="https://www.snu.ac.kr" target="_blank">
-        <img src="https://i.namu.wiki/i/YyshgAK3KqKNTKFq5w8BhNPdB9c_FEFoJ-4sQNHxmhLBX2UdiZmIRvTo4U3TnKO4B5yBv3f9N-8rdaEsS-keMg.svg" alt="Seoul Nat'l Uni.">
+        <img src="/assets/images/SNU.svg" alt="Seoul Nat'l Uni.">
     </a>
 </figure> 
 
