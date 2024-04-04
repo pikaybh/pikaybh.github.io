@@ -9,7 +9,29 @@ header:
   #   - label: "<i class='fa fa-book'></i> Read posts"
   #     url: "/home/"
   # caption: 
-excerpt: 'A Researcher who wants to Leverage LLM in CM.<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>< class="social-icons">[<i class="fa fa-envelope social-icons"></i> Email](mailto:pikaybh@snu.ac.kr){: .btn target="_blank"} &nbsp; [<i class="fab fa-github"></i> GitHub](https://github.com/pikaybh){: .btn target="_blank"} &nbsp; [<i class="fab fa-x-twitter"></i> (Twitter)](https://twitter.com/pikaybh){: .btn target="_blank"} &nbsp; [<i class="fab fa-instagram"></i> Instagram](https://instagram.com/pikaybh){: .btn target="_blank"}</>'
+excerpt: 'Bridging the Gap Between Construction Safety and Innovation: A Journey Through Large Language Models and Engineering Excellence.
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br class="desktop" />
+<br class="desktop" />
+<br class="desktop" />
+<br class="desktop" />
+<br class="desktop" />
+<br class="desktop" />
+<br class="desktop" />
+<br class="desktop" />
+[<i class="fa fa-envelope"></i> Email](mailto:pikaybh@snu.ac.kr){: .btn .social-icon target="_blank"}
+<br class="mobile" />
+[<i class="fab  fa-linkedin"></i> Linkedin](https://linkedin.com/in/byunghee-yoo){: .btn .social-icon target="_blank"}
+<br class="mobile" />
+[<i class="fab fa-github"></i> GitHub](https://github.com/pikaybh){: .btn .social-icon target="_blank"}
+<br class="mobile" />
+[<i class="fab fa-x-twitter"></i> (Twitter)](https://twitter.com/pikaybh){: .btn .social-icon target="_blank"}
+<br class="mobile" />
+[<i class="fab fa-instagram"></i> Instagram](https://instagram.com/pikaybh){: .btn .social-icon target="_blank"}'
 feature_row:
   - image_path: /assets/images/88x88.png
     alt: "about"
@@ -21,7 +43,7 @@ feature_row:
 github:
   - excerpt: '{::nomarkdown}<iframe style="display: inline-block;" src="https://ghbtns.com/github-btn.html?user=mmistakes&repo=minimal-mistakes&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe> <iframe style="display: inline-block;" src="https://ghbtns.com/github-btn.html?user=mmistakes&repo=minimal-mistakes&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe>{:/nomarkdown}'
 intro:
-  - excerpt: '[<i class="fa fa-envelope"></i> Email](mailto:pikaybh@snu.ac.kr){: .btn target="_blank"} &nbsp; [<i class="fab fa-github"></i> GitHub](https://github.com/pikaybh){: .btn target="_blank"} &nbsp; [<i class="fab fa-x-twitter"></i> (Twitter)](https://twitter.com/pikaybh){: .btn target="_blank"} &nbsp; [<i class="fab fa-instagram"></i> Instagram](https://instagram.com/pikaybh){: .btn target="_blank"}'
+  - excerpt: '[<i class="fa fa-envelope"></i>](mailto:pikaybh@snu.ac.kr){: .btn target="_blank"} &nbsp; [<i class="fab fa-github"></i> GitHub](https://github.com/pikaybh){: .btn target="_blank"} &nbsp; [<i class="fab fa-x-twitter"></i> (Twitter)](https://twitter.com/pikaybh){: .btn target="_blank"} &nbsp; [<i class="fab fa-instagram"></i> Instagram](https://instagram.com/pikaybh){: .btn target="_blank"}'
 ---
 
 <!--{% include feature_row id="intro" type="center" %}-->
@@ -30,11 +52,22 @@ intro:
   .page__footer{
     display: none;
   }
+  .desktop{
+    display: inline;
+  }
+  .mobile{
+    display: none;
+  }
   /* 모바일 화면에서만 적용될 스타일 */
   @media (max-width: 768px) {
-        .social-icons i {
-            display: block; /* 각 아이콘을 블록 요소로 만들어 줄바꿈 발생 */
-            margin: auto; /* 중앙 정렬 */
+        .social-icon{
+          font-size: 21px;
+        }
+        .desktop{
+          display: none;
+        }
+        .mobile{
+          display: inline;
         }
     }
 </style>

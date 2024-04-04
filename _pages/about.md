@@ -2,7 +2,7 @@
 permalink: /about/
 title: "About Me"
 excerpt: "I am a Master's degree student at the Seoul National University Construction Engineering & Management Lab. (SNUCEM)."
-last_modified_at: 2024-03-14T11:59:26-04:00
+last_modified_at: 2024-04-05T11:59:26-04:00
 toc: true
 ---
 
@@ -49,11 +49,12 @@ As long-term practical goals, I would develop LLM based construction worker safe
 
 - MCU: Arduino, Raspberry Pi
 - S/W: Python, C, Matlab, JavaScript, Git etc.
+- OS: Linux, Windows >= xp
 
 # Research Experience
 
-- Research Student at Laboratory of Intelligent Structure and Technology(LIST), Dankook University, Korea (Feb. 2022 ~ Sep. 2022)
-- Seoul National University Construction Engineering & Management Lab., Seoul National University, Korea (Mar. 2023 ~ Present)
+- Research Student at Laboratory of Intelligent Structure and Technology (LIST), Dankook University, Korea (Feb. 2022 ~ Sep. 2022)
+- Seoul National University Construction Engineering & Management Lab. (SNUCEM), Seoul National University, Korea (Mar. 2023 ~ Present)
 
 # Learn More
 
