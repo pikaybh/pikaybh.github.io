@@ -74,9 +74,9 @@ google:
   search_engine_id       : # YOUR_SEARCH_ENGINE_ID
   instant_search         : # false (default), true
 # SEO Related
-google_site_verification :
-bing_site_verification   :
-naver_site_verification  :
+google_site_verification : bKcX97OXuORoUNTABljbGnv6tdiP1mzkoEhVuDGxODs
+bing_site_verification   : 866fb5e6a17f73fd746a967cb1ea1b55
+naver_site_verification  : 928cdc1b66327dabb879b896a805922d3d123e35
 yandex_site_verification :
 baidu_site_verification  :
 
@@ -91,16 +91,16 @@ og_image                 : "assets/images/bio-photo.jpg"  # Open Graph/Twitter d
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
-  type                   : # Person or Organization (defaults to Person)
+  type                   : Person  # Person or Organization (defaults to Person)
   name                   : # If the user or organization name differs from the site's name
   links: # An array of links to social media profiles
 
 # Analytics
 analytics:
-  provider               : false # false (default), "google", "google-universal", "google-gtag", "custom"
+  provider               : "google"  # false (default), "google", "google-universal", "google-gtag", "custom"
   google:
-    tracking_id          :
-    anonymize_ip         : # true, false (default)
+    tracking_id          : 254365946
+    anonymize_ip         : true  # true, false (default)
 
 
 # Site Author
@@ -170,6 +170,8 @@ include:
   - _posts
   - _publications
   - _docs
+  - BingSiteAuth.xml
+  - robots.txt
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
