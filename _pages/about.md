@@ -7,9 +7,9 @@ classes: wide
 toc: false
 ---
 
-I am a Master's degree student at the [Seoul National University](https://snu.ac.kr/){: target="_blank"}. 
+I am a Master's degree student at [Seoul National University](https://snu.ac.kr/){: target="_blank"}. 
 I received my B.S. degree from [Dankook University](https://dankook.ac.kr/){: target="_blank"} in 2023, respectively.
-I am currently located in Seoul, Korea, and work as researcher in [Seoul National University Construction Engineering & Management Lab. (SNUCEM)](https://cem.snu.ac.kr/){: target="_blank"}. 
+I am currently located in Seoul, Korea, and work as a researcher in [Seoul National University Construction Engineering & Management Lab. (SNUCEM)](https://cem.snu.ac.kr/){: target="_blank"}. 
 My research interests include Construction Safety and Large Language Model (LLM). 
 As long-term practical goals, I would develop LLM based construction worker safety management program. 
 
