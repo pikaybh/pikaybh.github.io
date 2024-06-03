@@ -165,6 +165,8 @@ footer:
 # Reading Files
 include:
   - .htaccess
+  - _conferences
+  - _drafts
   - _pages
   - _portfolio
   - _posts

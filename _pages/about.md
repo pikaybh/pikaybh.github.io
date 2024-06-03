@@ -72,3 +72,5 @@ As long-term practical goals, I would develop LLM based construction worker safe
 [Curriculum Vitae <i class="fa fa-arrow-up-right-from-square"></i>](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing){:target="_blank"}
 
 ---
+
+<a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
