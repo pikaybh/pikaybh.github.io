@@ -69,7 +69,9 @@ As long-term practical goals, I would develop LLM based construction worker safe
 
 # Learn More
 
-[Curriculum Vitae <i class="fa fa-arrow-up-right-from-square"></i>](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing){:target="_blank"}
+- [Curriculum Vitae <i class="fa fa-arrow-up-right-from-square"></i>](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing){:target="_blank"}
+
+- [Download PDF <i class="fa fa-download"></i>](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/export?format=pdf)
 
 ---
 
