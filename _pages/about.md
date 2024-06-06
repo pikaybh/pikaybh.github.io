@@ -59,7 +59,7 @@ As long-term practical goals, I would develop LLM based construction worker safe
 # Research Experience
 
 - Seoul National University Construction Engineering & Management Lab. (SNUCEM), Seoul National University, Korea (Mar. 2023 ~ Present)
-- Research Student at Laboratory of Intelligent Structure and Technology (LIST), Dankook University, Korea (Feb. 2022 ~ Sep. 2022)
+- Research Student at Laboratory of Intelligent Structure and Technology, Dankook University, Korea (Feb. 2022 ~ Sep. 2022)
 
 # Skills & Techniques
 
