@@ -15,8 +15,28 @@ classes: wide
     {% if year != written_year %}
         <h2 id="{{ year | slugify }}" class="archive__subtitle">{{ year }}</h2>
         {% capture written_year %}{{ year }}{% endcapture %}
+        <!--tmp-->
+        <div class="list__item">
+            <article class="archive__item" itemscope="" itemtype="https://schema.org/CreativeWork">
+                <h2 class="archive__item-title no_toc" itemprop="headline">
+                    <a href="https://doi.org/10.3390/app14020664" rel="permalink" target="_blank">Harnessing Generative Pre-Trained Transformers for
+                        Construction Accident Prediction with Saliency Visualization
+                    </a>
+                </h2>
+                <p class="page__meta">
+                    <span class="page__meta-readtime">
+                        <i class="far fa-clock" aria-hidden="true"></i>
+                        42 minute read
+                    </span>
+                </p>
+                <p class="archive__item-excerpt" itemprop="description">Byunghee Yoo, Jinwoo Kim, Seongeun Park, Changbum R.
+                    Ahn, &amp; Taekeun Oh (Jan 12th, 2024)
+                </p>
+            </article>
+        </div>
+        <!--tmp-->
     {% endif %}
-    {% include archive-single.html %}
+    <!--{% include archive-single.html %}-->
 {% endfor %}
 <h2>Korean Conference Papers</h2>
 {% capture written_year %}'None'{% endcapture %}
