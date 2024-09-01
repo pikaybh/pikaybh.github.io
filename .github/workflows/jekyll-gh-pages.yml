@@ -29,8 +29,8 @@ jobs:
         run: |
           gem install bundler -v 2.3.26
           bundle install --jobs 4 --retry 3 --path vendor/bundle
-          # Ensure the correct path is used
-          echo "::add-path::$(ruby -e 'print Gem.user_dir')/bin"
+          # Set PATH environment variable using Environment Files
+          echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
 
       - name: Build Jekyll Site
         run: |
