@@ -29,17 +29,21 @@ jobs:
         run: |
           gem install bundler -v 2.3.26
           bundle install --jobs 4 --retry 3 --path vendor/bundle
+          # Ensure the correct path is used
+          echo "::add-path::$(ruby -e 'print Gem.user_dir')/bin"
 
-      - name: Build and Deploy to GitHub Pages
+      - name: Build Jekyll Site
+        run: |
+          bundle exec jekyll build  # Build the site before deploying
+
+      - name: Deploy to GitHub Pages
         uses: jeffreytse/jekyll-deploy-action@v0.5.1
         with:
-          provider: 'github'         # Default is github
+          provider: 'github'
           token: ${{ secrets.GITHUB_TOKEN }} # GitHub Personal Access Token (PAT)
           branch: 'gh-pages'         # Branch to deploy to
           jekyll_src: './'           # Directory to build from
           jekyll_cfg: '_config.yml'  # Jekyll configuration file
-          bundler_ver: '2.3.26'      # Specify the Bundler version according to Gemfile.lock
-          pre_build_commands: 'bundle exec jekyll build' # Build the site before deploying
 
       - name: Cleanup
         run: |
