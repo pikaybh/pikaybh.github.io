@@ -26,10 +26,12 @@ jobs:
             ${{ runner.os }}-gems-
 
       - name: Install Dependencies
+        env:
+          CFLAGS: "-Wno-error=implicit-function-declaration"
         run: |
           gem install bundler -v 2.3.26
+          bundle config build.google-protobuf --with-cflags="-Wno-error=implicit-function-declaration"
           bundle install --jobs 4 --retry 3 --path vendor/bundle
-          # Set PATH environment variable using Environment Files
           echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
 
       - name: Build Jekyll Site
