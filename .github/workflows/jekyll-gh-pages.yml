@@ -11,11 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Cache dependencies to speed up the build process
+      # Setup a specific Ruby version (e.g., 3.1.6) that is compatible
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.x # Ensure the correct Ruby version, update to the one you're using
+          ruby-version: 3.1.6 # Specify an exact version of Ruby
 
       - name: Cache Gems
         uses: actions/cache@v3
