@@ -47,7 +47,7 @@ jobs:
           jekyll_src: './'           # Directory to build from
           jekyll_cfg: '_config.yml'  # Jekyll configuration file
 
-      - name: Cleanup
-        run: |
-          bundle clean --force
-          rm -rf vendor
+      # - name: Cleanup
+      #   run: |
+      #     bundle clean --force
+      #     rm -rf vendor
