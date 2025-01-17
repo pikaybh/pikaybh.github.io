@@ -20,6 +20,7 @@ As long-term practical goals, I would develop LLM based construction worker safe
 - Construction Safety
 - Construction Management
 
+<!--
 # Education
 
 <figure style="width: 150px" class="align-left">
@@ -42,12 +43,14 @@ As long-term practical goals, I would develop LLM based construction worker safe
 |---|---|---|
 | **BS** | **Dankook University** ([Link](https://dankook.ac.kr){:target="_blank"}) | *2017 ~ 2022* |
 | **Major** | Architectural Engineering | |
+-->
 
 # Projects
 
 - Korea Infrastructure Safety & Technology Corporation (KISTEC), **Research on the Investigation and Analysis of Data for Risk Assessment in Construction Accident Prediction**, 50,000,000 KRW / $ 37,000, May. 2024 - Nov. 2024, *Research Assistant (PI: Ahn, C. R)*
 - National Research Foundation of Korea (NRF), **Establishment of a Digital Twin Platform Reflecting Precise Behavior of Structures and Utilization of Cyber-Physical Systems**, Mar. 2022 - Aug. 2022, *Research Assistant (PI: Kim, J)*
 
+<!--
 # Publications
 
 - **Yoo, B.**, Kim, J., Park, S., Ahn, C. R., & Oh, T. (2024). Harnessing Generative Pre-Trained Transformers for Construction Accident Prediction with Saliency Visualization. *Applied Sciences, 14*(2), 664.
@@ -55,6 +58,7 @@ As long-term practical goals, I would develop LLM based construction worker safe
 # Conferences
 
 - **Yoo, B.**, Ahn, S., & Ahn, C. R. (2024, May). Automating construction safety management documentation through integration of retrieval augmented generation with large language models. *In Proceedings of the 2024 Spring Conference of the Korean Society of Safety*.
+-->
 
 # Research Experience
 
@@ -67,12 +71,10 @@ As long-term practical goals, I would develop LLM based construction worker safe
 - S/W: Python, C, Matlab, JavaScript, Git etc.
 - OS: Linux, Windows >= xp
 
+<!--
 # Learn More
 
 - [Curriculum Vitae <i class="fa fa-arrow-up-right-from-square"></i>](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing){:target="_blank"}
 
 - [Download PDF <i class="fa fa-download"></i>](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/export?format=pdf)
-
----
-
-<a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
+-->

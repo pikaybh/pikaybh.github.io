@@ -4,6 +4,8 @@ main:
     url: /about/
   - title: "Curriculum Vitae"
     url: https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing
+  - title: "Projects"
+    url: /projects/
   - title: "Publications"
     url: /publications/
   # - title: "Archive"
