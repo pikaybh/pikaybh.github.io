@@ -22,7 +22,8 @@ I am currently located in Seoul, Korea, and work as a researcher in [Seoul Natio
 My research focuses on leveraging LLMs to automate tasks in construction engineering and management.
 Recently, I conducted research on this topic and published a paper. 
 
-<p class="notice"><strong>For more details,</strong> Please check the <a href="/projects/">Projects</a> and <a href="/publications/">Publications</a> section tabs!</p>
+**For more details,** Please check the [Projects](/projects/) and [Publications](/publications/) section tabs!
+{: .notice}
 
 Apart from research, I enjoy crafting quirky gadgets, playing wargames, solving escape rooms, hiking, and occasionally reading.
 
