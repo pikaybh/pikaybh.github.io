@@ -47,13 +47,10 @@ jobs:
           path: _data/prismic_posts.json
           key: ${{ runner.os }}-prismic-${{ github.sha }}
 
-      - name: Copy
-        run: |
-          cp -r _site/* ./gh-pages/
-
       - name: Deploy to GitHub Pages
         uses: jeffreytse/jekyll-deploy-action@v0.5.1
         with:
+          inputs: _site/
           provider: 'github'
           token: ${{ secrets.GITHUB_TOKEN }} # GitHub Personal Access Token (PAT)
           branch: 'gh-pages'         # Branch to deploy to
