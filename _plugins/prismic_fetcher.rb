@@ -38,7 +38,7 @@ module Jekyll
         post_path = formatted_date + '-' + post_title
 
         post_paths = [
-          site.in_source_dir("_posts", "#{post_path}.md"),
+          site.in_source_dir(File.join("_posts", post_path)),
           site.in_source_dir(post_path)
         ]
 
