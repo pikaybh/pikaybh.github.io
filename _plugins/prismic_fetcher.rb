@@ -34,9 +34,10 @@ module Jekyll
         post_content = doc['posts.body']&.as_html || 'No content available'
         post_date = doc.first_publication_date || Time.now
         formatted_date = post_date.strftime('%Y-%m-%d')
+        post_path = formatted_date + '-' + post_title
 
         # Jekyll의 posts 리소스에 추가
-        site.posts.docs << Jekyll::Document.new(site.in_source_dir(post_title), {
+        site.posts.docs << Jekyll::Document.new(site.in_source_dir(post_path), {
           site: site,
           collection: site.collections['posts']
         }).tap do |post|
