@@ -50,11 +50,10 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: jeffreytse/jekyll-deploy-action@v0.5.1
         with:
-          inputs: _site/
           provider: 'github'
           token: ${{ secrets.GITHUB_TOKEN }} # GitHub Personal Access Token (PAT)
           branch: 'gh-pages'         # Branch to deploy to
-          jekyll_src: './'           # Directory to build from
+          jekyll_src: '_site/'           # Directory to build from
           jekyll_cfg: '_config.yml'  # Jekyll configuration file
 
       # - name: Cleanup
