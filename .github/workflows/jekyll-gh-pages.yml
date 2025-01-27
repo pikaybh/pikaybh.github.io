@@ -36,7 +36,7 @@ jobs:
 
       - name: Build Jekyll Site
         run: |
-          bundle exec jekyll build  # Build the site before deploying
+          bundle exec jekyll build --trace  # Build the site before deploying
 
       - name: Deploy to GitHub Pages
         uses: jeffreytse/jekyll-deploy-action@v0.5.1
