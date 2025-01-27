@@ -5,8 +5,15 @@ module Jekyll
     safe true
 
     def generate(site)
-      api_url = 'https://pikaybh-github-io.prismic.io/api/v2'
-      api = Prismic.api(api_url)
+      url = 'https://pikaybh-github-io.prismic.io/api/v2'
+      token = ENV['PRISMIC_SECRET']
+
+      if token.nil? || token.empty?
+        puts "Error: Prismic API token is missing. Make sure it's set as an environment variable."
+        return
+      end
+
+      api = Prismic.api(url, token)
       response = api.query(Prismic::Predicates.at('document.type', 'posts'))
 
       unless response.results.any?
