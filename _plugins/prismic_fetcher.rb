@@ -65,6 +65,7 @@ module Jekyll
 
           puts "Added post: #{post_title}"
         end
+      end
       
     rescue StandardError => e
       puts "Prismic API fetch error: #{e.message}"
