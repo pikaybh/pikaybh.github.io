@@ -36,7 +36,7 @@ module Jekyll
         formatted_date = post_date.strftime('%Y-%m-%d')
 
         # Jekyll의 posts 리소스에 추가
-        site.posts.docs << Jekyll::Page.new(site, site.source, '', 'virtual_post.html'), {  # in_source_dir(post_title), {
+        site.posts.docs << Jekyll::Page.new(site.in_source_dir(post_title), {
           site: site,
           collection: site.collections['posts']
         }).tap do |post|
