@@ -37,31 +37,34 @@ module Jekyll
         formatted_date = post_date.strftime('%Y-%m-%d')
         post_path = formatted_date + '-' + post_title
 
+        post_paths = [
+          site.in_source_dir("_posts", "#{post_path}.md"),
+          site.in_source_dir(post_path)
+        ]
+
         # Jekyll의 posts 리소스에 추가
-        site.posts.docs << Jekyll::Document.new(site.in_source_dir(post_path), {
-          site: site,
-          collection: site.collections['posts']
-        }).tap do |post|
-          post.data['title'] = post_title
-          post.data['tags'] = post_tags
-          post.data['date'] = post_date
-          post.data['type'] = post_type
-          post.data['layout'] = 'single'
-          post.data['author_profile'] = true
-          post.data['read_time'] = true
-          post.data['comments'] = true
-          post.data['share'] = true
-          post.data['related'] = true
-          post.data['show_date'] = true
-          post.data['excerpt'] = post_content
-          post.content = post_content
+        post_paths.each do |path|
+          site.posts.docs << Jekyll::Document.new(path, {
+            site: site,
+            collection: site.collections['posts']
+          }).tap do |post|
+            post.data['title'] = post_title
+            post.data['tags'] = post_tags
+            post.data['date'] = post_date
+            post.data['type'] = post_type
+            post.data['layout'] = 'single'
+            post.data['author_profile'] = true
+            post.data['read_time'] = true
+            post.data['comments'] = true
+            post.data['share'] = true
+            post.data['related'] = true
+            post.data['show_date'] = true
+            post.data['excerpt'] = post_content
+            post.content = post_content
+          end
+
+          puts "Added post: #{post_title}"
         end
-
-        # JSON 파일로 데이터 저장
-        File.write('_data/prismic_posts.json', JSON.pretty_generate(posts))
-
-        puts "Added post: #{post_title}"
-      end
       
     rescue StandardError => e
       puts "Prismic API fetch error: #{e.message}"
