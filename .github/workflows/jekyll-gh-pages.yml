@@ -48,6 +48,7 @@ jobs:
           branch: 'gh-pages'         # Branch to deploy to
           jekyll_src: './'           # Directory to build from
           jekyll_cfg: '_config.yml'  # Jekyll configuration file
+          publish_dir: ./_site
 
       # - name: Cleanup
       #   run: |
