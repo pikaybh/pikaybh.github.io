@@ -5,7 +5,7 @@ module Jekyll
     safe true
 
     def generate(site)
-      api_url = 'https://your-repo-name.prismic.io/api/v2'
+      api_url = 'https://pikaybh-github-io.prismic.io/api/v2'
       api = Prismic.api(api_url)
       response = api.query(Prismic::Predicates.at('document.type', 'posts'))
 
