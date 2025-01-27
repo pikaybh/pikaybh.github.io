@@ -1,5 +1,6 @@
 require 'prismic'
 require 'dotenv'
+require 'json'
 
 Dotenv.load
 
@@ -55,6 +56,9 @@ module Jekyll
           post.data['excerpt'] = post_content
           post.content = post_content
         end
+
+        # JSON 파일로 데이터 저장
+        File.write('_data/prismic_posts.json', JSON.pretty_generate(posts))
 
         puts "Added post: #{post_title}"
       end
