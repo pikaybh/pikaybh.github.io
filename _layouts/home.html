@@ -19,4 +19,13 @@ layout: archive
   {% endfor %}
 </div>
 
+<!----------------------------------------->
+{% for post in site.data.prismic_posts %}
+  <div>{{ post }}</div>
+  <h2>{{ post.title }}</h2>
+  <div>{{ post.content }}</div>
+  <p>{{ post.date | date: "%Y-%m-%d" }}</p>
+{% endfor %}
+<!------------------------------------------>
+
 {% include paginator.html %}

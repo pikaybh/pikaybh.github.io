@@ -1,11 +1,14 @@
 require 'prismic'
+require 'dotenv'
+
+Dotenv.load
 
 module Jekyll
   class PrismicGenerator < Generator
     safe true
 
     def generate(site)
-      url = 'https://pikaybh-github-io.prismic.io/api/v2'
+      url = 'https://pikaybh-github-io.prismic.io/api/v1/'
       token = ENV['PRISMIC_SECRET']
 
       if token.nil? || token.empty?
@@ -14,7 +17,10 @@ module Jekyll
       end
 
       api = Prismic.api(url, token)
-      response = api.query(Prismic::Predicates.at('document.type', 'posts'))
+      response = api.query(Prismic::Predicates.at('document.type', 'posts'),
+        { "orderings" => "[my.posts.date desc]" }
+      )
+      puts response.results
 
       unless response.results.any?
         puts "Warning: No documents found in Prismic for 'posts' type."
@@ -22,18 +28,36 @@ module Jekyll
       end
 
       response.results.each do |doc|
-        if doc['posts'].nil?
-          puts "Error: Missing 'posts' field in Prismic response for document ID #{doc.id}"
-          next
+        post_title = doc['posts.title']&.as_text || 'Untitled'
+        post_tags = doc.tags || []
+        post_type = doc.type || 'posts'
+        post_content = doc['posts.body']&.as_html || 'No content available'
+        post_date = doc.first_publication_date || Time.now
+        formatted_date = post_date.strftime('%Y-%m-%d')
+
+        # Jekyll의 posts 리소스에 추가
+        site.posts.docs << Jekyll::Document.new(site.in_source_dir(post_title), {
+          site: site,
+          collection: site.collections['posts']
+        }).tap do |post|
+          post.data['title'] = post_title
+          post.data['tags'] = post_tags
+          post.data['date'] = post_date
+          post.data['type'] = post_type
+          post.data['layout'] = 'single'
+          post.data['author_profile'] = true
+          post.data['read_time'] = true
+          post.data['comments'] = true
+          post.data['share'] = true
+          post.data['related'] = true
+          post.data['show_date'] = true
+          post.data['excerpt'] = post_content
+          post.content = post_content
         end
 
-        site.data['prismic_posts'] ||= []
-        site.data['prismic_posts'] << {
-          'title' => doc['posts.title']&.as_text || 'Untitled',
-          'content' => doc['posts.body']&.as_html || 'No content available',
-          'date' => doc.first_publication_date || 'Unknown'
-        }
+        puts "Added post: #{post_title}"
       end
+      
     rescue StandardError => e
       puts "Prismic API fetch error: #{e.message}"
     end
