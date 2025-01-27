@@ -37,10 +37,7 @@ module Jekyll
         formatted_date = post_date.strftime('%Y-%m-%d')
         post_path = formatted_date + '-' + post_title
 
-        post_paths = [
-          site.in_source_dir(File.join("_posts", post_path)),
-          site.in_source_dir(post_path)
-        ]
+        post_paths = [site.in_source_dir(post_path)]
 
         # Jekyll의 posts 리소스에 추가
         post_paths.each do |path|
