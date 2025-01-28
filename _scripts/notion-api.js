@@ -12,6 +12,9 @@ const notion = new Client({
 });
 
 function escapeCodeBlock(body) {
+    // Null body pass
+    if (!body) return "";
+
     const regex = /```([\s\S]*?)```/g;
     return body.replace(regex, function (match, htmlBlock) {
         return "\n{% raw %}\n```" + htmlBlock.trim() + "\n```\n{% endraw %}\n";
