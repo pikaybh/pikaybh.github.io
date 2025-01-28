@@ -152,7 +152,7 @@ title: ${title}${fmcats}${fmtags}
         let edited_md = md.replace(
             /!\[(.*?)\]\((.*?)\)/g,
             function (match, p1, p2, p3) {
-                const dirname = path.join("assets/img", ftitle);
+                const dirname = path.join("assets/images", ftitle);
                 if (!fs.existsSync(dirname)) {
                     fs.mkdirSync(dirname, { recursive: true });
                 }
