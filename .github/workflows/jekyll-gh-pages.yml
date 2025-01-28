@@ -18,7 +18,7 @@ concurrency:                          # me
   cancel-in-progress: true            # me
 
 jobs:
-  importer:                           # @pikaybh
+  commit_blog_data:                           # @pikaybh
     runs-on: ubuntu-latest            # @pikaybh
 
     steps:                            # @pikaybh
@@ -45,7 +45,7 @@ jobs:
           commit_user_email: actions@github.com                 # @pikaybh
           commit_author: importer-bot 🤖 <actions@github.com>   # @pikaybh
 
-  build_and_deploy:
+  build:  # build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3  # Checkout the repository
@@ -80,9 +80,39 @@ jobs:
       - name: Build Jekyll Site
         # env:
         #   PRISMIC_SECRET: ${{ secrets.PRISMIC_SECRET }}
+        # run: |
+        #   bundle exec jekyll build --trace  # Build the site before deploying
+        #   ls _site  # _site 디렉토리 안의 파일 확인
+        run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"                    # @pikaybh
+        env:
+          JEKYLL_ENV: "production"
+
+      - name: Test site
         run: |
-          bundle exec jekyll build --trace  # Build the site before deploying
-          ls _site  # _site 디렉토리 안의 파일 확인
+          bundle exec htmlproofer _site --disable-external --check-html --allow_hash_href
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "_site${{ steps.pages.outputs.base_path }}"
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: jeffreytse/jekyll-deploy-action@v0.5.1
+        with:
+          provider: 'github'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages                    # ...@pikaybh
+          jekyll_src: '_site/'           # Directory to build from
+          jekyll_cfg: '../_config.yml'  # Jekyll configuration file
+
 
       # - name: Cache Prismic Data
       #   uses: actions/cache@v3
@@ -90,12 +120,12 @@ jobs:
       #     path: _data/prismic_posts.json
       #     key: ${{ runner.os }}-prismic-${{ github.sha }}
 
-      - name: Deploy to GitHub Pages
-        uses: jeffreytse/jekyll-deploy-action@v0.5.1
-        with:
-          provider: 'github'
-          token: ${{ secrets.GITHUB_TOKEN }} # GitHub Personal Access Token (PAT)
-          branch: 'gh-pages'         # Branch to deploy to
-          jekyll_src: '_site/'           # Directory to build from
-          jekyll_cfg: '../_config.yml'  # Jekyll configuration file
+      # - name: Deploy to GitHub Pages
+      #   uses: jeffreytse/jekyll-deploy-action@v0.5.1
+      #   with:
+      #     provider: 'github'
+      #     token: ${{ secrets.GITHUB_TOKEN }} # GitHub Personal Access Token (PAT)
+      #     branch: 'gh-pages'         # Branch to deploy to
+      #     jekyll_src: '_site/'           # Directory to build from
+      #     jekyll_cfg: '../_config.yml'  # Jekyll configuration file
 

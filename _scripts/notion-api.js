@@ -122,15 +122,15 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         let fmtags = "";
         let fmcats = "";
         if (tags.length > 0) {
-            fmtags += "\ntags:\n";
+            fmtags += "\ntags:";
             for (const t of tags) {
-                fmtags += "  - " + t + "\n";
+                fmtags += "\n  - " + t;
             }
         }
         if (cats.length > 0) {
-            fmcats += "\ncategories:\n";
+            fmcats += "\ncategories:";
             for (const t of cats) {
-                fmcats += "  - " + t + "\n";
+                fmcats += "\n  - " + t;
             }
         }
         const fm = `---
