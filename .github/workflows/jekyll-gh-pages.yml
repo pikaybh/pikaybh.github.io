@@ -30,7 +30,7 @@ jobs:
 
       - run: npm install                 # @pikaybh
 
-      - run: node _scripts/notion-import.js                  # @pikaybh
+      - run: node _scripts/notion-api.js                  # @pikaybh
         env:                                                    # @pikaybh
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}             # @pikaybh
           DATABASE_ID: ${{ secrets.BLOG_DB_ID }}               # @pikaybh
