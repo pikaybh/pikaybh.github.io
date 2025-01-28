@@ -18,7 +18,7 @@ concurrency:                          # me
   cancel-in-progress: true            # me
 
 jobs:
-  commit_blog_data:                           # @pikaybh
+  import_data:                           # @pikaybh
     runs-on: ubuntu-latest            # @pikaybh
 
     steps:                            # @pikaybh
@@ -47,6 +47,7 @@ jobs:
 
   build:  # build_and_deploy:
     runs-on: ubuntu-latest
+    needs: import_data
     steps:
       - uses: actions/checkout@v3  # Checkout the repository
       
