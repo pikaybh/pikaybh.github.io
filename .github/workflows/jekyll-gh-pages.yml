@@ -4,12 +4,55 @@ on:
   push:
     branches:
       - master  # Change to the appropriate branch if needed
+  repository_dispatch:                # me
+    types: [RUN_WORKFLOW_DISPATCH]    # me
+
+permissions:                          # me
+  contents: write                     # me
+  pages: write                        # me
+  id-token: write                     # me
+
+# Allow one concurrent deployment     # me
+concurrency:                          # me
+  group: "pages"                      # me
+  cancel-in-progress: true            # me
 
 jobs:
+  importer:                           # @pikaybh
+    runs-on: ubuntu-latest            # @pikaybh
+
+    steps:                            # @pikaybh
+      - uses: actions/checkout@master                 # @pikaybh
+      
+      - uses: actions/setup-node@v3                 # @pikaybh
+        with:                 # @pikaybh
+          node-version: "17"                 # @pikaybh
+
+      - run: npm install                 # @pikaybh
+
+      - run: node _scripts/notion-import.js                  # @pikaybh
+        env:                                                    # @pikaybh
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}             # @pikaybh
+          DATABASE_ID: ${{ secrets.BLOG_DB_ID }}               # @pikaybh
+
+      - uses: stefanzweifel/git-auto-commit-action@v4           # @pikaybh
+        env:                                                     # @pikaybh
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}             # @pikaybh
+        with:                                                   # @pikaybh
+          commit_message: "[배포] Notion 변경 사항 저장"          # @pikaybh
+          branch: main                                          # @pikaybh
+          commit_user_name: importer-bot 🤖                 # @pikaybh
+          commit_user_email: actions@github.com                 # @pikaybh
+          commit_author: importer-bot 🤖 <actions@github.com>   # @pikaybh
+
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3  # Checkout the repository
+      
+      - name: Setup Pages                                 # @pikaybh
+        id: pages                                         # @pikaybh
+        uses: actions/configure-pages@v1                  # @pikaybh
 
       # Setup a specific Ruby version (e.g., 3.1.6) that is compatible
       - name: Setup Ruby
@@ -35,17 +78,17 @@ jobs:
           echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
 
       - name: Build Jekyll Site
-        env:
-          PRISMIC_SECRET: ${{ secrets.PRISMIC_SECRET }}
+        # env:
+        #   PRISMIC_SECRET: ${{ secrets.PRISMIC_SECRET }}
         run: |
           bundle exec jekyll build --trace  # Build the site before deploying
           ls _site  # _site 디렉토리 안의 파일 확인
 
-      - name: Cache Prismic Data
-        uses: actions/cache@v3
-        with:
-          path: _data/prismic_posts.json
-          key: ${{ runner.os }}-prismic-${{ github.sha }}
+      # - name: Cache Prismic Data
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: _data/prismic_posts.json
+      #     key: ${{ runner.os }}-prismic-${{ github.sha }}
 
       - name: Deploy to GitHub Pages
         uses: jeffreytse/jekyll-deploy-action@v0.5.1
