@@ -40,7 +40,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}             # @pikaybh
         with:                                                   # @pikaybh
           commit_message: "[배포] Notion 변경 사항 저장"          # @pikaybh
-          branch: main                                          # @pikaybh
+          branch: master                                          # @pikaybh
           commit_user_name: importer-bot 🤖                 # @pikaybh
           commit_user_email: actions@github.com                 # @pikaybh
           commit_author: importer-bot 🤖 <actions@github.com>   # @pikaybh
