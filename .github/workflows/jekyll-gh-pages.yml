@@ -95,6 +95,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
+          branch: gh-pages
 
   deploy:
     environment:
