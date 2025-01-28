@@ -43,7 +43,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 
 (async () => {
     // Call DB
-    const databaseId = process.env.BLOG_DB_ID;
+    const databaseId = process.env.DATABASE_ID;
     let response = await notion.databases.query({
         database_id: databaseId,
         filter: {
