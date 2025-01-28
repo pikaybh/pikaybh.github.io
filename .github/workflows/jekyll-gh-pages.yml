@@ -96,7 +96,7 @@ jobs:
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
           branch: gh-pages
-
+          
   deploy:
     environment:
       name: github-pages
@@ -106,13 +106,23 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: jeffreytse/jekyll-deploy-action@v0.5.1
-        with:
-          provider: 'github'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages                    # ...@pikaybh
-          jekyll_src: '_site/'           # Directory to build from
-          jekyll_cfg: '../_config.yml'  # Jekyll configuration file
+        uses: actions/deploy-pages@v1
+
+  # deploy:
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - name: Deploy to GitHub Pages
+  #       uses: jeffreytse/jekyll-deploy-action@v0.5.1
+  #       with:
+  #         provider: 'github'
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         branch: 'gh-pages'                    # ...@pikaybh
+  #         jekyll_src: '_site/'           # Directory to build from
+  #         jekyll_cfg: '../_config.yml'  # Jekyll configuration file
 
 
       # - name: Cache Prismic Data
