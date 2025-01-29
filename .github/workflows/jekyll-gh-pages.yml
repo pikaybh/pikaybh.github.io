@@ -3,26 +3,26 @@ name: Build and Deploy to Github Pages
 on:
   push:
     branches:
-      - master  # Change to the appropriate branch if needed
-  repository_dispatch:                # me
-    types: [RUN_WORKFLOW_DISPATCH]    # me
+      - master
+  repository_dispatch:
+    types: [RUN_WORKFLOW_DISPATCH]
 
-permissions:                          # me
-  contents: write                     # me
-  pages: write                        # me
-  id-token: write                     # me
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
-# Allow one concurrent deployment     # me
-concurrency:                          # me
-  group: "pages"                      # me
-  cancel-in-progress: true            # me
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  import_data:                           # @pikaybh
-    runs-on: ubuntu-latest            # @pikaybh
+  import_data:
+    runs-on: ubuntu-latest
 
-    steps:                            # @pikaybh
-      - uses: actions/checkout@master                 # @pikaybh
+    steps:
+      - uses: actions/checkout@master
       
       - name: Clean Directory
         run: |
@@ -40,34 +40,35 @@ jobs:
                       ;;
                   *)
                       rm -rf "$file"
-                      ;;
+                      ;;  
               esac
           done
           rm -rf _posts/*
       
-      - uses: actions/setup-node@v3                 # @pikaybh
-        with:                 # @pikaybh
-          node-version: "17"                 # @pikaybh
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "17"
 
-      - run: npm install                 # @pikaybh
+      - run: npm install
 
-      - run: node _scripts/notion-api.js                  # @pikaybh
-        env:                                                    # @pikaybh
-          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}             # @pikaybh
-          DATABASE_ID: ${{ secrets.BLOG_DB_ID }}               # @pikaybh
+      - run: node _scripts/notion-api.js
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          DATABASE_ID: ${{ secrets.BLOG_DB_ID }}
 
-      - uses: stefanzweifel/git-auto-commit-action@v4           # @pikaybh
-        env:                                                     # @pikaybh
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}             # @pikaybh
-        with:                                                   # @pikaybh
-          commit_message: "[배포] Notion 변경 사항 저장"          # @pikaybh
-          branch: master                                          # @pikaybh
-          commit_user_name: importer-bot 🤖                 # @pikaybh
-          commit_user_email: actions@github.com                 # @pikaybh
-          commit_author: importer-bot 🤖 <actions@github.com>   # @pikaybh
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commit_message: "[배포] Notion 변경 사항 저장"
+          branch: master
+          commit_user_name: importer-bot 🤖
+          commit_user_email: actions@github.com
+          commit_author: importer-bot 🤖 <actions@github.com>
 
   build_and_deploy:
     runs-on: ubuntu-latest
+    needs: import_data
     steps:
       - uses: actions/checkout@v4
 
@@ -82,8 +83,7 @@ jobs:
             ${{ runner.os }}-cache-
 
       # Use GitHub Deploy Action to build and deploy to Github
-      # For latest version: `jeffreytse/jekyll-deploy-action@master`
-      - uses: jeffreytse/jekyll-deploy-action@v0.6.0
+      - uses: jeffreytse/jekyll-deploy-action@master
         with:
           provider: 'github'         # Default is github
           token: ${{ secrets.GITHUB_TOKEN }} # It's your Personal Access Token(PAT)
@@ -98,105 +98,3 @@ jobs:
           cname: ''                  # Default is to not use a cname
           actor: ''                  # Default is the GITHUB_ACTOR
           pre_build_commands: ''     # Installing additional dependencies (Arch Linux)
-  # build:  # build_and_deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: import_data
-  #   steps:
-  #     - uses: actions/checkout@v3  # Checkout the repository
-  #       with:
-  #         ref: master
-  #         fetch-depth: 1
-  #     
-  #     - name: Setup Pages                                 # @pikaybh
-  #       id: pages                                         # @pikaybh
-  #       uses: actions/configure-pages@v1                  # @pikaybh
-# 
-  #     # Setup a specific Ruby version (e.g., 3.1.6) that is compatible
-  #     - name: Setup Ruby
-  #       uses: ruby/setup-ruby@v1
-  #       with:
-  #         ruby-version: 3.1.6 # Specify an exact version of Ruby
-# 
-  #     - name: Cache Gems
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: vendor/bundle
-  #         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-gems-
-# 
-  #     - name: Install Dependencies
-  #       env:
-  #         CFLAGS: "-Wno-error=implicit-function-declaration"
-  #       run: |
-  #         gem install bundler -v 2.3.26
-  #         bundle config build.google-protobuf --with-cflags="-Wno-error=implicit-function-declaration"
-  #         bundle install --jobs 4 --retry 3 --path vendor/bundle
-  #         echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
-# 
-  #     - name: Build Jekyll Site
-  #       # env:
-  #       #   PRISMIC_SECRET: ${{ secrets.PRISMIC_SECRET }}
-  #       run: |
-  #         bundle exec jekyll build --trace  # Build the site before deploying
-  #       #   ls _site  # _site 디렉토리 안의 파일 확인
-  #       # run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"                    # @pikaybh
-  #       # env:
-  #       #   JEKYLL_ENV: "production"
-# 
-  #     # - name: Test site
-  #     #   run: |
-  #     #     bundle exec htmlproofer _site --disable-external --allow-hash-href
-# 
-  #     # - name: Upload site artifact
-  #     #   uses: actions/upload-pages-artifact@v1
-  #     #   with:
-  #     #     path: "_site${{ steps.pages.outputs.base_path }}"
-  #         
-  # deploy:
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   steps:
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v1
-  #       with:
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         branch: 'gh-pages' 
-# 
-  # # deploy:
-  # #   environment:
-  # #     name: github-pages
-  # #     url: ${{ steps.deployment.outputs.page_url }}
-  # #   runs-on: ubuntu-latest
-  # #   needs: build
-  # #   steps:
-  # #     - name: Deploy to GitHub Pages
-  # #       uses: jeffreytse/jekyll-deploy-action@v0.5.1
-  # #       with:
-  # #         provider: 'github'
-  # #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  # #         branch: 'gh-pages'                    # ...@pikaybh
-  # #         jekyll_src: '_site/'           # Directory to build from
-  # #         jekyll_cfg: '../_config.yml'  # Jekyll configuration file
-# 
-# 
-  #     # - name: Cache Prismic Data
-  #     #   uses: actions/cache@v3
-  #     #   with:
-  #     #     path: _data/prismic_posts.json
-  #     #     key: ${{ runner.os }}-prismic-${{ github.sha }}
-# 
-  #     # - name: Deploy to GitHub Pages
-  #     #   uses: jeffreytse/jekyll-deploy-action@v0.5.1
-  #     #   with:
-  #     #     provider: 'github'
-  #     #     token: ${{ secrets.GITHUB_TOKEN }} # GitHub Personal Access Token (PAT)
-  #     #     branch: 'gh-pages'         # Branch to deploy to
-  #     #     jekyll_src: '_site/'           # Directory to build from
-  #     #     jekyll_cfg: '../_config.yml'  # Jekyll configuration file
-# 
-# 
