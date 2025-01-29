@@ -2,7 +2,7 @@
 title: "Blog Data Manager"
 excerpt: "This page is for admin user."
 sitemap: false
-permalink: /scripts
+permalink: /admin/scripts
 author_profile: true
 ---
 

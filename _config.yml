@@ -16,11 +16,11 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : &title "pikaybh"
+title                    : &title "Lucid Cipher"
 title_separator          : "|"
 subtitle                 : "pikaybh.github.io"  # site tagline that appears below site title in masthead
 name                     : &name "Byunghee Yoo"
-description              : &description "Byunghee's personal blog."
+description              : &description "A personal blog about computer science, engineering, hobbies, and all sorts of random stuffs."
 url                      : "https://pikaybh.github.io"  # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "pikaybh/pikaybh.github.io"  # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -204,6 +204,8 @@ exclude:
   - tmp
   - /docs # ignore Minimal Mistakes /docs
   - /test # ignore Minimal Mistakes /test
+  - run.ps1  # @pikaybh
+  - build.ps1 # @pikaybh
 keep_files:
   - .git
   - .svn
