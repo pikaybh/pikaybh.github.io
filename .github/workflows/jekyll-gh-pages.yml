@@ -66,76 +66,93 @@ jobs:
           commit_user_email: actions@github.com                 # @pikaybh
           commit_author: importer-bot 🤖 <actions@github.com>   # @pikaybh
 
-  build:  # build_and_deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
-    needs: import_data
     steps:
-      - uses: actions/checkout@v3  # Checkout the repository
-        with:
-          ref: master
-          fetch-depth: 1
-      
-      - name: Setup Pages                                 # @pikaybh
-        id: pages                                         # @pikaybh
-        uses: actions/configure-pages@v1                  # @pikaybh
+      - uses: actions/checkout@v4
 
-      # Setup a specific Ruby version (e.g., 3.1.6) that is compatible
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      # Use GitHub Actions' cache to cache dependencies on servers
+      - uses: actions/cache@v4
         with:
-          ruby-version: 3.1.6 # Specify an exact version of Ruby
-
-      - name: Cache Gems
-        uses: actions/cache@v3
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          path: |
+            .asdf/**
+            vendor/bundle
+          key: ${{ runner.os }}-cache-${{ hashFiles('**/cache.key') }}
           restore-keys: |
-            ${{ runner.os }}-gems-
+            ${{ runner.os }}-cache-
 
-      - name: Install Dependencies
-        env:
-          CFLAGS: "-Wno-error=implicit-function-declaration"
-        run: |
-          gem install bundler -v 2.3.26
-          bundle config build.google-protobuf --with-cflags="-Wno-error=implicit-function-declaration"
-          bundle install --jobs 4 --retry 3 --path vendor/bundle
-          echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
-
-      - name: Build Jekyll Site
-        # env:
-        #   PRISMIC_SECRET: ${{ secrets.PRISMIC_SECRET }}
-        # run: |
-        #   bundle exec jekyll build --trace  # Build the site before deploying
-        #   ls _site  # _site 디렉토리 안의 파일 확인
-        run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"                    # @pikaybh
-        env:
-          JEKYLL_ENV: "production"
-
-      # - name: Test site
-      #   run: |
-      #     bundle exec htmlproofer _site --disable-external --allow-hash-href
-
-      - name: Upload site artifact
-        uses: actions/upload-pages-artifact@v1
+      # Use GitHub Deploy Action to build and deploy to Github
+      # For latest version: `jeffreytse/jekyll-deploy-action@master`
+      - uses: jeffreytse/jekyll-deploy-action@v0.6.0
         with:
-          path: "_site${{ steps.pages.outputs.base_path }}"
-          branch: gh-pages
-          
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: 'gh-pages' 
-
+          provider: 'github'         # Default is github
+          token: ${{ secrets.GITHUB_TOKEN }} # It's your Personal Access Token(PAT)
+          ssh_private_key: ''        # It's your SSH private key (SSH approach)
+          repository: ''             # Default is current repository
+          branch: 'gh-pages'         # Default is gh-pages for github provider
+          jekyll_src: './'           # Default is root directory
+          jekyll_cfg: '_config.yml'  # Default is _config.yml
+          jekyll_baseurl: ''         # Default is according to _config.yml
+          ruby_ver: ''               # Default is 3.2.0 version
+          bundler_ver: ''            # Default is compatible bundler version (~>2.5.0)
+          cname: ''                  # Default is to not use a cname
+          actor: ''                  # Default is the GITHUB_ACTOR
+          pre_build_commands: ''     # Installing additional dependencies (Arch Linux)
+  # build:  # build_and_deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: import_data
+  #   steps:
+  #     - uses: actions/checkout@v3  # Checkout the repository
+  #       with:
+  #         ref: master
+  #         fetch-depth: 1
+  #     
+  #     - name: Setup Pages                                 # @pikaybh
+  #       id: pages                                         # @pikaybh
+  #       uses: actions/configure-pages@v1                  # @pikaybh
+# 
+  #     # Setup a specific Ruby version (e.g., 3.1.6) that is compatible
+  #     - name: Setup Ruby
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: 3.1.6 # Specify an exact version of Ruby
+# 
+  #     - name: Cache Gems
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: vendor/bundle
+  #         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-gems-
+# 
+  #     - name: Install Dependencies
+  #       env:
+  #         CFLAGS: "-Wno-error=implicit-function-declaration"
+  #       run: |
+  #         gem install bundler -v 2.3.26
+  #         bundle config build.google-protobuf --with-cflags="-Wno-error=implicit-function-declaration"
+  #         bundle install --jobs 4 --retry 3 --path vendor/bundle
+  #         echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
+# 
+  #     - name: Build Jekyll Site
+  #       # env:
+  #       #   PRISMIC_SECRET: ${{ secrets.PRISMIC_SECRET }}
+  #       run: |
+  #         bundle exec jekyll build --trace  # Build the site before deploying
+  #       #   ls _site  # _site 디렉토리 안의 파일 확인
+  #       # run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"                    # @pikaybh
+  #       # env:
+  #       #   JEKYLL_ENV: "production"
+# 
+  #     # - name: Test site
+  #     #   run: |
+  #     #     bundle exec htmlproofer _site --disable-external --allow-hash-href
+# 
+  #     # - name: Upload site artifact
+  #     #   uses: actions/upload-pages-artifact@v1
+  #     #   with:
+  #     #     path: "_site${{ steps.pages.outputs.base_path }}"
+  #         
   # deploy:
   #   environment:
   #     name: github-pages
@@ -144,27 +161,42 @@ jobs:
   #   needs: build
   #   steps:
   #     - name: Deploy to GitHub Pages
-  #       uses: jeffreytse/jekyll-deploy-action@v0.5.1
+  #       id: deployment
+  #       uses: actions/deploy-pages@v1
   #       with:
-  #         provider: 'github'
   #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         branch: 'gh-pages'                    # ...@pikaybh
-  #         jekyll_src: '_site/'           # Directory to build from
-  #         jekyll_cfg: '../_config.yml'  # Jekyll configuration file
-
-
-      # - name: Cache Prismic Data
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: _data/prismic_posts.json
-      #     key: ${{ runner.os }}-prismic-${{ github.sha }}
-
-      # - name: Deploy to GitHub Pages
-      #   uses: jeffreytse/jekyll-deploy-action@v0.5.1
-      #   with:
-      #     provider: 'github'
-      #     token: ${{ secrets.GITHUB_TOKEN }} # GitHub Personal Access Token (PAT)
-      #     branch: 'gh-pages'         # Branch to deploy to
-      #     jekyll_src: '_site/'           # Directory to build from
-      #     jekyll_cfg: '../_config.yml'  # Jekyll configuration file
-
+  #         branch: 'gh-pages' 
+# 
+  # # deploy:
+  # #   environment:
+  # #     name: github-pages
+  # #     url: ${{ steps.deployment.outputs.page_url }}
+  # #   runs-on: ubuntu-latest
+  # #   needs: build
+  # #   steps:
+  # #     - name: Deploy to GitHub Pages
+  # #       uses: jeffreytse/jekyll-deploy-action@v0.5.1
+  # #       with:
+  # #         provider: 'github'
+  # #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  # #         branch: 'gh-pages'                    # ...@pikaybh
+  # #         jekyll_src: '_site/'           # Directory to build from
+  # #         jekyll_cfg: '../_config.yml'  # Jekyll configuration file
+# 
+# 
+  #     # - name: Cache Prismic Data
+  #     #   uses: actions/cache@v3
+  #     #   with:
+  #     #     path: _data/prismic_posts.json
+  #     #     key: ${{ runner.os }}-prismic-${{ github.sha }}
+# 
+  #     # - name: Deploy to GitHub Pages
+  #     #   uses: jeffreytse/jekyll-deploy-action@v0.5.1
+  #     #   with:
+  #     #     provider: 'github'
+  #     #     token: ${{ secrets.GITHUB_TOKEN }} # GitHub Personal Access Token (PAT)
+  #     #     branch: 'gh-pages'         # Branch to deploy to
+  #     #     jekyll_src: '_site/'           # Directory to build from
+  #     #     jekyll_cfg: '../_config.yml'  # Jekyll configuration file
+# 
+# 
