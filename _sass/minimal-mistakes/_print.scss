@@ -244,8 +244,8 @@
   .author__content,
   .author__urls-wrapper,
   .nav__list,
-  .sidebar,
-  .adsbygoogle {
+  .sidebar {
+  /*.adsbygoogle {*/
     display: none !important;
     height: 1px !important;
   }
