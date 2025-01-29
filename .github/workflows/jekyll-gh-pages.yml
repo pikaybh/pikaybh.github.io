@@ -24,6 +24,27 @@ jobs:
     steps:                            # @pikaybh
       - uses: actions/checkout@master                 # @pikaybh
       
+      - name: Clean Directory
+        run: |
+          for file in assets/images/*
+          do
+              case $file in
+                  assets/images/88x88.png | \
+                  assets/images/bio-photo_202424.jpg | \
+                  assets/images/bio-photo.jpg | \
+                  assets/images/bio-photo.png | \
+                  assets/images/effective-hazard-prevention-1.png | \
+                  assets/images/favicon.png | \
+                  *.svg)
+                      continue
+                      ;;
+                  *)
+                      rm -rf "$file"
+                      ;;
+              esac
+          done
+          rm -rf _posts/*
+      
       - uses: actions/setup-node@v3                 # @pikaybh
         with:                 # @pikaybh
           node-version: "17"                 # @pikaybh
@@ -50,6 +71,9 @@ jobs:
     needs: import_data
     steps:
       - uses: actions/checkout@v3  # Checkout the repository
+        with:
+          ref: master
+          fetch-depth: 1
       
       - name: Setup Pages                                 # @pikaybh
         id: pages                                         # @pikaybh
@@ -108,6 +132,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: 'gh-pages' 
 
   # deploy:
   #   environment:
