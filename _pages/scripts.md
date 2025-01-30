@@ -49,10 +49,12 @@ If you are not the owner of this site, please [go back](#){: onclick="history.ba
 </style>
 <div class="trigger-container">
     <button id="triggerButton" class="trigger-button">Update</button>
-    <div id="message" class="message"></div>
 </div>
+<div id="message" class="message"></div>
 
 <script>
+    const apiUrl = "https://script.google.com/macros/s/AKfycbzYYpp5Xswu2E8gVFSFlOdaACrS7ByidAAnXiVFZs2xBOfhT_M6JcOl4-c2t7AbvnTMoQ/exec";
+
     document.getElementById("triggerButton").addEventListener("click", sendRequest);
 
     async function sendRequest() {
@@ -60,23 +62,27 @@ If you are not the owner of this site, please [go back](#){: onclick="history.ba
         messageElement.classList.add("notice", "notice--info");
         messageElement.textContent = "Sending the request...";
 
-        await fetch("https://script.google.com/macros/s/AKfycbzYYpp5Xswu2E8gVFSFlOdaACrS7ByidAAnXiVFZs2xBOfhT_M6JcOl4-c2t7AbvnTMoQ/exec", {
-            method: "POST",
+        fetch(apiUrl, { method: "POST" })
+        .then(response => {
+            if (!response.ok) {
+                messageElement.classList.replace("notice--info", "notice--danger");
+                throw new Error(`Failed to send the request. Status code: ${response.status}`);
+            }
+            return response.json();
         })
-        .then((response) => {
-            if (response.status === 204 || response.status === 200) {
+        .then(data => {
+            if (data.remaining !== undefined) {
                 messageElement.classList.replace("notice--info", "notice--success");
-                messageElement.textContent = "Request sent successfully.";
-                console.log("Status code: " + response.status)
+                remainingElement.textContent = `Request sent successfully. Remaining requests today: ${data.remaining}`;
             } else {
                 messageElement.classList.replace("notice--info", "notice--warning");
-                messageElement.textContent = "Failed to send the request. Status code: " + response.status;
+                remainingElement.textContent = "Failed to retrieve remaining count.";
             }
         })
         .catch(error => {
             console.error("Error:", error);
-            messageElement.classList.replace("notice--info", "notice--warning");
-            messageElement.textContent = "An unknown error occurred while sending the request.";
-        })
+            messageElement.classList.replace("notice--info", "notice--danger");
+            messageElement.textContent = error.message || "An unknown error occurred while sending the request.";
+        });
     }
 </script>
