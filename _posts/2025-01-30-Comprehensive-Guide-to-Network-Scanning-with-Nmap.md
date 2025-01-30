@@ -1,5 +1,9 @@
 ---
-title: Comprehensive Guide to Network Scanning with Nmap 
+title: Comprehensive Guide to Network Scanning with Nmap
+categories:
+  - OSCP
+tags:
+  - Nmap 
 ---
 
 Nmap (Network Mapper) is an essential tool for network security assessment and vulnerability analysis. This post provides an in-depth guide to Nmap's key features and applications. For demonstration purposes, we will use **127.0.0.1** (localhost) as an example.
