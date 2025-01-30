@@ -71,6 +71,13 @@ jobs:
     needs: import_data
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ensure latest master branch
+        run: |
+          git checkout master
+          git pull origin master --rebase
 
       # Use GitHub Actions' cache to cache dependencies on servers
       - uses: actions/cache@v4
