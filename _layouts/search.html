@@ -20,7 +20,7 @@ layout: default-noads
       <h1 id="page-title" class="page__title">{{ page.title }}</h1>
     {% endunless %}
 
-    <!--{{ content }}-->
+    {{ content }}
 
     {%- assign search_provider = site.search_provider | default: "lunr" -%}
     {%- case search_provider -%}
