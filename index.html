@@ -5,12 +5,236 @@ permalink: /
 header:
   # overlay_color: "#5e616c"
   overlay_image: https://camo.githubusercontent.com/a3cc1841b0632845540123ba9e2e4daea663af2699bea148993e20b1f399d31b/68747470733a2f2f63617073756c652d72656e6465722e76657263656c2e6170702f6170693f746578743d2526616e696d6174696f6e3d66616465496e26747970653d776176696e6726666f6e74416c69676e3d383026666f6e74416c69676e593d383026666f6e7453697a653d343026666f6e74436f6c6f723d64366163653626636f6c6f723d74696d654772616469656e7426726576657273616c3d747275652673656374696f6e3d666f6f746572  # https://picsum.photos/1920/1080  # https://api.api-ninjas.com/v1/randomimage?category=city  # ?width=1920?height=1080  # https://source.unsplash.com/random?topic=architecture/1920%C3%971080  # https://picsum.photos/1920/1080
-  # overlay_filter: 0  # 0.5
+  overlay_filter: 0.3  # 0.5
   # actions:
   #   - label: "<i class='fa fa-book'></i> Read posts"
   #     url: "/home/"
   # caption: "Photo credit: [**Lorem Picsum**](https://picsum.photos){: target='_blank'}"  # "Photo credit: [**Unsplash**](https://unsplash.com){: target='_blank'}"
 excerpt: '<!--Bridging the Gap Between Construction Safety and Innovation: A Journey Through Large Language Models and Engineering Excellence.-->
+<div class="author__avatar">
+  <img src="/assets/images/bio-photo.jpg" alt="pikaybh" itemprop="image" class="u-photo align-center">
+</div>
+<div class="author__content">
+  <h3 class="author__name p-name text-center" itemprop="name">@pikaybh</h3>
+  <div class="text-box" data-trigger>
+    <pre class="text-container highlight">
+      <code class="text"></code>
+      <code class="cursor">_</code>
+    </pre>
+</div>
+</div>
+<br />
+<br />
+<a href="/home/" class="btn btn--light-outline btn--large">
+  <i class="fas fa-house"></i>&nbsp; Blog
+</a>
+<br />
+<br />
+<a href="https://linkedin.com/in/byunghee-yoo" class="btn btn--light-outline btn--large">
+  <i class="fab fa-linkedin"></i>&nbsp; Linkedin
+</a>
+<br />
+<br />
+<a href="https://github.com/pikaybh" class="btn btn--light-outline btn--large">
+  <i class="fab fa-github"></i>&nbsp; GitHub
+</a>
+<br />
+<br />
+<a href="https://twitter.com/pikaybh" class="btn btn--light-outline btn--large">
+  <i class="fab fa-x-twitter"></i>&nbsp; (Twitter)
+</a>
+<br />
+<br />
+<a href="https://instagram.com/pikaybh" class="btn btn--light-outline btn--large">
+  <i class="fab fa-instagram"></i>&nbsp; Instagram
+</a>
+<br />
+<br />
+<a href="#" class="btn btn--light-outline btn--large">
+  <i class="fas fa-question"></i>&nbsp; Comming soon...
+</a>
+'
+feature_row:
+  - image_path: /assets/images/88x88.png
+    alt: "about"
+    title: "Welcome to my personal research site!"
+    excerpt: "My name is Byunghee Yoo and I have a background in construction managements and artificial intelligence."
+    url: "/about/"
+    # btn_class: "btn--primary"
+    btn_label: "Learn more"
+github:
+  - excerpt: '{::nomarkdown}<iframe style="display: inline-block;" src="https://ghbtns.com/github-btn.html?user=mmistakes&repo=minimal-mistakes&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe> <iframe style="display: inline-block;" src="https://ghbtns.com/github-btn.html?user=mmistakes&repo=minimal-mistakes&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe>{:/nomarkdown}'
+intro:
+  - excerpt: '[<i class="fa fa-envelope"></i>](mailto:pikaybh@snu.ac.kr){: .btn target="_blank"} &nbsp; [<i class="fab fa-github"></i> GitHub](https://github.com/pikaybh){: .btn target="_blank"} &nbsp; [<i class="fab fa-x-twitter"></i> (Twitter)](https://twitter.com/pikaybh){: .btn target="_blank"} &nbsp; [<i class="fab fa-instagram"></i> Instagram](https://instagram.com/pikaybh){: .btn target="_blank"}'
+---
+
+<!--
+<a href="mailto:pikaybh@snu.ac.kr" class="btn--large btn--light-outline" target="_blank"><i class="fa fa-envelope"></i> Email</a>
+<br class="mobile" />
+[<i class="fab fa-linkedin"></i> Linkedin](https://linkedin.com/in/byunghee-yoo){: .btn .social-icon target="_blank"}
+<br class="mobile" />
+[<i class="fab fa-github"></i> GitHub](https://github.com/pikaybh){: .btn .social-icon target="_blank"}
+<br class="mobile" />
+[<i class="fab fa-x-twitter"></i> (Twitter)](https://twitter.com/pikaybh){: .btn .social-icon target="_blank"}
+<br class="mobile" />
+[<i class="fab fa-instagram"></i> Instagram](https://instagram.com/pikaybh){: .btn .social-icon target="_blank"}'
+-->
+
+<!--{% include feature_row id="intro" type="center" %}-->
+
+<style>
+  /* 전체 스크롤 숨기기 */
+  ::-webkit-scrollbar {
+      display: none;
+  }
+
+  body {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE, Edge */
+  }
+
+  .adsbygoogle--wrapper {
+    margin: 0 auto !important;
+    display: none;
+  }
+  a{
+    width: 100%;
+  }
+  .author__content {
+    color: #f2f3f3;
+  }
+  .text-container {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+  .text-box {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    height: 50px;
+  }
+  .cursor {
+    display: inline-block;
+    animation: blink 0.5s step-end infinite alternate;
+  }
+  @keyframes blink {
+      50% { opacity: 0; }
+  }
+  .masthead {
+    display: none;
+  }
+  .page__title{
+    display: none;
+  }
+  .page__footer{
+    margin-top: 0;
+  }
+  .desktop{
+    display: inline;
+  }
+  .mobile{
+    display: none;
+  }
+  .page__hero--overlay{
+    margin-bottom: 0;
+  }
+  /* 모바일 화면에서만 적용될 스타일 */
+  @media (max-width: 768px) {
+        .author__avatar {
+          display: flex;
+          margin: 20px auto;
+          padding: 5px;
+          width: 110px;
+          height: 110px;
+          border: 1px solid #f2f3f3;
+          border-radius: 50%;
+        }
+        .author__content {
+          font-size: 21px;
+          display: block;
+        }
+        .social-icon {
+          font-size: 21px;
+        }
+        .desktop {
+          display: none;
+        }
+        .mobile {
+          display: inline;
+        }
+    }
+</style>
+<script>
+  const contents = [
+    'while(!(succeed == try()));', 
+    'import antigravity',
+    'while True: print("Segmentation Fault!")',
+    'let future = async () => await new Promise(() => {});',
+    'throw new Exception("Works on my machine!");',
+    'alias rm="mv --to-trash"', 
+    'if (coffee.isEmpty()) System.exit(1);', ,
+    'if (coffee == null) throw new NullReferenceException();',
+    'go go go go();',
+    ':(){ :|:& };:',
+    'SELECT * FROM users WHERE clue > 0;',
+    'let mut dev = None; dev.unwrap();',
+    '$money += "0";',
+    '<blink>Under maintenance since 2022</blink>',
+    '^.*?$',
+    'git commit -m "final fix"'
+  ];
+  const textElement = document.querySelector(".text");
+  const cursorElement = document.querySelector(".cursor");
+  
+  let currentIndex = 0;
+  let charIndex = 0;
+  let typingSpeed = 100;
+
+  // 문장을 다 입력한 후 대기 시간 (1초)
+  let pauseTime = 3000;
+  
+  function typeText() {
+      const currentText = contents[currentIndex];
+      
+      if (charIndex < currentText.length) {
+          textElement.textContent += currentText[charIndex++];
+          setTimeout(typeText, typingSpeed);
+      } else {
+          setTimeout(() => {
+              textElement.textContent = "";
+              currentIndex = Math.floor(Math.random() * contents.length);
+              charIndex = 0;
+              setTimeout(typeText, typingSpeed);
+          }, pauseTime);
+      }
+  }
+  
+  function blinkCursor() {
+      cursorElement.style.visibility = cursorElement.style.visibility === 'hidden' ? 'visible' : 'hidden';
+  }
+  
+  // 0.5초마다 커서 깜빡이기
+  setInterval(blinkCursor, 500);
+  
+  typeText();  
+</script>
+
+<!--{% include feature_row %}-->
+
+<!--Old version------------------------------------------------------------
+---
+layout: splash
+permalink: /
+# title: Byunghee Yoo
+header:
+  # overlay_color: "#5e616c"
+  overlay_image: https://camo.githubusercontent.com/a3cc1841b0632845540123ba9e2e4daea663af2699bea148993e20b1f399d31b/68747470733a2f2f63617073756c652d72656e6465722e76657263656c2e6170702f6170693f746578743d2526616e696d6174696f6e3d66616465496e26747970653d776176696e6726666f6e74416c69676e3d383026666f6e74416c69676e593d383026666f6e7453697a653d343026666f6e74436f6c6f723d64366163653626636f6c6f723d74696d654772616469656e7426726576657273616c3d747275652673656374696f6e3d666f6f746572  # https://picsum.photos/1920/1080  # https://api.api-ninjas.com/v1/randomimage?category=city  # ?width=1920?height=1080  # https://source.unsplash.com/random?topic=architecture/1920%C3%971080  # https://picsum.photos/1920/1080
+  # overlay_filter: 0  # 0.5
+  # actions:
+  #   - label: "<i class='fa fa-book'></i> Read posts"
+  #     url: "/home/"
+  # caption: "Photo credit: [**Lorem Picsum**](https://picsum.photos){: target='_blank'}"  # "Photo credit: [**Unsplash**](https://unsplash.com){: target='_blank'}"
+excerpt: '<!--Bridging the Gap Between Construction Safety and Innovation: A Journey Through Large Language Models and Engineering Excellence.-
 <br/>
 <br/>
 <br/>
@@ -50,7 +274,7 @@ intro:
   - excerpt: '[<i class="fa fa-envelope"></i>](mailto:pikaybh@snu.ac.kr){: .btn target="_blank"} &nbsp; [<i class="fab fa-github"></i> GitHub](https://github.com/pikaybh){: .btn target="_blank"} &nbsp; [<i class="fab fa-x-twitter"></i> (Twitter)](https://twitter.com/pikaybh){: .btn target="_blank"} &nbsp; [<i class="fab fa-instagram"></i> Instagram](https://instagram.com/pikaybh){: .btn target="_blank"}'
 ---
 
-<!--{% include feature_row id="intro" type="center" %}-->
+<!--{% include feature_row id="intro" type="center" %}
 
 <style>
   .page__title{
@@ -83,4 +307,5 @@ intro:
     }
 </style>
 
-<!--{% include feature_row %}-->
+<!--{% include feature_row %}-
+-->
