@@ -4,6 +4,7 @@ excerpt: "This page is for admin user."
 sitemap: false
 permalink: /admin/scripts
 author_profile: true
+search: false
 ---
 
 This page is for admin user to manage blog data.
