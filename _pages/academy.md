@@ -1,10 +1,27 @@
 ---
-permalink: /about/
-title: "About Me"
+permalink: /academy/
+title: "About Me (Academic Version)"
 excerpt: "I am a Master's degree student at the Seoul National University Construction Engineering & Management Lab. (SNUCEM)."
-last_modified_at: 2025-01-31T11:59:26-04:00
+last_modified_at: 2024-04-05T11:59:26-04:00
 classes: wide
 toc: false
+snu_row:
+  - image_path: /assets/images/SNU.svg
+    alt: "An Emblem of Seoul National University."
+    fig_caption: "An Emblem of Seoul National University."
+    excerpt: |
+        **PhD** 2025 ~ Present 
+        - **MS** 2023 ~ 2024 
+        - **Major**  [Department of Architecture & Architectural Engineering](https://architecture.snu.ac.kr/){:target="_blank"} 
+        - **Lab.** [SNUCEM](https://cem.snu.ac.kr/){:target="_blank"} 
+dku_row:
+  - image_path: unsplash-gallery-image-2-th.jpg
+    alt: "placeholder image 2"
+    title: "Placeholder Image Left Aligned"
+    excerpt: 'This is some sample content that goes here with **Markdown** formatting. Left aligned with `type="left"`'
+    url: "#test-link"
+    btn_label: "Read More"
+    btn_class: "btn--inverse"
 ---
 
 I am a Ph.D. researcher at [Seoul National University (SNU)](https://snu.ac.kr/){: target="_blank"}.
@@ -26,19 +43,26 @@ Apart from research, I enjoy crafting quirky gadgets, playing wargames, solving 
 - Civil Engineering
 - Construction Management
 
-<!--
-# Education
+## Education
+
+<!--{% include feature_row id="snu_row" type="right" %}-->
+
+### Seoul Nat'l University
 
 <figure style="width: 150px" class="align-left">
     <a href="https://www.snu.ac.kr" target="_blank">
         <img src="/assets/images/SNU.svg" alt="Seoul Nat'l Uni.">
     </a>
+    <!--<figcaption>An Emblem of Seoul National University.</figcaption>-->
 </figure> 
 
 |---|---|---|
-| **MS** | **Seoul Nat'l Universit** ([Link](https://snu.ac.kr){:target="_blank"}) | *2023 ~ present* |
-| **Major** | Department of Architecture <br/>& Architectural Engineering ([Link](https://architecture.snu.ac.kr/){:target="_blank"}) | |
-| **Lab.** | **SNUCEM** ([Link](https://cem.snu.ac.kr/){:target="_blank"}) | |
+| **PhD** | 2025 ~ Present |
+| **MS** | 2023 ~ 2024 |
+| **Major** |  [Department of Architecture & Architectural Engineering](https://architecture.snu.ac.kr/){:target="_blank"} |
+| **Lab.** | [SNUCEM](https://cem.snu.ac.kr/){:target="_blank"} |
+
+### Dankook University
 
 <figure style="width: 150px" class="align-left">
     <a href="https://www.dankook.ac.kr" target="_blank">
@@ -47,24 +71,23 @@ Apart from research, I enjoy crafting quirky gadgets, playing wargames, solving 
 </figure> 
 
 |---|---|---|
-| **BS** | **Dankook University** ([Link](https://dankook.ac.kr){:target="_blank"}) | *2017 ~ 2022* |
+| **BS** | 2017 ~ 2022 |
 | **Major** | Architectural Engineering | |
--->
 
 ## Projects
 
 - Korea Infrastructure Safety & Technology Corporation (KISTEC), **Research on the Investigation and Analysis of Data for Risk Assessment in Construction Accident Prediction**, 50,000,000 KRW / $ 37,000, May. 2024 - Nov. 2024, *Research Assistant (PI: Ahn, C. R)*
 - National Research Foundation of Korea (NRF), **Establishment of a Digital Twin Platform Reflecting Precise Behavior of Structures and Utilization of Cyber-Physical Systems**, Mar. 2022 - Aug. 2022, *Research Assistant (PI: Kim, J)*
 
-<!--
-# Publications
+
+## Publications
 
 - **Yoo, B.**, Kim, J., Park, S., Ahn, C. R., & Oh, T. (2024). Harnessing Generative Pre-Trained Transformers for Construction Accident Prediction with Saliency Visualization. *Applied Sciences, 14*(2), 664.
 
-# Conferences
+### Conferences
 
 - **Yoo, B.**, Ahn, S., & Ahn, C. R. (2024, May). Automating construction safety management documentation through integration of retrieval augmented generation with large language models. *In Proceedings of the 2024 Spring Conference of the Korean Society of Safety*.
--->
+
 
 ## Research Experience
 
@@ -85,9 +108,3 @@ If you want to learn more about me, please check my [Curriculum Vitae](https://d
 
 [Open CV in new tab <i class="fa fa-arrow-up-right-from-square"></i>](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing){: .btn .btn--primary .btn--info target="_blank"}
 [Download CV as PDF<i class="fa fa-download"></i>](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/export?format=pdf){: .btn .btn--primary .btn--danger target="_blank"}
-
-<!--
-- [Read CV <i class="fa fa-arrow-up-right-from-square"></i>](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing){:target="_blank"}
-
-- [Download CV as PDF <i class="fa fa-download"></i>](https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/export?format=pdf)
--->
