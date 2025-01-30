@@ -16,7 +16,8 @@ excerpt: '<!--Bridging the Gap Between Construction Safety and Innovation: A Jou
 </div>
 <div class="author__content">
   <h3 class="author__name p-name text-center" itemprop="name">@pikaybh</h3>
-  <div class="text-box" data-trigger>
+  <!--<p class="author__bio p-note text-center" itemprop="description">Byunghee Yoo</p>-->
+  <div class="text-box higtlight" data-trigger>
     <pre class="text-container highlight">
       <code class="text"></code>
       <code class="cursor">_</code>
@@ -177,7 +178,7 @@ intro:
     'let future = async () => await new Promise(() => {});',
     'throw new Exception("Works on my machine!");',
     'alias rm="mv --to-trash"', 
-    'if (coffee.isEmpty()) System.exit(1);', ,
+    'if (coffee.isEmpty()) System.exit(1);',
     'if (coffee == null) throw new NullReferenceException();',
     'go go go go();',
     ':(){ :|:& };:',
@@ -191,7 +192,7 @@ intro:
   const textElement = document.querySelector(".text");
   const cursorElement = document.querySelector(".cursor");
   
-  let currentIndex = 0;
+  let currentIndex = Math.floor(Math.random() * contents.length);
   let charIndex = 0;
   let typingSpeed = 100;
 
@@ -218,10 +219,19 @@ intro:
       cursorElement.style.visibility = cursorElement.style.visibility === 'hidden' ? 'visible' : 'hidden';
   }
   
+  function eternalTries() {
+    try {
+      typeText();
+    } catch (error) {
+      setTimeout(eternalTries, 1000);
+    }
+  }
+  
   // 0.5초마다 커서 깜빡이기
   setInterval(blinkCursor, 500);
   
-  typeText();  
+  // eternalTries
+  eternalTries();
 </script>
 
 <!--{% include feature_row %}-->
