@@ -25,7 +25,7 @@ function escapeCodeBlock(body) {
     const imageRegex = /!\[(.*?)\]\((.*?)\)/g;
     body = body.replace(imageRegex, function (match, altText, imageUrl, _) {
         let imgTag = "{% capture fig_img %}\n"
-                    + `![altText}](${imageUrl})`
+                    + `![${ altText }](${ imageUrl })`
                     + "\n{% endcapture %}\n\n<figure>\n  {{ fig_img | markdownify | remove: '<p>' | remove: '</p>' }}\n</figure>";
         
         return imgTag;
@@ -52,6 +52,51 @@ function replaceTitleOutsideRawBlocks(body) {
     });
 
     return body;
+}
+
+// 이미지 처리
+async function processImages(pImg) {
+    if (!Array.isArray(pImg) || pImg.length === 0) return "";
+
+    for (const img of pImg) {
+        // 🔹 Notion API에서 URL이 "file.url" 또는 "external.url"에 들어 있을 수 있음.
+        const name = img?.name || "unknown";
+        const url = img?.file?.url || img?.external?.url;
+
+        // 🔹 URL 유효성 검사
+        if (!url || typeof url !== "string" || !url.startsWith("http")) {
+            console.error(`Invalid URL for ${name}:`, url);
+            continue;
+        }
+
+        // 저장할 디렉터리 경로
+        const saveDir = path.join("assets/images/headers"); 
+
+        // 🔹 디렉터리 존재 확인 후 생성 (없으면 생성)
+        if (!fs.existsSync(saveDir)) {
+            fs.mkdirSync(saveDir, { recursive: true });
+        }
+
+        // Path
+        const savePath = path.join(saveDir, `${name}`);
+
+        if (!fs.existsSync(savePath)){
+            try {
+                const response = await axios.get(url, { responseType: "stream" });
+                const fileStream = fs.createWriteStream(savePath);
+    
+                await new Promise((resolve, reject) => {
+                    response.data.pipe(fileStream);
+                    fileStream.on("finish", resolve);
+                    fileStream.on("error", reject);
+                });
+            } catch (error) {
+                console.error(`Error downloading ${name}:`, error.message);
+            }
+        }
+    }
+
+    return savePath;
 }
 
 // passing notion client to the option
@@ -123,16 +168,10 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         }
 
         // header
-        let headerImg = [];
-        let pheaderImg = r.properties?.["Header"]?.["files"];
-        for (const t of pheaderImg) {
-            const n = t?.["name"];
-            const url = t?.["file"]?.["url"]; // 파일 URL 가져오기
-        
-            if (n && url) {
-                headerImg.push({ name: n, url: url });
-            }
-        }
+        let headerImg = r.properties?.["Header"]?.["files"];
+
+        // teaser
+        let teaserImg = r.properties?.["Teaser"]?.["files"];
 
         // author profile
         let profile = r.properties?.["Author Profile"]?.["checkbox"] ? "true" : "false";
@@ -155,55 +194,17 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 fmcats += "\n  - " + t;
             }
         }
-        
-        // Header 이미지 처리
-        async function processHeaderImages() {
-            if (!Array.isArray(pheaderImg) || pheaderImg.length === 0) return "";
-
-            let headerContent = "\nheader:";
-
-            for (const img of pheaderImg) {
-                // 🔹 Notion API에서 URL이 "file.url" 또는 "external.url"에 들어 있을 수 있음.
-                const name = img?.name || "unknown";
-                const url = img?.file?.url || img?.external?.url;
-
-                // 🔹 URL 유효성 검사
-                if (!url || typeof url !== "string" || !url.startsWith("http")) {
-                    console.error(`Invalid URL for ${name}:`, url);
-                    continue;
-                }
-
-                // 저장할 디렉터리 경로
-                const saveDir = path.join("assets/images/headers"); 
-
-                // 🔹 디렉터리 존재 확인 후 생성 (없으면 생성)
-                if (!fs.existsSync(saveDir)) {
-                    fs.mkdirSync(saveDir, { recursive: true });
-                }
-
-                const savePath = path.join(saveDir, `${name}`);
-                headerContent += `\n  overlay_image: ${savePath}\n  teaser: ${savePath}`;
-
-                try {
-                    const response = await axios.get(url, { responseType: "stream" });
-                    const fileStream = fs.createWriteStream(savePath);
-
-                    await new Promise((resolve, reject) => {
-                        response.data.pipe(fileStream);
-                        fileStream.on("finish", resolve);
-                        fileStream.on("error", reject);
-                    });
-
-                } catch (error) {
-                    console.error(`Error downloading ${name}:`, error.message);
-                }
+        if (headerImg || teaserImg) {
+            fmheaderImg = "\nheader:";
+            if (headerImg) {
+                let poverlayImg = await processImages(headerImg);
+                fmheaderImg += `\n  ${poverlayImg}`;
             }
-
-            return headerContent;
+            if (teaserImg) {
+                let pteaserImg = await processImages(teaserImg);
+                fmheaderImg += `\n  ${pteaserImg}`;
+            }
         }
-
-        fmheaderImg = await processHeaderImages();
-
         if (profile) fmprofile += "\nauthor_profile: " + profile;
 
         const fm = "---\ntitle: "
