@@ -155,34 +155,45 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 fmcats += "\n  - " + t;
             }
         }
+        
         // Header 이미지 처리
         async function processHeaderImages() {
-            if (pheaderImg.length === 0) return ""; // 이미지 없으면 빈 문자열 반환
+            if (!Array.isArray(pheaderImg) || pheaderImg.length === 0) {
+                console.log("No images found in pheaderImg.");
+                return "";
+            }
 
             let headerContent = "\nheader:";
 
-            for (const { name, url } of pheaderImg) {
+            for (const img of pheaderImg) {
+                // 🔹 Notion API에서 URL이 "file.url" 또는 "external.url"에 들어 있을 수 있음.
+                const name = img?.name || "unknown";
+                const url = img?.file?.url || img?.external?.url;
+
+                // 🔹 URL 유효성 검사
+                if (!url || typeof url !== "string" || !url.startsWith("http")) {
+                    console.error(`Invalid URL for ${name}:`, url);
+                    continue;
+                }
+
                 const savePath = `assets/images/${name}.png`;
                 headerContent += `\n  overlay_image: ${savePath}`;
 
                 try {
-                    const response = await axios.get(url, { responseType: "stream" });
-                    if (!response.ok) {
-                        console.error(`Failed to download ${name}: ${response.statusText}`);
-                        continue;
-                    }
+                    console.log(`Downloading: ${name} from ${url}`);
 
-                    // 이미지 저장
+                    const response = await axios.get(url, { responseType: "stream" });
                     const filePath = path.join("assets/images/", `${name}.png`);
                     const fileStream = fs.createWriteStream(filePath);
+
                     await new Promise((resolve, reject) => {
-                        response.body.pipe(fileStream);
-                        response.body.on("error", reject);
+                        response.data.pipe(fileStream);
                         fileStream.on("finish", resolve);
+                        fileStream.on("error", reject);
                     });
 
                 } catch (error) {
-                    console.error(`Error downloading ${name}:`, error);
+                    console.error(`Error downloading ${name}:`, error.message);
                 }
             }
 
