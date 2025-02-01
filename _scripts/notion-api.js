@@ -206,13 +206,16 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 }
             }
             if (teaserImg > 0) {
+                console.log(teaserImg);
                 // 🔹 병렬 처리로 모든 이미지 다운로드
                 const pteaserImg = await Promise.all(teaserImg.map(img => processImages([img])));
+                console.log(pteaserImg);
                 
                 // 🔹 결과를 하나씩 추가
                 for (const pimgArr of pteaserImg) {
-                    console.log(pimgArr)
+                    console.log(pimgArr);
                     for (const pimg of pimgArr) {
+                        console.log(pimg);
                         fmheaderImg += `\n  teaser: ${pimg}`;
                     }
                 }
