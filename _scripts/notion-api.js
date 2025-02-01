@@ -173,12 +173,12 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                     continue;
                 }
 
-                const savePath = `assets/images/headers/${name}.png`;
+                const savePath = `assets/images/headers/${name}`;
                 headerContent += `\n  overlay_image: ${savePath}`;
 
                 try {
                     const response = await axios.get(url, { responseType: "stream" });
-                    const filePath = path.join("assets/images/headers/", `${name}.png`);
+                    const filePath = path.join("assets/images/headers/", `${name}`);
                     const fileStream = fs.createWriteStream(filePath);
 
                     await new Promise((resolve, reject) => {
