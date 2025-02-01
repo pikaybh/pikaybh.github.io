@@ -6,6 +6,7 @@ tags:
   - Cheatsheet
 header:
   overlay_image: assets/images/headers/download.jpg
+  teaser: assets/images/headers/download.jpg
 author_profile: false
 ---
 
