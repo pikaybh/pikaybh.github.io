@@ -1,5 +1,6 @@
 ---
 title: A Study on the Effectiveness Analysis and Improvement of On-Site Operability of Hazard and Risk Prevention Plans in the Construction Industry
+header:
 gallery:
   - url: /assets/images/headers/effective-hazard-prevention-1.png
     image_path: assets/images/headers/effective-hazard-prevention-1.png
@@ -14,7 +15,7 @@ Therefore, this study aims to analyze the effectiveness of the hazard and risk p
 
 
 {% capture fig_img %}
-![0](/assets/images/2024-05-08-A-Study-on-the-Effectiveness-Analysis-and-Improvement-of-On-Site-Operability-of-Hazard-and-Risk-Prevention-Plans-in-the-Construction-Industry.md/0.png)_The Necessity of the Effectiveness Analysis of Construction Industry Hazard and Risk Prevention Plans and Improvement of On-Site Operability_
+![The Necessity of the Effectiveness Analysis of Construction Industry Hazard and Risk Prevention Plans and Improvement of On-Site Operability](/assets/images/2024-05-08-A-Study-on-the-Effectiveness-Analysis-and-Improvement-of-On-Site-Operability-of-Hazard-and-Risk-Prevention-Plans-in-the-Construction-Industry.md/0.png)
 {% endcapture %}
 
 <figure>
@@ -29,7 +30,6 @@ Therefore, this study aims to analyze the effectiveness of the hazard and risk p
 따라서 본 연구에서는 국내·외 사전안전성 평가 제도 관련 문헌조사, 유해·위험방지계획서 대상 현장 실태분석, 국내 유사 제도 운영 현황 조사를 통해 유해·위험방지계획서의 실효성을 분석하고, 내실화 방안을 마련하고자 한다.
 
 
-
-#### Reference
+### Reference
 
 - [SNUCEM](https://cem.snu.ac.kr/research/83)

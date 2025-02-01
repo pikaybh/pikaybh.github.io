@@ -6,8 +6,7 @@ tags:
   - Ruby
 author_profile: false
 ---
-
-### Date Formatting
+## Date Formatting
 
 
 | Format | Description                                      |
@@ -29,8 +28,7 @@ author_profile: false
 | `%e`   | Day of the month, blank-padded (_1..31)          |
 
 undefined
-
-### Flags
+## Flags
 
 
 | Flag | Description                  |
@@ -43,8 +41,7 @@ undefined
 | `:`  | Use colons for `%z`          |
 
 undefined
-
-### Time Formatting
+## Time Formatting
 
 
 | Format | Description                                           |
@@ -68,8 +65,7 @@ undefined
 | `%24N` | Yoctosecond (24 digits)                               |
 
 undefined
-
-### Time Zone Formatting
+## Time Zone Formatting
 
 
 | Format  | Description                                                                      |
@@ -81,8 +77,7 @@ undefined
 | `%Z`    | Time zone abbreviation name or similar information                               |
 
 undefined
-
-### Weekday Formatting
+## Weekday Formatting
 
 
 | Format | Description                                        |
@@ -95,8 +90,7 @@ undefined
 | `%w`   | Day of the week starting Sunday (0..6)             |
 
 undefined
-
-### Week Formatting
+## Week Formatting
 
 
 | Format | Description                                               |
@@ -108,8 +102,7 @@ undefined
 | `%W`   | Week number of the year. Week starts with Monday (00..53) |
 
 undefined
-
-### Seconds Formatting
+## Seconds Formatting
 
 
 | Format | Description                                          |
@@ -118,8 +111,7 @@ undefined
 | `%Q`   | Number of milliseconds since 1970-01-01 00:00:00 UTC |
 
 undefined
-
-### Literal Strings
+## Literal Strings
 
 
 | Format | Description              |
@@ -129,8 +121,7 @@ undefined
 | `%%`   | Literal '%' character    |
 
 undefined
-
-### Combination
+## Combination
 
 
 | Format | Description                           |

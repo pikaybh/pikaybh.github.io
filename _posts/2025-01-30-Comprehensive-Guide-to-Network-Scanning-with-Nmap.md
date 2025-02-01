@@ -12,12 +12,10 @@ author_profile: false
 For demonstration purposes, we will use [**127.0.0.1**](http://localhost/)[ (localhost)](http://localhost/) as an example.
 
 
-
-### **1. Basic Nmap Scan**
-
+## **1. Basic Nmap Scan**
 
 
-#### 🔹 Basic Port Scan (1,000 Common Ports)
+### 🔹 Basic Port Scan (1,000 Common Ports)
 
 
 
@@ -31,8 +29,7 @@ nmap 127.0.0.1
 - Checks if the target is online and scans the 1,000 most commonly used ports.
 - **Example use case:** When testing a newly deployed local server to ensure it is accessible.
 
-
-#### 🔹 Full Port Scan (All 65,535 Ports)
+### 🔹 Full Port Scan (All 65,535 Ports)
 
 
 
@@ -46,8 +43,7 @@ nmap -p- 127.0.0.1
 - Scans all ports to detect open services.
 - **Example use case:** When performing an exhaustive security audit on a machine to check for any unexpected open ports.
 
-
-#### 🔹 Fast Scan (Top 100 Ports)
+### 🔹 Fast Scan (Top 100 Ports)
 
 
 
@@ -61,12 +57,10 @@ nmap -F 127.0.0.1
 - Quickly scans only the 100 most commonly used ports.
 - **Example use case:** When troubleshooting connectivity issues and checking if essential services (e.g., HTTP, SSH) are available.
 
-
-### **2. Service and Operating System (OS) Detection**
-
+## **2. Service and Operating System (OS) Detection**
 
 
-#### 🔹 Detect Running Services and Versions
+### 🔹 Detect Running Services and Versions
 
 
 
@@ -80,8 +74,7 @@ nmap -sV 127.0.0.1
 - Identifies services running on open ports along with their versions.
 - **Example use case:** When verifying software versions on a web server before applying security patches.
 
-
-#### 🔹 Detect Operating System (OS)
+### 🔹 Detect Operating System (OS)
 
 
 
@@ -95,8 +88,7 @@ nmap -O 127.0.0.1
 - Determines the OS type of the target machine (requires admin privileges).
 - **Example use case:** When analyzing a network to understand the OS distribution for compatibility testing.
 
-
-#### 🔹 Detect Both Services and OS
+### 🔹 Detect Both Services and OS
 
 
 
@@ -110,12 +102,10 @@ nmap -sV -O 127.0.0.1
 - Combines service and OS detection in one scan.
 - **Example use case:** When conducting a preliminary security assessment of a machine to gather essential information.
 
-
-### **3. Scanning Specific Ports**
-
+## **3. Scanning Specific Ports**
 
 
-#### 🔹 Scan Specific Ports
+### 🔹 Scan Specific Ports
 
 
 
@@ -129,8 +119,7 @@ nmap -p 22,80,443 127.0.0.1
 - Checks only the specified ports: SSH (22), HTTP (80), and HTTPS (443).
 - **Example use case:** When ensuring that only necessary services are running on a secure system.
 
-
-#### 🔹 Scan a Range of Ports
+### 🔹 Scan a Range of Ports
 
 
 
@@ -144,12 +133,10 @@ nmap -p 20-100 127.0.0.1
 - Scans ports 20 to 100.
 - **Example use case:** When testing an internal server where services may be running within a known port range.
 
-
-### **4. Firewall Evasion and Stealth Scanning**
-
+## **4. Firewall Evasion and Stealth Scanning**
 
 
-#### 🔹 Scan Without Ping (Bypass Firewall Restrictions)
+### 🔹 Scan Without Ping (Bypass Firewall Restrictions)
 
 
 
@@ -163,8 +150,7 @@ nmap -Pn 127.0.0.1
 - Forces scanning even if the target does not respond to pings.
 - **Example use case:** When testing a server protected by a firewall that blocks ICMP requests.
 
-
-#### 🔹 TCP SYN Scan (Stealth Scan)
+### 🔹 TCP SYN Scan (Stealth Scan)
 
 
 
@@ -178,8 +164,7 @@ nmap -sS 127.0.0.1
 - Sends SYN packets without completing a full handshake to avoid detection.
 - **Example use case:** When performing a penetration test to see which ports can be probed undetected.
 
-
-#### 🔹 TCP Connect Scan (For Non-Admin Users)
+### 🔹 TCP Connect Scan (For Non-Admin Users)
 
 
 
@@ -193,12 +178,10 @@ nmap -sT 127.0.0.1
 - Establishes full TCP connections for scanning.
 - **Example use case:** When running scans from a non-root user without elevated privileges.
 
-
-### **5. Scanning an Entire Network**
-
+## **5. Scanning an Entire Network**
 
 
-#### 🔹 Find Live Hosts in a Network
+### 🔹 Find Live Hosts in a Network
 
 
 
@@ -212,8 +195,7 @@ nmap -sP 127.0.0.0/24
 - Detects active IP addresses in the specified subnet.
 - **Example use case:** When mapping a corporate network to identify all connected devices.
 
-
-#### 🔹 Find Open Ports in a Network
+### 🔹 Find Open Ports in a Network
 
 
 
@@ -227,12 +209,10 @@ nmap -p 22,80,443 127.0.0.0/24
 - Searches for devices with SSH, HTTP, or HTTPS ports open.
 - **Example use case:** When auditing an organization's network for unauthorized services.
 
-
-### **6. Using NSE (Nmap Scripting Engine)**
-
+## **6. Using NSE (Nmap Scripting Engine)**
 
 
-#### 🔹 Scan for Vulnerabilities
+### 🔹 Scan for Vulnerabilities
 
 
 
@@ -246,8 +226,7 @@ nmap --script=vuln 127.0.0.1
 - Runs vulnerability detection scripts.
 - **Example use case:** When assessing a server for known security flaws before deploying it to production.
 
-
-#### 🔹 Extract Webpage Titles
+### 🔹 Extract Webpage Titles
 
 
 
@@ -261,8 +240,7 @@ nmap --script=http-title -p 80,443 127.0.0.1
 - Retrieves the title of webpages hosted on the target.
 - **Example use case:** When identifying hosted web applications without manually accessing each site.
 
-
-#### 🔹 Scan for Malware and Backdoors
+### 🔹 Scan for Malware and Backdoors
 
 
 
@@ -276,12 +254,10 @@ nmap --script=malware 127.0.0.1
 - Checks for signs of malicious software or compromised services.
 - **Example use case:** When investigating a potentially infected server for security breaches.
 
-
-### **7. Saving and Exporting Results**
-
+## **7. Saving and Exporting Results**
 
 
-#### 🔹 Save Output in Plain Text
+### 🔹 Save Output in Plain Text
 
 
 
@@ -295,8 +271,7 @@ nmap -oN scan_results.txt 127.0.0.1
 - Saves scan results in a text file.
 - **Example use case:** When documenting security assessments for further analysis.
 
-
-#### 🔹 Save Output in XML Format
+### 🔹 Save Output in XML Format
 
 
 
@@ -310,8 +285,7 @@ nmap -oX scan_results.xml 127.0.0.1
 - Exports scan results in XML format for automation.
 - **Example use case:** When integrating Nmap results with security monitoring tools.
 
-
-### **📌 Quick Summary (For Reference)**
+## **📌 Quick Summary (For Reference)**
 
 
 | Purpose             | Command                          |

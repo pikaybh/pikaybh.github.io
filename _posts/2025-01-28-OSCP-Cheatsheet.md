@@ -6,8 +6,7 @@ tags:
   - Cheatsheet
 author_profile: false
 ---
-
-### VI
+## VI
 
 
 
@@ -19,8 +18,7 @@ author_profile: false
 
 
 
-
-### Windows Command Formatting
+## Windows Command Formatting
 
 
 
@@ -32,12 +30,10 @@ echo "<COMMAND>" | iconv -f UTF-8 -t UTF-16LE | base64 -w0
 
 
 
-
-### Microsoft Windows
-
+## Microsoft Windows
 
 
-#### dir
+### dir
 
 
 
@@ -50,8 +46,7 @@ dir /s /b *.log
 
 
 
-
-### PHP Webserver
+## PHP Webserver
 
 
 
@@ -63,8 +58,7 @@ sudo php -S 127.0.0.1:80
 
 
 
-
-### Ping
+## Ping
 
 
 
@@ -77,8 +71,7 @@ ping -n 1 <RHOST>
 
 
 
-
-### Python Webserver
+## Python Webserver
 
 
 
@@ -91,8 +84,7 @@ sudo python3 -m http.server 80
 
 
 
-
-### RDP
+## RDP
 
 
 
@@ -105,8 +97,7 @@ xfreerdp /v:<RHOST> /u:<USERNAME> /d: <DOMAIN> /pth: '<HASH>' /dynamic-resolutoi
 
 
 
-
-### showmount
+## showmount
 
 
 
