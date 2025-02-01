@@ -1,6 +1,5 @@
 ---
 title: A Study on the Effectiveness Analysis and Improvement of On-Site Operability of Hazard and Risk Prevention Plans in the Construction Industry
-header:
 author_profile: true
 ---
 | with **KOSHA(Korea Occupational Safety and Health Agency)** | _2024.05 ~ 2024.11_
@@ -17,6 +16,9 @@ Therefore, this study aims to analyze the effectiveness of the hazard and risk p
 <figure>
   {{ fig_img | markdownify | remove: '<p>' | remove: '</p>' }}
 </figure>
+
+
+{% include gallery caption="The Necessity of the Effectiveness Analysis of Construction Industry Hazard and Risk Prevention Plans and Improvement of On-Site Operability" %}
 
 
 유해·위험방지계획서 제도가 건설현장의 재해예방에 있어서 현장 작동성과 실효성을 확보하기 위해서는, 작성·제출, 심사·확인의 전 과정에 이르기까지 제도의 운용 체계가 유용성을 가지면서도 실무적으로 과중한 부담에 이르지 않도록 해야 한다.
