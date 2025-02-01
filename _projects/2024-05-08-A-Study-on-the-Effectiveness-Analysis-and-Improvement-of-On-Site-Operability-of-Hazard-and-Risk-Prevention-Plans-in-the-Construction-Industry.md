@@ -1,5 +1,6 @@
 ---
 title: A Study on the Effectiveness Analysis and Improvement of On-Site Operability of Hazard and Risk Prevention Plans in the Construction Industry
+header:
 author_profile: true
 ---
 | with **KOSHA(Korea Occupational Safety and Health Agency)** | _2024.05 ~ 2024.11_
@@ -10,7 +11,7 @@ Therefore, this study aims to analyze the effectiveness of the hazard and risk p
 
 
 {% capture fig_img %}
-![0](/assets/images/2024-05-08-A-Study-on-the-Effectiveness-Analysis-and-Improvement-of-On-Site-Operability-of-Hazard-and-Risk-Prevention-Plans-in-the-Construction-Industry.md/0.png)_altText}_
+![0](/assets/images/2024-05-08-A-Study-on-the-Effectiveness-Analysis-and-Improvement-of-On-Site-Operability-of-Hazard-and-Risk-Prevention-Plans-in-the-Construction-Industry.md/0.png)_The Necessity of the Effectiveness Analysis of Construction Industry Hazard and Risk Prevention Plans and Improvement of On-Site Operability_
 {% endcapture %}
 
 <figure>
