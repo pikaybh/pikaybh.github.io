@@ -236,13 +236,14 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         md = escapeCodeBlock(md);
         md = replaceTitleOutsideRawBlocks(md);
 
-        const ftitle = `${date}-${title.replaceAll(" ", "-")}.md`;
+        const imgtitle = `${date}-${title.replaceAll(" ", "-")}`
+        const ftitle = `${imgtitle}.md`;
 
         let index = 0;
         let edited_md = md.replace(
             /!\[(.*?)\]\((.*?)\)/g,
             function (match, altText, url) {
-                const dirname = path.join("/assets/images", ftitle);
+                const dirname = path.join("assets/images", imgtitle);
                 if (!fs.existsSync(dirname)) {
                     fs.mkdirSync(dirname, { recursive: true });
                 }
@@ -263,7 +264,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 
                 
                 let imgTag = "{% capture fig_img %}\n"
-                            + `![${ altText }](${ filename })`
+                            + `![${ altText }](/${ filename })`
                             + "\n{% endcapture %}\n\n<figure>\n  {{ fig_img | markdownify | remove: '<p>' | remove: '</p>' }}"
                             + `\n  <figcaption>${ altText }</figcaption>`
                             + "\n</figure>";
