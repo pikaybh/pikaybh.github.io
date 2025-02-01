@@ -125,6 +125,11 @@ chown root:root sid-shell; chomd +s sid-shell
 Test image
 
 
-{% capture fig_img %}![0](/assets/images/2025-01-28-OSCP-Cheatsheet.md/0.png)_This is a test_{% endcapture %}
-<figure>{{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}<figcaption>1005</figcaption></figure>
+{% capture fig_img %}
+![0](/assets/images/2025-01-28-OSCP-Cheatsheet.md/0.png)_altText}_
+{% endcapture %}
+
+<figure>
+  {{ fig_img | markdownify | remove: '<p>' | remove: '</p>' }}
+</figure>
 
