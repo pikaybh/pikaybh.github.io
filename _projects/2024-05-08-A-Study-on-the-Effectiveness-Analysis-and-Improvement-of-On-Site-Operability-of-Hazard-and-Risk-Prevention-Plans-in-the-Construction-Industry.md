@@ -14,16 +14,6 @@ In order for the hazard and risk prevention plan system to ensure on-site operab
 Therefore, this study aims to analyze the effectiveness of the hazard and risk prevention plan by conducting a literature review on pre-safety evaluation systems both domestically and internationally, analyzing the actual conditions of sites subject to hazard and risk prevention plans, and investigating the current operation status of similar systems in Korea, with the goal of proposing measures to enhance its substance.
 
 
-{% capture fig_img %}
-![The Necessity of the Effectiveness Analysis of Construction Industry Hazard and Risk Prevention Plans and Improvement of On-Site Operability](/assets/images/2024-05-08-A-Study-on-the-Effectiveness-Analysis-and-Improvement-of-On-Site-Operability-of-Hazard-and-Risk-Prevention-Plans-in-the-Construction-Industry/0.png)
-{% endcapture %}
-
-<figure>
-  {{ fig_img | markdownify | remove: '<p>' | remove: '</p>' }}
-  <figcaption>The Necessity of the Effectiveness Analysis of Construction Industry Hazard and Risk Prevention Plans and Improvement of On-Site Operability</figcaption>
-</figure>
-
-
 {% include gallery caption="The Necessity of the Effectiveness Analysis of Construction Industry Hazard and Risk Prevention Plans and Improvement of On-Site Operability" %}
 
 
