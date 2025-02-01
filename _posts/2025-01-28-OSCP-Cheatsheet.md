@@ -4,9 +4,6 @@ categories:
   - OSCP
 tags:
   - Cheatsheet
-header:
-  overlay_image: assets/images/headers/download.jpg
-  teaser: assets/images/headers/download.jpg
 author_profile: false
 ---
 
@@ -121,16 +118,4 @@ chown root:root sid-shell; chomd +s sid-shell
 ```
 {% endraw %}
 
-
-
-Test image
-
-
-{% capture fig_img %}
-![0](/assets/images/2025-01-28-OSCP-Cheatsheet.md/0.png)_altText}_
-{% endcapture %}
-
-<figure>
-  {{ fig_img | markdownify | remove: '<p>' | remove: '</p>' }}
-</figure>
 

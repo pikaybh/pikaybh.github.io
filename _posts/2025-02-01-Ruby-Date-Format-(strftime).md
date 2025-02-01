@@ -4,9 +4,6 @@ categories:
   - Cheatsheet
 tags:
   - Ruby
-header:
-  overlay_image: assets/images/headers/github_profile.png
-  teaser: assets/images/headers/github_profile.png
 author_profile: false
 ---
 
