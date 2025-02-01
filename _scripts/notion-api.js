@@ -194,12 +194,26 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             fmheaderImg = "\nheader:";
 
             if (headerImg.length > 0) {
-                let poverlayImg = await processImages(headerImg[0]);
-                fmheaderImg += `\n  ${poverlayImg}`;
+                // 🔹 병렬 처리로 모든 이미지 다운로드
+                const poverlayImg = await Promise.all(headerImg.map(img => processImages([img])));
+                
+                // 🔹 결과를 하나씩 추가
+                for (const pimgArr of poverlayImg) {
+                    for (const pimg of pimgArr) {
+                        fmheaderImg += `\n  ${pimg}`;
+                    }
+                }
             }
             if (teaserImg > 0) {
-                let pteaserImg = await processImages(teaserImg[0]);
-                fmheaderImg += `\n  ${pteaserImg}`;
+                // 🔹 병렬 처리로 모든 이미지 다운로드
+                const pteaserImg = await Promise.all(teaserImg.map(img => processImages([img])));
+                
+                // 🔹 결과를 하나씩 추가
+                for (const pimgArr of pteaserImg) {
+                    for (const pimg of pimgArr) {
+                        fmheaderImg += `\n  ${pimg}`;
+                    }
+                }
             }
         }
         if (galleryImg.length > 0) {
