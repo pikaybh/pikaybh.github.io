@@ -231,7 +231,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             + fmcats
             + fmtags
             + fmheaderImg
-            + galleryImg
+            + fmgalleryImg
             + fmprofile
             + "\n---";
 
