@@ -162,7 +162,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             }
         }
         if (headerImg.length > 0) {
-            images.map(async ({ name, url }) => {
+            pheaderImg.map(async ({ name, url }) => {
                 headerImg += "\nheader:\n  overlay_image: assets/images/" + name;
 
                 const response = await fetch(url);
