@@ -27,11 +27,9 @@ function escapeCodeBlock(body) {
         let imgTag = `{% capture fig_img %}![${altText}](${imageUrl}){% endcapture %}` + '\n';
 
         // 캡션이 있을 경우 추가
-        if (caption) {
-            imgTag += `<figure>{{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}<figcaption>${caption.trim()}</figcaption></figure>`;
-        } else {
-            imgTag += "<figure>{{ fig_img | markdownify | remove: '<p>' | remove: '</p>' }}</figure>"
-        }
+        imgTag += caption 
+                ? `<figure>{{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}<figcaption>${caption}</figcaption></figure>`
+                : "<figure>{{ fig_img | markdownify | remove: '<p>' | remove: '</p>' }}</figure>";
         
         return imgTag;
     });
