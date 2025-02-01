@@ -21,13 +21,18 @@ function escapeCodeBlock(body) {
     });
 
     // 이미지 태그 변환 (캡션 추가)
-    const imageRegex = /!\[(.*?)\]\((.*?)\)(?:\n_([^_]*)_)?/g;
+    /* const imageRegex = /!\[(.*?)\]\((.*?)\)(?:_([^_]*)_)?/g; */
+    const imageRegex = /!\[(.*?)\]\((.*?)\)/g;
     body = body.replace(imageRegex, function (match, altText, imageUrl, caption) {
-        let imgTag = `{% capture fig_img %}![${altText}](${imageUrl}){% endcapture %}`;
+        let imgTag = `{% capture fig_img %}![${altText}](${imageUrl}){% endcapture %}` + '\n';
+
         // 캡션이 있을 경우 추가
         if (caption) {
             imgTag += `<figure>{{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}<figcaption>${caption.trim()}</figcaption></figure>`;
+        } else {
+            imgTag += "<figure>{{ fig_img | markdownify | remove: '<p>' | remove: '</p>' }}</figure>"
         }
+        
         return imgTag;
     });
 
