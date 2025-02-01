@@ -4,7 +4,8 @@ const moment = require("moment");
 const path = require("path");
 const fs = require("fs");
 const axios = require("axios");
-
+// or
+// import {NotionToMarkdown} from "notion-to-md";
 
 const notion = new Client({
     auth: process.env.NOTION_TOKEN,
@@ -18,6 +19,8 @@ function escapeCodeBlock(body) {
     return body = body.replace(regex, function (match, htmlBlock) {
         return "\n{% raw %}\n```" + htmlBlock.trim() + "\n```\n{% endraw %}\n";
     });
+    // 이미지 태그 변환 (캡션 추가)
+    /* const imageRegex = /!\[(.*?)\]\((.*?)\)(?:_([^_]*)_)?/g; */
 }
 
 function replaceTitleOutsideRawBlocks(body) {
@@ -27,6 +30,13 @@ function replaceTitleOutsideRawBlocks(body) {
         rawBlocks.push(match);
         return placeholder;
     });
+
+    /**
+    const regex = /\n#[^\n]+\n/g;
+    body = body.replace(regex, function (match) {
+        return "\n" + match.replace("\n#", "\n##");
+    });
+    */
 
     rawBlocks.forEach(block => {
         body = body.replace(placeholder, block);
@@ -107,6 +117,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 
     // Fetch into pages
     const pages = [...response.results];
+    /** const pages = response.results; */
     while (response.has_more) {
         const nextCursor = response.next_cursor;
         response = await notion.databases.query({
@@ -172,7 +183,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         let fmtags = "";
         let fmcats = "";
         let fmheaderImg = "";
-        let fmgalleryImgs = "";
+        let fmgalleryImg = "";
         let fmprofile = "";
 
         if (tags.length > 0) {
@@ -200,7 +211,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             }
         }
         if (galleryImg.length > 0) {
-            fmgalleryImgs += "\ngallery:";
+            fmgalleryImg += "\ngallery:";
         
             // 🔹 병렬 처리로 모든 이미지 다운로드
             const downloadedImages = await Promise.all(galleryImg.map(img => processImages([img])));
@@ -208,9 +219,9 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             // 🔹 결과를 하나씩 추가
             for (const pimgArr of downloadedImages) {
                 for (const pimg of pimgArr) {
-                    fmgalleryImgs += `\n  - url: /${pimg}`;
-                    fmgalleryImgs += `\n    image_path: ${pimg}`;
-                    fmgalleryImgs += `\n    alt: placeholder ${pimg}`;
+                    fmgalleryImg += `\n  - url: /${pimg}`;
+                    fmgalleryImg += `\n    image_path: ${pimg}`;
+                    fmgalleryImg += `\n    alt: placeholder ${pimg}`;
                 }
             }
         }        
@@ -221,7 +232,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             + fmcats
             + fmtags
             + fmheaderImg
-            + fmgalleryImgs
+            + fmgalleryImg
             + fmprofile
             + "\n---";
 
@@ -268,6 +279,34 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 return imgTag;
             }
         );
+            /** function (match, p1, p2, p3) { 
+            function (match, p1, p2) {
+                const dirname = path.join("assets/images", ftitle);
+                if (!fs.existsSync(dirname)) {
+                    fs.mkdirSync(dirname, { recursive: true });
+                }
+                const filename = path.join(dirname, `${index}.png`);
+
+                axios({
+                    method: "get",
+                    url: p2,
+                    responseType: "stream",
+                })
+                .then(function (response) {
+                    let file = fs.createWriteStream(`${filename}`);
+                    response.data.pipe(file);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+                let res;
+                if (p1 === "") res = "";
+                else res = `_${p1}_`;
+
+                return `![${index++}](/${filename})${res}`;
+            }
+        ); */
 
         //writing to file
         fs.writeFile(path.join(root, ftitle), fm + edited_md, (err) => {
