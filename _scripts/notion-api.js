@@ -190,7 +190,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 fmcats += "\n  - " + t;
             }
         }
-        if (!headerImg || !teaserImg) {
+        if (headerImg.length > 0 || teaserImg.length > 0) {
             fmheaderImg += "\nheader:";
 
             if (headerImg.length > 0) {
