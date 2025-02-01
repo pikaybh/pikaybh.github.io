@@ -56,9 +56,16 @@ function replaceTitleOutsideRawBlocks(body) {
 
 // 이미지 처리
 async function processImages(pImg) {
-    if (!Array.isArray(pImg) || pImg.length === 0) return "";
+    if (!Array.isArray(pImg) || pImg.length === 0) return [];
 
-    const savePaths = [];
+    // 저장할 디렉터리 경로
+    const saveDir = path.join("assets/images/headers"); 
+    let savePaths = [];
+
+    // 🔹 디렉터리 존재 확인 후 생성 (없으면 생성)
+    if (!fs.existsSync(saveDir)) {
+        fs.mkdirSync(saveDir, { recursive: true });
+    }
 
     for (const img of pImg) {
         // 🔹 Notion API에서 URL이 "file.url" 또는 "external.url"에 들어 있을 수 있음.
@@ -71,33 +78,31 @@ async function processImages(pImg) {
             continue;
         }
 
-        // 저장할 디렉터리 경로
-        const saveDir = path.join("assets/images/headers"); 
+        // 저장할 파일 경로
+        const savePath = path.join(saveDir, name);
 
-        // 🔹 디렉터리 존재 확인 후 생성 (없으면 생성)
-        if (!fs.existsSync(saveDir)) {
-            fs.mkdirSync(saveDir, { recursive: true });
+        // 파일이 이미 존재하면 건너뜀
+        if (fs.existsSync(savePath)) {
+            console.log(`File already exists, skipping: ${savePath}`);
+            savePaths.push(savePath);
+            continue;
         }
 
-        // Path
-        const savePath = path.join(saveDir, `${name}`);
+        try {
+            const response = await axios.get(url, { responseType: "stream" });
+            const fileStream = fs.createWriteStream(savePath);
 
-        if (!fs.existsSync(savePath)){
-            try {
-                const response = await axios.get(url, { responseType: "stream" });
-                const fileStream = fs.createWriteStream(savePath);
-    
-                await new Promise((resolve, reject) => {
-                    response.data.pipe(fileStream);
-                    fileStream.on("finish", resolve);
-                    fileStream.on("error", reject);
-                });
-            } catch (error) {
-                console.error(`Error downloading ${name}:`, error.message);
-            }
+            await new Promise((resolve, reject) => {
+                response.data.pipe(fileStream);
+                fileStream.on("finish", resolve);
+                fileStream.on("error", reject);
+            });
+
+            savePaths.push(savePath);
+
+        } catch (error) {
+            console.error(`Error downloading ${name}:`, error.message);
         }
-
-        savePaths.push(...savePath)
     }
 
     return savePaths;
