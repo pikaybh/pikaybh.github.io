@@ -23,10 +23,10 @@ function escapeCodeBlock(body) {
     // 이미지 태그 변환 (캡션 추가)
     const imageRegex = /!\[(.*?)\]\((.*?)\)(?:\n_([^_]*)_)?/g;
     body = body.replace(imageRegex, function (match, altText, imageUrl, caption) {
-        let imgTag = `![${altText}](${imageUrl})`;
+        let imgTag = `{% capture fig_img %}![${altText}](${imageUrl}){% endcapture %}`;
         // 캡션이 있을 경우 추가
         if (caption) {
-            imgTag = `<figure>{{ ${imgTag} | markdownify | remove: "<p>" | remove: "</p>" }}<figcaption>${caption.trim()}</figcaption></figure>`;
+            imgTag += `<figure>{{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}<figcaption>${caption.trim()}</figcaption></figure>`;
         }
         return imgTag;
     });
