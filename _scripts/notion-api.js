@@ -221,14 +221,19 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         }
         if (galleryImg.length > 0) {
             fmgalleryImg += "\ngallery:";
-
-            for (const img of galleryImg) {
-                let pimg = await processImages(img);
-                fmgalleryImg += `\n  - url: /${pimg}`;
-                fmgalleryImg += `\n  - image_path: ${pimg}`;
-                fmgalleryImg += `\n  - alt: placeholder ${pimg}`;
+        
+            // 🔹 병렬 처리로 모든 이미지 다운로드
+            const downloadedImages = await Promise.all(galleryImg.map(img => processImages([img])));
+        
+            // 🔹 결과를 하나씩 추가
+            for (const pimgArr of downloadedImages) {
+                for (const pimg of pimgArr) {
+                    fmgalleryImg += `\n  - url: /${pimg}`;
+                    fmgalleryImg += `\n    image_path: ${pimg}`;
+                    fmgalleryImg += `\n    alt: placeholder ${pimg}`;
+                }
             }
-        }
+        }        
         if (profile) fmprofile += "\nauthor_profile: " + profile;
 
         const fm = "---\ntitle: "
