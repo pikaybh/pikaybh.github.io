@@ -4,6 +4,8 @@ categories:
   - OSCP
 tags:
   - Cheatsheet
+header:
+  overlay_image: assets/images/headers/download.jpg.png
 author_profile: false
 ---
 
