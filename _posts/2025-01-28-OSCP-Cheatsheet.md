@@ -3,9 +3,9 @@ title: OSCP Cheatsheet
 categories:
   - OSCP
 tags:
-  - Cheatsheet 
+  - Cheatsheet
+author_profile: false
 ---
-
 
 ### VI
 
@@ -118,4 +118,10 @@ chown root:root sid-shell; chomd +s sid-shell
 ```
 {% endraw %}
 
+
+
+Test image
+
+
+![0](/assets/images/2025-01-28-OSCP-Cheatsheet.md/0.png)_This is a test_
 

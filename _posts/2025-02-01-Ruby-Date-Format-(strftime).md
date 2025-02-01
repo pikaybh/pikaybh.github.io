@@ -3,9 +3,9 @@ title: Ruby Date Format (strftime)
 categories:
   - Cheatsheet
 tags:
-  - Ruby 
+  - Ruby
+author_profile: false
 ---
-
 
 ### Date Formatting
 
