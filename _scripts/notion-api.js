@@ -161,26 +161,42 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 fmcats += "\n  - " + t;
             }
         }
-        if (headerImg.length > 0) {
-            pheaderImg.map(async ({ name, url }) => {
-                headerImg += "\nheader:\n  overlay_image: assets/images/" + name;
+        // Header 이미지 처리
+        async function processHeaderImages() {
+            if (pheaderImg.length === 0) return ""; // 이미지 없으면 빈 문자열 반환
 
-                const response = await fetch(url);
-                if (!response.ok) {
-                    console.error(`Failed to download ${name}: ${response.statusText}`);
-                    return;
+            let headerContent = "\nheader:";
+
+            for (const { name, url } of pheaderImg) {
+                const savePath = `assets/images/${name}.png`;
+                headerContent += `\n  overlay_image: ${savePath}`;
+
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        console.error(`Failed to download ${name}: ${response.statusText}`);
+                        continue;
+                    }
+
+                    // 이미지 저장
+                    const filePath = path.join("assets/images/", `${name}.png`);
+                    const fileStream = fs.createWriteStream(filePath);
+                    await new Promise((resolve, reject) => {
+                        response.body.pipe(fileStream);
+                        response.body.on("error", reject);
+                        fileStream.on("finish", resolve);
+                    });
+
+                } catch (error) {
+                    console.error(`Error downloading ${name}:`, error);
                 }
-    
-                const filePath = path.join("assets/images/", `${name}.png`);
-                const fileStream = fs.createWriteStream(filePath);
-                return new Promise((resolve, reject) => {
-                    response.body.pipe(fileStream);
-                    response.body.on("error", reject);
-                    fileStream.on("finish", resolve);
-                });
-            })
+            }
 
+            return headerContent;
         }
+
+        fmheaderImg = await processHeaderImages();
+
         if (profile) fmprofile += "\nauthor_profile: " + profile;
 
         const fm = "---\ntitle: "
