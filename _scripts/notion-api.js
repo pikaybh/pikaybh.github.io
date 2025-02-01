@@ -158,10 +158,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         
         // Header 이미지 처리
         async function processHeaderImages() {
-            if (!Array.isArray(pheaderImg) || pheaderImg.length === 0) {
-                console.log("No images found in pheaderImg.");
-                return "";
-            }
+            if (!Array.isArray(pheaderImg) || pheaderImg.length === 0) return "";
 
             let headerContent = "\nheader:";
 
@@ -176,14 +173,12 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                     continue;
                 }
 
-                const savePath = `assets/images/${name}.png`;
+                const savePath = `assets/images/headers/${name}.png`;
                 headerContent += `\n  overlay_image: ${savePath}`;
 
                 try {
-                    console.log(`Downloading: ${name} from ${url}`);
-
                     const response = await axios.get(url, { responseType: "stream" });
-                    const filePath = path.join("assets/images/", `${name}.png`);
+                    const filePath = path.join("assets/images/headers/", `${name}.png`);
                     const fileStream = fs.createWriteStream(filePath);
 
                     await new Promise((resolve, reject) => {
@@ -208,6 +203,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             + title
             + fmcats
             + fmtags
+            + fmheaderImg
             + fmprofile
             + "\n---";
 
