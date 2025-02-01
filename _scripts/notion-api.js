@@ -42,10 +42,12 @@ function replaceTitleOutsideRawBlocks(body) {
         return placeholder;
     });
 
+    /**
     const regex = /\n#[^\n]+\n/g;
     body = body.replace(regex, function (match) {
         return "\n" + match.replace("\n#", "\n##");
     });
+    */
 
     rawBlocks.forEach(block => {
         body = body.replace(placeholder, block);
@@ -258,7 +260,30 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         let index = 0;
         let edited_md = md.replace(
             /!\[(.*?)\]\((.*?)\)/g,
-            /** function (match, p1, p2, p3) { */
+            function (match, altText, url) {
+                const dirname = path.join("assets/images", ftitle);
+                if (!fs.existsSync(dirname)) {
+                    fs.mkdirSync(dirname, { recursive: true });
+                }
+                const filename = path.join(dirname, `${index++}.png`);
+
+                axios({
+                    method: "get",
+                    url: url,
+                    responseType: "stream",
+                })
+                .then(function (response) {
+                    let file = fs.createWriteStream(`${filename}`);
+                    response.data.pipe(file);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+                return `![${altText}](/${filename})`;
+            }
+        );
+            /** function (match, p1, p2, p3) { 
             function (match, p1, p2) {
                 const dirname = path.join("assets/images", ftitle);
                 if (!fs.existsSync(dirname)) {
@@ -285,7 +310,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 
                 return `![${index++}](/${filename})${res}`;
             }
-        );
+        ); */
 
         //writing to file
         fs.writeFile(path.join(root, ftitle), fm + edited_md, (err) => {
