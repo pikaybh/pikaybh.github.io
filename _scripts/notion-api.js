@@ -64,6 +64,7 @@ async function processImages(pImg) {
 
         // 저장할 파일 경로
         const savePath = path.join(saveDir, name);
+        console.log(savePath)
 
         // 파일이 이미 존재하면 건너뜀
         if (fs.existsSync(savePath)) {
