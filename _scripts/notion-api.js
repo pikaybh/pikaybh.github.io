@@ -15,12 +15,15 @@ function escapeCodeBlock(body) {
     if (!body) return "";
 
     const regex = /```([\s\S]*?)```/g;
-    return body = body.replace(regex, function (match, htmlBlock) {
+    return body.replace(regex, function (match, htmlBlock) {
         return "\n{% raw %}\n```" + htmlBlock.trim() + "\n```\n{% endraw %}\n";
     });
 }
 
 function replaceTitleOutsideRawBlocks(body) {
+    // Null body pass
+    if (!body) return "";
+
     const rawBlocks = [];
     const placeholder = "%%RAW_BLOCK%%";
     body = body.replace(/{% raw %}[\s\S]*?{% endraw %}/g, (match) => {
@@ -239,7 +242,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         let edited_md = md.replace(
             /!\[(.*?)\]\((.*?)\)/g,
             function (match, altText, url) {
-                const dirname = path.join("assets/images", ftitle);
+                const dirname = path.join("/assets/images", ftitle);
                 if (!fs.existsSync(dirname)) {
                     fs.mkdirSync(dirname, { recursive: true });
                 }
@@ -262,7 +265,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 let imgTag = "{% capture fig_img %}\n"
                             + `![${ altText }](${ filename })`
                             + "\n{% endcapture %}\n\n<figure>\n  {{ fig_img | markdownify | remove: '<p>' | remove: '</p>' }}"
-                            + `\n<figcaption>${ altText }</figcaption>`
+                            + `\n  <figcaption>${ altText }</figcaption>`
                             + "\n</figure>";
 
                 return imgTag;
