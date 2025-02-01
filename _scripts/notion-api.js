@@ -191,15 +191,15 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             }
         }
         if (!headerImg || !teaserImg) {
-            fmheaderImg = "\nheader:";
+            fmheaderImg += "\nheader:";
 
             if (headerImg.length > 0) {
                 // 🔹 병렬 처리로 모든 이미지 다운로드
                 const poverlayImg = await Promise.all(headerImg.map(img => processImages([img])));
+
                 
                 // 🔹 결과를 하나씩 추가
                 for (const pimgArr of poverlayImg) {
-                    console.log(pimgArr)
                     for (const pimg of pimgArr) {
                         fmheaderImg += `\n  overlay_image: ${pimg}`;
                     }
@@ -211,6 +211,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 
                 // 🔹 결과를 하나씩 추가
                 for (const pimgArr of pteaserImg) {
+                    console.log(pimgArr)
                     for (const pimg of pimgArr) {
                         fmheaderImg += `\n  teaser: ${pimg}`;
                     }
