@@ -15,12 +15,12 @@ Therefore, this study aims to analyze the effectiveness of the hazard and risk p
 
 
 {% capture fig_img %}
-![The Necessity of the Effectiveness Analysis of Construction Industry Hazard and Risk Prevention Plans and Improvement of On-Site Operability](assets/images/2024-05-08-A-Study-on-the-Effectiveness-Analysis-and-Improvement-of-On-Site-Operability-of-Hazard-and-Risk-Prevention-Plans-in-the-Construction-Industry.md/0.png)
+![The Necessity of the Effectiveness Analysis of Construction Industry Hazard and Risk Prevention Plans and Improvement of On-Site Operability](/assets/images/2024-05-08-A-Study-on-the-Effectiveness-Analysis-and-Improvement-of-On-Site-Operability-of-Hazard-and-Risk-Prevention-Plans-in-the-Construction-Industry/0.png)
 {% endcapture %}
 
 <figure>
   {{ fig_img | markdownify | remove: '<p>' | remove: '</p>' }}
-<figcaption>The Necessity of the Effectiveness Analysis of Construction Industry Hazard and Risk Prevention Plans and Improvement of On-Site Operability</figcaption>
+  <figcaption>The Necessity of the Effectiveness Analysis of Construction Industry Hazard and Risk Prevention Plans and Improvement of On-Site Operability</figcaption>
 </figure>
 
 
