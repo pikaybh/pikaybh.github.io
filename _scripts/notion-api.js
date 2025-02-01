@@ -173,13 +173,20 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                     continue;
                 }
 
-                const savePath = `assets/images/headers/${name}`;
+                // 저장할 디렉터리 경로
+                const saveDir = path.join("assets/images/headers"); 
+
+                // 🔹 디렉터리 존재 확인 후 생성 (없으면 생성)
+                if (!fs.existsSync(saveDir)) {
+                    fs.mkdirSync(saveDir, { recursive: true });
+                }
+
+                const savePath = path.join(saveDir, `${name}`);
                 headerContent += `\n  overlay_image: ${savePath}`;
 
                 try {
                     const response = await axios.get(url, { responseType: "stream" });
-                    const filePath = path.join("assets/images/headers/", `${name}`);
-                    const fileStream = fs.createWriteStream(filePath);
+                    const fileStream = fs.createWriteStream(savePath);
 
                     await new Promise((resolve, reject) => {
                         response.data.pipe(fileStream);
