@@ -206,6 +206,12 @@ layout: default
         {% if entry.doi %}
             {% capture uri %}{{ "https://doi.org/" }}{{ entry.doi }}{% endcapture %}
             <a href="{{ uri }}" role="button" target="_blank">{{ uri }}</a>
+            <hr/>
+            <a href="{{ uri }}" 
+                class="btn btn--primary btn--info"
+                role="button"
+                target="_blank"
+            >View <i class="fa fa-arrow-up-right-from-square"></i></a>
         {% endif %}
         {% if entry.arxiv %}
             {% capture uri %}{{ "http://arxiv.org/abs/" }}{{ entry.arxiv }}{% endcapture %}
@@ -217,19 +223,21 @@ layout: default
                 {% capture uri %}{{ entry.html }}{% endcapture %}
                 <a href="{{ uri }}" role="button" target="_blank">{{ uri }}</a>
             {% else %}
-                <p>
-                    <a href="{{ entry.html | prepend: '/assets/html/' | relative_url }}" 
-                        class="btn btn--primary"
-                        role="button"
-                        target="_blank"
-                    >HTML</a>
-                </di>
+                <a href="{{ entry.html | prepend: '/assets/html/' | relative_url }}" 
+                    class="btn btn--primary"
+                    role="button"
+                    target="_blank"
+                >HTML</a>
             {% endif %}
         {% endif %}
         {% if entry.pdf %}
             {% if entry.pdf contains '://' %}
                 {% capture uri %}{{ entry.pdf }}{% endcapture %}
-                <a href="{{ uri }}" role="button" target="_blank">{{ uri }}</a>
+                <a href="{{ uri }}" 
+                    class="btn btn--danger" 
+                    role="button" 
+                    target="_blank"
+                >PDF <i class="fa fa-download"></i></a>
             {% else %}
                 <p>
                     <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" 

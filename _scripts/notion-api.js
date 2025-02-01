@@ -182,7 +182,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 }
 
                 const savePath = path.join(saveDir, `${name}`);
-                headerContent += `\n  overlay_image: ${savePath}`;
+                headerContent += `\n  overlay_image: ${savePath}\n  teaser: ${savePath}`;
 
                 try {
                     const response = await axios.get(url, { responseType: "stream" });
