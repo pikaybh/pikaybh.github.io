@@ -177,6 +177,9 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         // teaser
         let teaserImg = r.properties?.["Teaser"]?.["files"];
 
+        // gallery
+        let galleryImg = r.properties?.["Gallery"]?.["files"];
+
         // author profile
         let profile = r.properties?.["Author Profile"]?.["checkbox"] ? "true" : "false";
 
@@ -184,6 +187,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         let fmtags = "";
         let fmcats = "";
         let fmheaderImg = "";
+        let fmgalleryImg = "";
         let fmprofile = "";
 
         if (tags.length > 0) {
@@ -200,7 +204,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         }
         if (headerImg.length > 0 || teaserImg.length > 0) {
             fmheaderImg = "\nheader:";
-            
+
             if (headerImg.length > 0) {
                 let poverlayImg = await processImages(headerImg[0]);
                 fmheaderImg += `\n  ${poverlayImg}`;
@@ -208,6 +212,14 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             if (teaserImg > 0) {
                 let pteaserImg = await processImages(teaserImg[0]);
                 fmheaderImg += `\n  ${pteaserImg}`;
+            }
+        }
+        if (galleryImg.length > 0) {
+            fmgalleryImg += "\ngallery:";
+
+            for (const img of galleryImg) {
+                let pimg = await processImages(img);
+                fmgalleryImg += `\n  - image_path: ${pimg}`;
             }
         }
         if (profile) fmprofile += "\nauthor_profile: " + profile;
