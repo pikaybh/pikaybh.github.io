@@ -58,6 +58,8 @@ function replaceTitleOutsideRawBlocks(body) {
 async function processImages(pImg) {
     if (!Array.isArray(pImg) || pImg.length === 0) return "";
 
+    const savePaths = [];
+
     for (const img of pImg) {
         // 🔹 Notion API에서 URL이 "file.url" 또는 "external.url"에 들어 있을 수 있음.
         const name = img?.name || "unknown";
@@ -94,9 +96,11 @@ async function processImages(pImg) {
                 console.error(`Error downloading ${name}:`, error.message);
             }
         }
+
+        savePaths.push(...savePath)
     }
 
-    return savePath;
+    return savePaths;
 }
 
 // passing notion client to the option
@@ -194,14 +198,15 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 fmcats += "\n  - " + t;
             }
         }
-        if (headerImg || teaserImg) {
+        if (headerImg.length > 0 || teaserImg.length > 0) {
             fmheaderImg = "\nheader:";
-            if (headerImg) {
-                let poverlayImg = await processImages(headerImg);
+            
+            if (headerImg.length > 0) {
+                let poverlayImg = await processImages(headerImg[0]);
                 fmheaderImg += `\n  ${poverlayImg}`;
             }
-            if (teaserImg) {
-                let pteaserImg = await processImages(teaserImg);
+            if (teaserImg > 0) {
+                let pteaserImg = await processImages(teaserImg[0]);
                 fmheaderImg += `\n  ${pteaserImg}`;
             }
         }
