@@ -77,13 +77,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         const nextCursor = response.next_cursor;
         response = await notion.databases.query({
             database_id: databaseId,
-            start_cursor: nextCursor,
-            /** filter: {
-                property: "Publish",
-                checkbox: {
-                    equals: true,
-                },
-            }, */
+            start_cursor: nextCursor
         });
         pages.push(...response.results);
     }
