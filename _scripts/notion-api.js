@@ -64,7 +64,6 @@ async function processImages(pImg) {
 
         // 저장할 파일 경로
         const savePath = path.join(saveDir, name);
-        console.log(savePath)
 
         // 파일이 이미 존재하면 건너뜀
         if (fs.existsSync(savePath)) {
@@ -191,7 +190,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 fmcats += "\n  - " + t;
             }
         }
-        if (headerImg.length > 0 || teaserImg.length > 0) {
+        if (!headerImg || !teaserImg) {
             fmheaderImg = "\nheader:";
 
             if (headerImg.length > 0) {
@@ -200,8 +199,9 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 
                 // 🔹 결과를 하나씩 추가
                 for (const pimgArr of poverlayImg) {
+                    console.log(pimgArr)
                     for (const pimg of pimgArr) {
-                        fmheaderImg += `\n  ${pimg}`;
+                        fmheaderImg += `\n  overlay_image: ${pimg}`;
                     }
                 }
             }
@@ -212,7 +212,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 // 🔹 결과를 하나씩 추가
                 for (const pimgArr of pteaserImg) {
                     for (const pimg of pimgArr) {
-                        fmheaderImg += `\n  ${pimg}`;
+                        fmheaderImg += `\n  teaser: ${pimg}`;
                     }
                 }
             }
