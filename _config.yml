@@ -90,7 +90,7 @@ facebook:
   username               : "pikaybh"
   app_id                 :
   publisher              :
-og_image                 : &mugshot "/assets/images/bio-photo.jpg"  # Open Graph/Twitter default site image
+og_image                 : "https://picsum.photos/1920/1080"  # Open Graph/Twitter default site image
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
@@ -113,7 +113,7 @@ analytics:
 # Site Author
 author:
   name             : *name
-  avatar           : *mugshot  # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : &mugshot "/assets/images/bio-photo.jpg"  # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Ph.D. Student<br/>Seoul National University<br/>Department of Architecture<br/>& Architectural Engineering"
   location         : "Seoul, Korea"
   links:
@@ -176,8 +176,7 @@ include:
   - _pages
   - _portfolio
   - _posts
-  - _publications
-  - _docs
+  # - _docs
   - BingSiteAuth.xml
   - robots.txt
 exclude:
@@ -448,16 +447,16 @@ defaults:
       share: false
       related: true
   # _publications
-  - scope:
-      path: ""
-      type: publications
-    values:
-      layout: single
-      author_profile: true
-      read_time: true
-      comments: false
-      share: false
-      related: true
+  # - scope:
+  #     path: ""
+  #     type: publications
+  #   values:
+  #     layout: single
+  #     author_profile: true
+  #     read_time: true
+  #     comments: false
+  #     share: false
+  #     related: true
   # _conferences
   # - scope:
   #     path: ""

@@ -16,9 +16,22 @@ function escapeCodeBlock(body) {
     if (!body) return "";
 
     const regex = /```([\s\S]*?)```/g;
-    return body.replace(regex, function (match, htmlBlock) {
+    body = body.replace(regex, function (match, htmlBlock) {
         return "\n{% raw %}\n```" + htmlBlock.trim() + "\n```\n{% endraw %}\n";
     });
+
+    // 이미지 태그 변환 (캡션 추가)
+    const imageRegex = /!\[(.*?)\]\((.*?)\)(?:\n_([^_]*)_)?/g;
+    body = body.replace(imageRegex, function (match, altText, imageUrl, caption) {
+        let imgTag = `![${altText}](${imageUrl})`;
+        // 캡션이 있을 경우 추가
+        if (caption) {
+            imgTag = `<figure>{{ ${imgTag} | markdownify | remove: "<p>" | remove: "</p>" }}<figcaption>${caption.trim()}</figcaption></figure>`;
+        }
+        return imgTag;
+    });
+
+    return body;
 }
 
 function replaceTitleOutsideRawBlocks(body) {
@@ -58,18 +71,19 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
     });
 
     // Fetch into pages
-    const pages = response.results;
+    const pages = [...response.results];
+    /** const pages = response.results; */
     while (response.has_more) {
         const nextCursor = response.next_cursor;
         response = await notion.databases.query({
             database_id: databaseId,
             start_cursor: nextCursor,
-            filter: {
+            /** filter: {
                 property: "Publish",
                 checkbox: {
                     equals: true,
                 },
-            },
+            }, */
         });
         pages.push(...response.results);
     }
@@ -103,9 +117,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         let ptags = r.properties?.["Tags"]?.["multi_select"];
         for (const t of ptags) {
             const n = t?.["name"];
-            if (n) {
-                tags.push(n);
-            }
+            if (n) tags.push(n);
         }
 
         // categories
@@ -113,25 +125,30 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         let pcats = r.properties?.["Categories"]?.["multi_select"];
         for (const t of pcats) {
             const n = t?.["name"];
-            if (n) {
-                cats.push(n);
-            }
+            if (n) cats.push(n);
         }
 
         // header
-        /** let headerImg = [];
-        let pheaderImg = r.properties?.["Header"]?.["files_and_media"];
+        let headerImg = [];
+        let pheaderImg = r.properties?.["Header"]?.["files"];
         for (const t of pheaderImg) {
             const n = t?.["name"];
-            if (n) {
-                headerImg.push(n);
+            const url = t?.["file"]?.["url"]; // 파일 URL 가져오기
+        
+            if (n && url) {
+                headerImg.push({ name: n, url: url });
             }
-        } */
+        }
+
+        // author profile
+        let profile = r.properties?.["Author Profile"]?.["checkbox"] ? "true" : "false";
 
         // frontmatter
         let fmtags = "";
         let fmcats = "";
         let fmheaderImg = "";
+        let fmprofile = "";
+
         if (tags.length > 0) {
             fmtags += "\ntags:";
             for (const t of tags) {
@@ -144,13 +161,34 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 fmcats += "\n  - " + t;
             }
         }
-        /** if (headerImg.length > 0) {
-            fmheaderImg += "\nheader:\n  overlay_image: assets/images/"
-        } */
-        const fm = `---
-title: ${title}${fmcats}${fmtags} 
----
-`;
+        if (headerImg.length > 0) {
+            images.map(async ({ name, url }) => {
+                headerImg += "\nheader:\n  overlay_image: assets/images/" + name;
+
+                const response = await fetch(url);
+                if (!response.ok) {
+                    console.error(`Failed to download ${name}: ${response.statusText}`);
+                    return;
+                }
+    
+                const filePath = path.join("assets/images/", `${name}.png`);
+                const fileStream = fs.createWriteStream(filePath);
+                return new Promise((resolve, reject) => {
+                    response.body.pipe(fileStream);
+                    response.body.on("error", reject);
+                    fileStream.on("finish", resolve);
+                });
+            })
+
+        }
+        if (profile) fmprofile += "\nauthor_profile: " + profile;
+
+        const fm = "---\ntitle: "
+            + title
+            + fmcats
+            + fmtags
+            + fmprofile
+            + "\n---";
 
         const mdblocks = await n2m.pageToMarkdown(id);
         let md = n2m.toMarkdownString(mdblocks)["parent"];
@@ -165,7 +203,8 @@ title: ${title}${fmcats}${fmtags}
         let index = 0;
         let edited_md = md.replace(
             /!\[(.*?)\]\((.*?)\)/g,
-            function (match, p1, p2, p3) {
+            /** function (match, p1, p2, p3) { */
+            function (match, p1, p2) {
                 const dirname = path.join("assets/images", ftitle);
                 if (!fs.existsSync(dirname)) {
                     fs.mkdirSync(dirname, { recursive: true });
