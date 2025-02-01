@@ -166,7 +166,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 headerContent += `\n  overlay_image: ${savePath}`;
 
                 try {
-                    const response = await fetch(url);
+                    const response = await axios.get(url, { responseType: "stream" });
                     if (!response.ok) {
                         console.error(`Failed to download ${name}: ${response.statusText}`);
                         continue;
