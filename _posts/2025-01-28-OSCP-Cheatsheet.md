@@ -123,5 +123,5 @@ chown root:root sid-shell; chomd +s sid-shell
 Test image
 
 
-![0](/assets/images/2025-01-28-OSCP-Cheatsheet.md/0.png)_This is a test_
+{% capture fig_img %}![0](/assets/images/2025-01-28-OSCP-Cheatsheet.md/0.png)_This is a test_{% endcapture %}
 
