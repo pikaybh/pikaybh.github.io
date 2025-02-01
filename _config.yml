@@ -444,7 +444,7 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: false  # true
+      comments: false
       share: false
       related: true
   # _publications
@@ -455,7 +455,7 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: false  # true
+      comments: false
       share: false
       related: true
   # _conferences

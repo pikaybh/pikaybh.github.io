@@ -118,9 +118,20 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             }
         }
 
+        // header
+        let headerImg = [];
+        let pheaderImg = r.properties?.["Header"]?.["files_and_media"];
+        for (const t of pheaderImg) {
+            const n = t?.["name"];
+            if (n) {
+                headerImg.push(n);
+            }
+        }
+
         // frontmatter
         let fmtags = "";
         let fmcats = "";
+        let fmheaderImg = "";
         if (tags.length > 0) {
             fmtags += "\ntags:";
             for (const t of tags) {
@@ -133,6 +144,9 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 fmcats += "\n  - " + t;
             }
         }
+        /** if (headerImg.length > 0) {
+            fmheaderImg += "\nheader:\n  overlay_image: assets/images/"
+        } */
         const fm = `---
 title: ${title}${fmcats}${fmtags} 
 ---
