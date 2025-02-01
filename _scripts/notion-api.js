@@ -119,14 +119,14 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         }
 
         // header
-        let headerImg = [];
+        /** let headerImg = [];
         let pheaderImg = r.properties?.["Header"]?.["files_and_media"];
         for (const t of pheaderImg) {
             const n = t?.["name"];
             if (n) {
                 headerImg.push(n);
             }
-        }
+        } */
 
         // frontmatter
         let fmtags = "";
