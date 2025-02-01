@@ -205,7 +205,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                     }
                 }
             }
-            if (teaserImg > 0) {
+            if (teaserImg.length > 0) {
                 console.log(teaserImg);
                 // 🔹 병렬 처리로 모든 이미지 다운로드
                 const pteaserImg = await Promise.all(teaserImg.map(img => processImages([img])));
