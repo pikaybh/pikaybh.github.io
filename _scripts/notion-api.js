@@ -219,7 +219,9 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 
             for (const img of galleryImg) {
                 let pimg = await processImages(img);
+                fmgalleryImg += `\n  - url: /${pimg}`;
                 fmgalleryImg += `\n  - image_path: ${pimg}`;
+                fmgalleryImg += `\n  - alt: placeholder ${pimg}`;
             }
         }
         if (profile) fmprofile += "\nauthor_profile: " + profile;
