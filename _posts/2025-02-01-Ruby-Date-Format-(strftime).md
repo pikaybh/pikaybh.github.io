@@ -1,10 +1,10 @@
 ---
 title: Ruby Date Format (strftime)
-categories:
-  - Cheatsheet
 tags:
   - Ruby
+  - Cheatsheet
 author_profile: false
+toc: true
 ---
 ## Date Formatting
 

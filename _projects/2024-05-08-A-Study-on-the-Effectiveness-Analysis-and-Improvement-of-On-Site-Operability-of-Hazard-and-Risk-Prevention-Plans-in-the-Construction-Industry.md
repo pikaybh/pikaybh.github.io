@@ -8,6 +8,7 @@ gallery:
     image_path: assets/images/headers/effective-hazard-prevention-1.png
     alt: placeholder assets/images/headers/effective-hazard-prevention-1.png
 author_profile: true
+toc: false
 ---
 | with **KOSHA(Korea Occupational Safety and Health Agency)** | _2024.05 ~ 2024.11_
 
