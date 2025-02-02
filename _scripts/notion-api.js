@@ -269,7 +269,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         md = escapeCodeBlock(md);
         md = replaceTitleOutsideRawBlocks(md);
 
-        const imgtitle = `${date}-${title.replaceAll(" ", "-")}`
+        const imgtitle = `${date}-${title.replaceAll(" ", "-").replaceAll(":", "")}`
         const ftitle = `${imgtitle}.md`;
 
         let index = 0;
