@@ -1,5 +1,5 @@
 ---
-title: Vim Cheatsheet: Essential Commands for Developers
+title: Vim Cheatsheet Essential Commands for Developers
 categories:
   - OSCP
 tags:
