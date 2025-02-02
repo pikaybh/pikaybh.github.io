@@ -12,7 +12,7 @@ const notion = new Client({
 
 function escapeCodeBlock(body) {
     // Null body pass
-    if (!body) return "";
+    if (!body || body == "undefined") return "";
 
     const regex = /```([\s\S]*?)```/g;
     return body.replace(regex, function (match, htmlBlock) {
@@ -177,12 +177,16 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         // author profile
         let profile = r.properties?.["Author Profile"]?.["checkbox"] ? "true" : "false";
 
+        // toc
+        let toc = r.properties?.["ToC"]?.["checkbox"] ? "true" : "false";
+
         // frontmatter
         let fmtags = "";
         let fmcats = "";
         let fmheaderImg = "";
         let fmgalleryImgs = "";
         let fmprofile = "";
+        let fmtoc = "";
 
         if (tags.length > 0) {
             fmtags += "\ntags:";
@@ -245,6 +249,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             }
         }        
         if (profile) fmprofile += "\nauthor_profile: " + profile;
+        if (toc) fmtoc += "\ntoc: " + toc;
 
         const fm = "---\ntitle: "
             + title
@@ -253,6 +258,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             + fmheaderImg
             + fmgalleryImgs
             + fmprofile
+            + fmtoc
             + "\n---";
 
         const mdblocks = await n2m.pageToMarkdown(id);

@@ -35,6 +35,7 @@ jobs:
                   assets/images/bio-photo.png | \
                   assets/images/effective-hazard-prevention-1.png | \
                   assets/images/favicon.png | \
+                  assets/images/og_unsplash.jpg | \
                   *.svg)
                       continue
                       ;;
