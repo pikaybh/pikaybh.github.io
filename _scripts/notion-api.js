@@ -23,7 +23,13 @@ function escapeCodeBlock(body) {
 function replaceCalloutBlocks(md) {
     if (!md) return "";
 
-    return md.replace(/^>\s*([\u{1F300}-\u{1F6FF}])\s*(.*)$/gum, '<p class="notice">$2</p>');
+    return md.replace(/^>\s*([\u{1F300}-\u{1F6FF}])?\s*(\{([a-zA-Z0-9_-]+)\})?\s*(.*)$/gum, 
+        (match, emoji, _, className, content) => {
+            const noticeClass = className ? `notice notice--${className}` : "notice";
+            const emojiPart = emoji ? `${emoji} ` : "";
+            return `<p class="${noticeClass}">${emojiPart}${content}</p>`;
+        }
+    );
 }
 
 function replaceTitleOutsideRawBlocks(body) {
