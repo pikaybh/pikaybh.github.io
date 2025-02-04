@@ -12,7 +12,7 @@ const notion = new Client({
 
 function escapeCodeBlock(body) {
     // Null body pass
-    if (!body || body == "undefined") return "";
+    if (!body || body.trim() == "undefined") return "";
 
     const regex = /```([\s\S]*?)```/g;
     return body.replace(regex, function (match, htmlBlock) {
@@ -20,10 +20,11 @@ function escapeCodeBlock(body) {
     });
 }
 
-function replaceCalloutBlocks(md) {
-    if (!md) return "";
+function replaceCalloutBlocks(body) {
+    // Null body pass
+    if (!body || body.trim() == "undefined") return "";
 
-    return md.replace(/^>\s*([\u{1F300}-\u{1F6FF}])?\s*(\{([a-zA-Z0-9_-]+)\})?\s*(.*)$/gum, 
+    return body.replace(/^>\s*([\u{1F300}-\u{1F6FF}])?\s*(\{([a-zA-Z0-9_-]+)\})?\s*(.*)$/gum, 
         (match, emoji, _, className, content) => {
             const noticeClass = className ? `notice notice--${className}` : "notice";
             const emojiPart = emoji ? `${emoji} ` : "";
@@ -34,7 +35,7 @@ function replaceCalloutBlocks(md) {
 
 function replaceTitleOutsideRawBlocks(body) {
     // Null body pass
-    if (!body) return "";
+    if (!body || body.trim() == "undefined") return "";
 
     const rawBlocks = [];
     const placeholder = "%%RAW_BLOCK%%";

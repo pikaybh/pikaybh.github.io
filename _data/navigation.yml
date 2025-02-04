@@ -2,12 +2,18 @@
 main:
   - title: "About"
     url: /about/
-  - title: "Curriculum Vitae"
-    url: https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing
+  - title: "Articles"
+    url: /articles/
+  - title: "Posts"
+    url: /posts/
   - title: "Projects"
     url: /projects/
   - title: "Publications"
     url: /publications/
+  # - title: "<i class='fa-solid fa-folder-open'></i>"
+  #   url: /categories/
+  # - title: "<i class='fa-solid fa-tags'></i>"
+  #   url: /tags/
 
   # - title: "Quick-Start Guide"
   #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/

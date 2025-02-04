@@ -118,8 +118,11 @@ author:
   location         : "Seoul, Korea"
   links:
     - label: "Email"
-      icon : "far fa-fw fa-envelope"
+      icon : "fas fa-fw fa-envelope"
       url  : "mailto:pikaybh@snu.ac.kr"
+    - label: "Curriculum Vitae"
+      icon : "fas fa-fw fa-file"
+      url  : "https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing"
     - label: "Links"
       icon : "fas fa-fw fa-link"
       url  : "/"
@@ -171,10 +174,11 @@ footer:
 # Reading Files
 include:
   - .htaccess
-  - _conferences
+  # - _conferences
   - _drafts
   - _pages
-  - _portfolio
+  # - _portfolio
+  - _articles
   - _posts
   # - _docs
   - BingSiteAuth.xml
@@ -338,8 +342,8 @@ more_authors_animation_delay: 10 # more authors are revealed on click using anim
 # Enables publication thumbnails. If disabled, none of the publications will display thumbnails, even if specified in the bib entry.
 enable_publication_thumbnails: true
 
-prismic:
-  api_token: ENV['PRISMIC_SECRET']
+# prismic:
+#   api_token: ENV['PRISMIC_SECRET']
 
 # Archives
 #  Type
@@ -392,15 +396,18 @@ collections:
   # portfolio:
   #   output: true
   #   permalink: /:collection/:path/
+  articles:
+    output: true
+    permalink: /:collection/:path/
   posts:
     output: true
     permalink: /:path/
   projects:
     output: true
     permalink: /:collection/:path/
-  publications:
-    output: true
-    permalink: /:collection/:path/
+  # publications:
+  #   output: true
+  #   permalink: /:collection/:path/
   # conferences:
   #   output: true
   #   permalink: /:collection/:path/
@@ -408,6 +415,18 @@ collections:
 
 # Defaults
 defaults:
+  # _articles
+  - scope:
+      path: ""
+      type: articles
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+      show_date: true
   # _posts
   - scope:
       path: ""
