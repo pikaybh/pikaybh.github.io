@@ -17,7 +17,7 @@ const notion = new Client({
 	 */	
 	function nvl(str, defaultStr){
 		
-		if(typeof str == "undefined" || str == null || str == "")
+		if(typeof str == "undefined" || str === undefined || str == null || str == "")
 			str = defaultStr ;
 		
 		return str ;
