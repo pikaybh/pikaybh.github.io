@@ -27,7 +27,7 @@ toc: true
 | `%-d`  | Day of the month, no-padding (1..31)             |
 | `%e`   | Day of the month, blank-padded (_1..31)          |
 
-undefined
+
 ## Flags
 
 
@@ -40,7 +40,7 @@ undefined
 | `#`  | Change case                  |
 | `:`  | Use colons for `%z`          |
 
-undefined
+
 ## Time Formatting
 
 
@@ -64,7 +64,7 @@ undefined
 | `%21N` | Zeptosecond (21 digits)                               |
 | `%24N` | Yoctosecond (24 digits)                               |
 
-undefined
+
 ## Time Zone Formatting
 
 
@@ -76,7 +76,7 @@ undefined
 | `%:::z` | Time zone hour, minute, and second offset from UTC (e.g. +09, +09:30, +09:30:30) |
 | `%Z`    | Time zone abbreviation name or similar information                               |
 
-undefined
+
 ## Weekday Formatting
 
 
@@ -89,7 +89,7 @@ undefined
 | `%u`   | Day of the week starting Monday (1..7)             |
 | `%w`   | Day of the week starting Sunday (0..6)             |
 
-undefined
+
 ## Week Formatting
 
 
@@ -101,7 +101,7 @@ undefined
 | `%U`   | Week number of the year. Week starts with Sunday (00..53) |
 | `%W`   | Week number of the year. Week starts with Monday (00..53) |
 
-undefined
+
 ## Seconds Formatting
 
 
@@ -110,7 +110,7 @@ undefined
 | `%s`   | Number of seconds since 1970-01-01 00:00:00 UTC      |
 | `%Q`   | Number of milliseconds since 1970-01-01 00:00:00 UTC |
 
-undefined
+
 ## Literal Strings
 
 
@@ -120,7 +120,7 @@ undefined
 | `%t`   | Tab character (`\t`)     |
 | `%%`   | Literal '%' character    |
 
-undefined
+
 ## Combination
 
 
@@ -137,4 +137,3 @@ undefined
 | `%T`   | 24-hour time (`%H:%M:%S`)             |
 | `%+`   | `date(1)` (`%a %b %e %H:%M:%S %Z %Y`) |
 
-undefined

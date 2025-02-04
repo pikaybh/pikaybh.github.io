@@ -57,7 +57,7 @@ Now, let’s learn about how to use Vim commands.
 | `i`            | Enter Insert mode                         |
 | `Esc`          | Exit Insert mode                          |
 
-undefined
+
 ### 2. 2. Navigation
 
 
@@ -78,7 +78,7 @@ undefined
 | `Ctrl-f` | Scroll down a full screen                         |
 | `Ctrl-b` | Scroll up a full screen                           |
 
-undefined
+
 ### 2. 3. Editing
 
 
@@ -98,7 +98,7 @@ undefined
 | `ddp`     | Swap current line with the next                      |
 | `xp`      | Swap adjacent characters                             |
 
-undefined
+
 ### 2. 4. Search and Replace
 
 
@@ -113,7 +113,7 @@ undefined
 | `:.,$s/old/new/g`  | Replace `old` with `new` from the current line to the last line |
 | `:.,+5s/old/new/g` | Replace `old` with `new` from the current line to 5 lines down  |
 
-undefined
+
 ### 2. 5. Visual Mode
 
 
@@ -127,7 +127,7 @@ undefined
 | `>`      | Indent selection                             |
 | `<`      | Un-indent selection                          |
 
-undefined
+
 ### 2. 6. Buffers, Windows, and Tabs
 
 
@@ -145,7 +145,7 @@ undefined
 | `gt`               | Go to next tab                       |
 | `gT`               | Go to previous tab                   |
 
-undefined
+
 ### 2. 7. Macros and Registers
 
 
@@ -157,7 +157,7 @@ undefined
 | `@@`       | Repeat last macro                            |
 | `"<char>p` | Paste from register `<char>`                 |
 
-undefined
+
 ### 2. 8. Advanced Commands
 
 
@@ -177,7 +177,7 @@ undefined
 | `:set nowrap`         | Disable line wrapping                                      |
 | `:w !sudo tee %`      | Save file with sudo when opened without proper permissions |
 
-undefined
+
 ## 3. Conclusion
 
 
