@@ -305,5 +305,5 @@ nmap -oX scan_results.xml 127.0.0.1
 | Save results        | `nmap -oN results.txt 127.0.0.1` |
 
 undefined
-<p class="notice">With this guide, you can effectively use Nmap to analyze and secure your network!</p>
+<p class="notice notice--info">🚀 With this guide, you can effectively use Nmap to analyze and secure your network!</p>
 
