@@ -21,10 +21,7 @@ excerpt: '
   <div class="text-box higtlight" data-trigger>
     <pre class="text-container highlight">
       <code class="err">I&#39;m</code>
-      <code class="text ld"></code>
-      <strong>
-        <code class="cursor ld">_</code>
-      </strong>
+      <code class="text ld"></code><strong><code class="cursor ld">_</code></strong>
     </pre>
   </div>
 </div>
@@ -111,6 +108,7 @@ intro:
   }
   .text-container {
     display: inline-block;
+    white-space: nowrap; /* 자동 줄바꿈 방지 */
     margin-bottom: 0;
   }
   .text-box {
