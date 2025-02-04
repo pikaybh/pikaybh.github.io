@@ -20,8 +20,11 @@ excerpt: '
   <!--<p class="author__bio p-note text-center" itemprop="description">Byunghee Yoo</p>-->
   <div class="text-box higtlight" data-trigger>
     <pre class="text-container highlight">
-      <code class="text"></code>
-      <code class="cursor">_</code>
+      <code class="err">I&#39;m </code>
+      <code class="text ld"></code>
+      <strong>
+        <code class="cursor ld">_</code>
+      </strong>
     </pre>
   </div>
 </div>
@@ -169,67 +172,92 @@ intro:
     }
 </style>
 <script>
+  /** const contents = [
+      'while(!(succeed == try()));', 
+      'import antigravity',
+      'while True: print("Segmentation Fault!")',
+      'let future = async () => await new Promise(() => {});',
+      'throw new Exception("Works on my machine!");',
+      'alias rm="mv --to-trash"', 
+      'if (coffee.isEmpty()) System.exit(1);',
+      'if (coffee == null) throw new NullReferenceException();',
+      'go go go go();',
+      ':(){ :|:& };:',
+      'SELECT * FROM users WHERE clue > 0;',
+      'let mut dev = None; dev.unwrap();',
+      '$money += "0";',
+      '<blink>Under maintenance since 2022</blink>',
+      '^.*?$',
+      'git commit -m "final fix"'
+  ]; */
   const contents = [
-    'while(!(succeed == try()));', 
-    'import antigravity',
-    'while True: print("Segmentation Fault!")',
-    'let future = async () => await new Promise(() => {});',
-    'throw new Exception("Works on my machine!");',
-    'alias rm="mv --to-trash"', 
-    'if (coffee.isEmpty()) System.exit(1);',
-    'if (coffee == null) throw new NullReferenceException();',
-    'go go go go();',
-    ':(){ :|:& };:',
-    'SELECT * FROM users WHERE clue > 0;',
-    'let mut dev = None; dev.unwrap();',
-    '$money += "0";',
-    '<blink>Under maintenance since 2022</blink>',
-    '^.*?$',
-    'git commit -m "final fix"'
+      'Byunghee Yoo',
+      'a Programmer',
+      'an Engineer',
+      'a Researcher',
+      'a Developer',
+      'a Scientist',
+      'a Cracker',
+      'a Creator',
+      'a Coder',
+      'a Hacker',
+      'a Student',
+      'a Learner',
+      'an Architect',
+      'a Designer',
+      'Anonymous',
+      'Nobody',
+      'a Slave... 🥲'
   ];
   const textElement = document.querySelector(".text");
   const cursorElement = document.querySelector(".cursor");
-  
-  let currentIndex = Math.floor(Math.random() * contents.length);
+
+  let currentIndex = 0  // Math.floor(Math.random() * contents.length);
   let charIndex = 0;
   let typingSpeed = 100;
+  let deletingSpeed = 50;
+  let pauseTime = 500; // 유지 시간
+  let isDeleting = false;
 
-  // 문장을 다 입력한 후 대기 시간 (1초)
-  let pauseTime = 3000;
-  
   function typeText() {
       const currentText = contents[currentIndex];
       
-      if (charIndex < currentText.length) {
-          textElement.textContent += currentText[charIndex++];
-          setTimeout(typeText, typingSpeed);
-      } else {
-          setTimeout(() => {
-              textElement.textContent = "";
-              currentIndex = Math.floor(Math.random() * contents.length);
-              charIndex = 0;
+      if (!isDeleting) {
+          if (charIndex < currentText.length) {
+              textElement.textContent += currentText[charIndex++];
               setTimeout(typeText, typingSpeed);
-          }, pauseTime);
+          } else {
+              setTimeout(() => {
+                  isDeleting = true;
+                  setTimeout(typeText, deletingSpeed);
+              }, pauseTime);
+          }
+      } else {
+          if (charIndex > 0) {
+              textElement.textContent = currentText.substring(0, --charIndex);
+              setTimeout(typeText, deletingSpeed);
+          } else {
+              isDeleting = false;
+              currentIndex = Math.floor(Math.random() * contents.length);
+              setTimeout(typeText, typingSpeed);
+          }
       }
   }
-  
+
   function blinkCursor() {
       cursorElement.style.visibility = cursorElement.style.visibility === 'hidden' ? 'visible' : 'hidden';
   }
-  
-  function eternalTries() {
-    try {
-      typeText();
-    } catch (error) {
-      setTimeout(eternalTries, 1000);
-    }
+
+  function startTypingEffect() {
+      try {
+          typeText();
+      } catch (error) {
+          setTimeout(startTypingEffect, 1000);
+      }
   }
-  
-  // 0.5초마다 커서 깜빡이기
+
   setInterval(blinkCursor, 500);
-  
-  // eternalTries
-  eternalTries();
+  startTypingEffect();
 </script>
 
 <!--{% include feature_row %}-->

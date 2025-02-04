@@ -20,6 +20,12 @@ function escapeCodeBlock(body) {
     });
 }
 
+function replaceCalloutBlocks(md) {
+    if (!md) return "";
+
+    return md.replace(/^>\s*([\u{1F300}-\u{1F6FF}])\s*(.*)$/gum, '<p class="notice">$2</p>');
+}
+
 function replaceTitleOutsideRawBlocks(body) {
     // Null body pass
     if (!body) return "";
@@ -268,6 +274,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         }
         md = escapeCodeBlock(md);
         md = replaceTitleOutsideRawBlocks(md);
+        md = replaceCalloutBlocks(md);
 
         const imgtitle = `${date}-${title.replaceAll(" ", "-").replaceAll(":", "")}`
         const ftitle = `${imgtitle}.md`;
