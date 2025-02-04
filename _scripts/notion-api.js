@@ -11,9 +11,8 @@ const notion = new Client({
 });
 
 function escapeCodeBlock(body) {
-    console.log(body);
     // Null body pass
-    if (!body || body.trim() == "undefined") return "";
+    if (!body || body.trim() == "undefined") return " ";
 
     const regex = /```([\s\S]*?)```/g;
     return body.replace(regex, function (match, htmlBlock) {
