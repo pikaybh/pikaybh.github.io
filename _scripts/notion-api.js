@@ -10,9 +10,22 @@ const notion = new Client({
     auth: process.env.NOTION_TOKEN,
 });
 
+/**
+	 * 문자열이 빈 문자열인지 체크하여 기본 문자열로 리턴한다. 
+	 * @param str			: 체크할 문자열
+	 * @param defaultStr	: 문자열이 비어있을경우 리턴할 기본 문자열
+	 */	
+	function nvl(str, defaultStr){
+		
+		if(typeof str == "undefined" || str == null || str == "")
+			str = defaultStr ;
+		
+		return str ;
+	}
+
 function escapeCodeBlock(body) {
     // Null body pass
-    if (!body || body.trim() == "undefined") return " ";
+    // if (!body || body.trim() == "undefined") return " ";
 
     const regex = /```([\s\S]*?)```/g;
     return body.replace(regex, function (match, htmlBlock) {
@@ -279,6 +292,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         if (md === "") {
             continue;
         }
+        md = nvl(md, "");
         md = escapeCodeBlock(md);
         md = replaceTitleOutsideRawBlocks(md);
         md = replaceCalloutBlocks(md);
