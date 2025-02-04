@@ -11,7 +11,7 @@ const notion = new Client({
 });
 
 function escapeCodeBlock(body) {
-    Console.log(body)
+    console.log(body);
     // Null body pass
     if (!body || body.trim() == "undefined") return "";
 
