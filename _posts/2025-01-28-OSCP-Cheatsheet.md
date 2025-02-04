@@ -24,7 +24,7 @@ toc: true
 
 
 {% raw %}
-```ruby
+```powershell
 echo "<COMMAND>" | iconv -f UTF-8 -t UTF-16LE | base64 -w0
 ```
 {% endraw %}
