@@ -59,7 +59,7 @@ task :preview do
     listener.start
     Jekyll.logger.info "Auto-regeneration:", "enabled for '#{options["source"]}'"
 
-    unless options['serving']
+    unless options['serving']zz
       trap("INT") do
         listener.stop
         puts "     Halting auto-regeneration."
