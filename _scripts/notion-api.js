@@ -43,11 +43,13 @@ function replaceCalloutBlocks(body) {
 }
 
 function replaceVideoBlock(body) {
-    // 유튜브 URL을 감지하는 정규식
+    const videoBlockRegex = /```video\n(.*?)\n```/gs; // 비디오 블록 감지
     const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/g;
 
-    return body.replace(youtubeRegex, (match, videoId) => {
-        return `{% include video id="${videoId}" provider="youtube" %}`;
+    return body.replace(videoBlockRegex, (match, videoUrl) => {
+        return videoUrl.replace(youtubeRegex, (match, videoId) => {
+            return `{% include video id="${videoId}" provider="youtube" %}`;
+        });
     });
 }
 
