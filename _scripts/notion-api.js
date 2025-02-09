@@ -47,7 +47,7 @@ function replaceVideoBlock(body) {
     const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/g;
 
     return body.replace(videoBlockRegex, (match, videoUrl) => {
-        console.log(body);
+        console.log(match);
         return videoUrl.replace(youtubeRegex, (match, videoId) => {
             return `{% include video id="${videoId}" provider="youtube" %}`;
         });
