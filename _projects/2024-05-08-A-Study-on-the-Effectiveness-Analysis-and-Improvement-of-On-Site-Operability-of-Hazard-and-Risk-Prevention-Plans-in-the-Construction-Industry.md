@@ -3,7 +3,7 @@ title: "A Study on the Effectiveness Analysis and Improvement of On-Site Operabi
 header:
   teaser: assets/images/headers/effective-hazard-prevention-1.png
   caption: 
-  excerpt: 
+  excerpt: with ,KOSHA, (2024.05 ~ 2024.11)
 gallery:
   - url: /assets/images/headers/effective-hazard-prevention-1.png
     image_path: assets/images/headers/effective-hazard-prevention-1.png
