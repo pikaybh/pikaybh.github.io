@@ -7,11 +7,13 @@ tags:
   - OSCP
 author_profile: false
 toc: true
+toc_sticky: false
 ---
-[Nmap (Network Mapper)](https://nmap.org/) is an essential tool for network security assessment and vulnerability analysis. This post provides an in-depth guide to Nmap's key features and applications.
+
+[Nmap (Network Mapper)](https://nmap.org/){:target="_blank"} is an essential tool for network security assessment and vulnerability analysis. This post provides an in-depth guide to Nmap's key features and applications.
 
 
-For demonstration purposes, we will use [**127.0.0.1**](http://localhost/)[ (localhost)](http://localhost/) as an example.
+For demonstration purposes, we will use [**127.0.0.1**](http://localhost/){:target="_blank"}[ (localhost)](http://localhost/){:target="_blank"} as an example.
 
 
 ## **1. Basic Nmap Scan**

@@ -1,41 +1,42 @@
 ---
-title: "Vim Cheatsheet Essential Commands for Developers"
+title: "Vim Cheatsheet: Essential Commands for Developers"
 categories:
   - Cheatsheet
 tags:
   - OSCP
   - Linux
   - Vim
+author_profile: false
+toc: true
+toc_sticky: false
 header:
   overlay_image: assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png
   teaser: assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png
   caption: 
-author_profile: false
-toc: true
-toc_sticky: true
 ---
+
 Vim is a powerful text editor that can significantly enhance productivity when mastered. This cheatsheet covers fundamental to advanced commands, helping both beginners and experienced developers navigate Vim effectively.
 
 
 ## 1. Introduction
 
 
-Vim is a free and open-source, screen-based text editor that serves as an enhanced version of the original vi editor developed by Bill Joy. Created by Bram Moolenaar, Vim was first released to the public in 1991. The name "Vim" stands for "Vi IMproved," reflecting its numerous enhancements over the original vi. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Vim_%28text_editor%29?utm_source=chatgpt.com))
+Vim is a free and open-source, screen-based text editor that serves as an enhanced version of the original vi editor developed by Bill Joy. Created by Bram Moolenaar, Vim was first released to the public in 1991. The name "Vim" stands for "Vi IMproved," reflecting its numerous enhancements over the original vi. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Vim_%28text_editor%29?utm_source=chatgpt.com){:target="_blank"})
 
 
-Vim is designed for use both from a command-line interface and as a standalone application in a graphical user interface. Since its initial release for the Amiga, cross-platform development has made it available on many other systems. In 2018, it was voted the most popular editor among Linux Journal readers. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Vim_%28text_editor%29?utm_source=chatgpt.com))
+Vim is designed for use both from a command-line interface and as a standalone application in a graphical user interface. Since its initial release for the Amiga, cross-platform development has made it available on many other systems. In 2018, it was voted the most popular editor among Linux Journal readers. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Vim_%28text_editor%29?utm_source=chatgpt.com){:target="_blank"})
 
 
-Vim's forerunner, Stevie (ST Editor for VI Enthusiasts), was created by Tim Thompson for the Atari ST in 1987 and further developed by Tony Andrews and G.R. (Fred) Walter. It was one of the first popularized clones of vi and did not use vi's source code. Basing Vim on the source code for Stevie meant the program could be distributed without requiring the AT&T source license. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Vim_%28text_editor%29?utm_source=chatgpt.com))
+Vim's forerunner, Stevie (ST Editor for VI Enthusiasts), was created by Tim Thompson for the Atari ST in 1987 and further developed by Tony Andrews and G.R. (Fred) Walter. It was one of the first popularized clones of vi and did not use vi's source code. Basing Vim on the source code for Stevie meant the program could be distributed without requiring the AT&T source license. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Vim_%28text_editor%29?utm_source=chatgpt.com){:target="_blank"})
 
 
 Vim has a reputation for its steep learning curve due to its modal nature, where users switch between different modes for editing and command inputs. However, once mastered, it is celebrated for its efficiency and powerful features, making it a favorite among many developers and system administrators.
 
 
-The enduring rivalry between Vim and Emacs users, often referred to as the "editor war," has become a notable part of hacker culture and the free software community. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Editor_war?utm_source=chatgpt.com))
+The enduring rivalry between Vim and Emacs users, often referred to as the "editor war," has become a notable part of hacker culture and the free software community. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Editor_war?utm_source=chatgpt.com){:target="_blank"})
 
 
-Bram Moolenaar, the creator and maintainer of Vim, was a Dutch software engineer and activist. He advocated for ICCF Holland, a non-governmental organization supporting AIDS victims in Uganda, and used the popularity of Vim to encourage donations. Moolenaar passed away on August 3, 2023, at the age of 62. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Bram_Moolenaar?utm_source=chatgpt.com))
+Bram Moolenaar, the creator and maintainer of Vim, was a Dutch software engineer and activist. He advocated for ICCF Holland, a non-governmental organization supporting AIDS victims in Uganda, and used the popularity of Vim to encourage donations. Moolenaar passed away on August 3, 2023, at the age of 62. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Bram_Moolenaar?utm_source=chatgpt.com){:target="_blank"})
 
 
 Now, let’s learn about how to use Vim commands.
@@ -187,4 +188,4 @@ Vim is an incredibly efficient editor when properly mastered. This cheatsheet pr
 
 ## Reference
 
-- [Wikipedia](http://en.wikipedia.org/)
+- [Wikipedia](http://en.wikipedia.org/){:target="_blank"}

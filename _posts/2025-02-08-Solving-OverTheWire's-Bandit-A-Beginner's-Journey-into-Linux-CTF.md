@@ -7,6 +7,7 @@ tags:
 excerpt: Disclaimer This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.
 author_profile: false
 toc: true
+toc_sticky: false
 header:
   overlay_image: assets/images/headers/domokitten.png
   teaser: assets/images/headers/download.png
@@ -17,7 +18,7 @@ header:
 ## Introduction
 
 
-[OverTheWire](https://overthewire.org/wargames/)’s [**Bandit**](https://overthewire.org/wargames/bandit/) wargame is an excellent starting point for anyone looking to improve their Linux command-line skills, especially in the context of cybersecurity and Capture The Flag (CTF) challenges. This blog post outlines my experience solving Bandit, the key lessons I learned, and tips for beginners tackling the challenge.
+[OverTheWire](https://overthewire.org/wargames/){:target="_blank"}’s [**Bandit**](https://overthewire.org/wargames/bandit/){:target="_blank"} wargame is an excellent starting point for anyone looking to improve their Linux command-line skills, especially in the context of cybersecurity and Capture The Flag (CTF) challenges. This blog post outlines my experience solving Bandit, the key lessons I learned, and tips for beginners tackling the challenge.
 
 
 ## What is Bandit?
@@ -288,7 +289,7 @@ strings data.txt | grep '==' | awk -F '=+' '{print $2}'
 
 - `strings data.txt` → Extracts human-readable strings from `data.txt`, filtering out non-printable characters.
 - `grep '=='` → Filters lines that contain `==`, ensuring only relevant lines are processed.
-- `awk -F '==+' '{print $2}'` →
+- `awk -F '=+' '{print $2}'` →
 	- `F '=+'` → Uses one or more `=` characters as the field separator.
 	- `{print $2}` → Prints the portion of the line after the `=` characters, extracting the password.
 
@@ -570,7 +571,10 @@ This method allows you to **bypass the permissions issue** by logging in as `ban
 
 To retrieve the password for the next level, you need to **send** the current level's password to **port 30000** on `localhost`.
 
-{% include video id="7_LPdttKXPc" provider="youtube" %}
+
+[video]({% include video id="7_LPdttKXPc" provider="youtube" %}){:target="_blank"}
+
+
 
 {% raw %}
 ```shell
@@ -622,6 +626,6 @@ If you're new to Linux security, I highly recommend giving Bandit a try. Happy h
 
 ## Reference
 
-- [OverTheWire](https://overthewire.org/wargames/)
-- [Bandit](https://overthewire.org/wargames/bandit/)
-- [How the Internet Works in 5 Minutes](https://www.youtube.com/watch?v=7_LPdttKXPc)
+- [OverTheWire](https://overthewire.org/wargames/){:target="_blank"}
+- [Bandit](https://overthewire.org/wargames/bandit/){:target="_blank"}
+- [How the Internet Works in 5 Minutes]({% include video id="7_LPdttKXPc" provider="youtube" %}){:target="_blank"}
