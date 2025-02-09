@@ -8,7 +8,7 @@ tags:
   - Vim
 author_profile: false
 toc: true
-toc_sticky: false
+toc_sticky: true
 header:
   overlay_image: assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png
   teaser: assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png

@@ -7,7 +7,7 @@ tags:
   - OSCP
 author_profile: false
 toc: true
-toc_sticky: false
+toc_sticky: true
 ---
 
 [Nmap (Network Mapper)](https://nmap.org/){:target="_blank"} is an essential tool for network security assessment and vulnerability analysis. This post provides an in-depth guide to Nmap's key features and applications.

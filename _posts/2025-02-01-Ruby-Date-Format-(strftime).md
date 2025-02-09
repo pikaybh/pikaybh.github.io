@@ -7,7 +7,7 @@ tags:
   - OSCP
 author_profile: false
 toc: true
-toc_sticky: false
+toc_sticky: true
 ---
 
 ## Date Formatting
