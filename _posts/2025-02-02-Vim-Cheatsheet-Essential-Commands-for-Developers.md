@@ -1,15 +1,16 @@
 ---
-title: Vim Cheatsheet Essential Commands for Developers
+title: 'Vim Cheatsheet Essential Commands for Developers'
 categories:
-  - OSCP
-tags:
   - Cheatsheet
+tags:
+  - OSCP
   - Linux
   - Vim
 header:
   overlay_image: assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png
   teaser: assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png
   caption: 
+  excerpt: 
 author_profile: false
 toc: true
 ---

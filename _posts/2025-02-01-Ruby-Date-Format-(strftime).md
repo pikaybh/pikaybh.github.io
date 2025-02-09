@@ -1,8 +1,10 @@
 ---
-title: Ruby Date Format (strftime)
+title: 'Ruby Date Format (strftime)'
+categories:
+  - Cheatsheet
 tags:
   - Ruby
-  - Cheatsheet
+  - OSCP
 author_profile: false
 toc: true
 ---

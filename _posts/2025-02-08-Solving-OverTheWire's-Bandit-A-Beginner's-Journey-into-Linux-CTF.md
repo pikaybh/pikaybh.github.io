@@ -1,7 +1,7 @@
 ---
-title: "Solving OverTheWire's Bandit: A Beginner's Journey into Linux CTF"
+title: 'Solving OverTheWire's Bandit: A Beginner's Journey into Linux CTF'
 categories:
-  - Wargames
+  - Wargame
 tags:
   - Linux
 header:
@@ -9,8 +9,9 @@ header:
   teaser: assets/images/headers/download.png
   caption: [object Object]
   cta_url: https://overthewire.org/wargames/bandit/
+  excerpt: [object Object],[object Object]
 author_profile: false
-toc: false
+toc: true
 ---
 ## Introduction
 
@@ -24,7 +25,8 @@ toc: false
 Bandit is a CTF-style wargame hosted on OverTheWire that teaches fundamental Linux security concepts. The challenge consists of multiple levels, each requiring players to find a password that grants access to the next level. These levels introduce various Linux commands, file manipulation techniques, permissions handling, and some basic scripting concepts.
 
 
-<p class="notice notice--danger">🚧 **Disclaimer** This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.</p>
+<p class="notice notice--danger">🚧 <strong>Disclaimer</strong>  </p>
+<p class="notice">This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.</p>
 
 
 ## Getting Started
@@ -35,7 +37,7 @@ To begin, you need SSH access to OverTheWire’s Bandit server. The first level 
 
 
 {% raw %}
-```shell
+```bash
 ssh bandit0@bandit.labs.overthewire.org -p 2220
 ```
 {% endraw %}
@@ -45,7 +47,8 @@ ssh bandit0@bandit.labs.overthewire.org -p 2220
 The password for `bandit0` is provided on the official site, and from there, each level presents a unique problem requiring different Linux utilities to solve.
 
 
-<p class="notice notice--info">💡 **TIP** Instead of using the standard login command, I used the following format to streamline the process:</p>
+<p class="notice notice--success">💡 <strong>TIP</strong>  </p>
+<p class="notice">Instead of using the standard login command, I used the following format to streamline the process:</p>
 
 
 

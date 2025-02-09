@@ -1,8 +1,9 @@
 ---
-title: A Study on the Effectiveness Analysis and Improvement of On-Site Operability of Hazard and Risk Prevention Plans in the Construction Industry
+title: 'A Study on the Effectiveness Analysis and Improvement of On-Site Operability of Hazard and Risk Prevention Plans in the Construction Industry'
 header:
   teaser: assets/images/headers/effective-hazard-prevention-1.png
   caption: 
+  excerpt: [object Object],[object Object],[object Object]
 gallery:
   - url: /assets/images/headers/effective-hazard-prevention-1.png
     image_path: assets/images/headers/effective-hazard-prevention-1.png

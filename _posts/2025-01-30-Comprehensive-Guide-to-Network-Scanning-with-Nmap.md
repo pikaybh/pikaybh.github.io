@@ -1,10 +1,10 @@
 ---
-title: Comprehensive Guide to Network Scanning with Nmap
+title: 'Comprehensive Guide to Network Scanning with Nmap'
 categories:
-  - OSCP
+  - Cheatsheet
 tags:
   - Nmap
-  - Cheatsheet
+  - OSCP
 author_profile: false
 toc: true
 ---

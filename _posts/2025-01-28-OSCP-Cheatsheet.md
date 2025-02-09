@@ -1,9 +1,9 @@
 ---
-title: OSCP Cheatsheet
+title: 'OSCP Cheatsheet'
 categories:
-  - OSCP
-tags:
   - Cheatsheet
+tags:
+  - OSCP
 author_profile: false
 toc: true
 ---
