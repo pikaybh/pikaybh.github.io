@@ -572,7 +572,7 @@ This method allows you to **bypass the permissions issue** by logging in as `ban
 To retrieve the password for the next level, you need to **send** the current level's password to **port 30000** on `localhost`.
 
 
-[video]({% include video id="7_LPdttKXPc" provider="youtube" %}){:target="_blank"}
+{% include video id="7_LPdttKXPc" provider="youtube" %}
 
 
 
@@ -628,4 +628,4 @@ If you're new to Linux security, I highly recommend giving Bandit a try. Happy h
 
 - [OverTheWire](https://overthewire.org/wargames/){:target="_blank"}
 - [Bandit](https://overthewire.org/wargames/bandit/){:target="_blank"}
-- [How the Internet Works in 5 Minutes]({% include video id="7_LPdttKXPc" provider="youtube" %}){:target="_blank"}
+- [How the Internet Works in 5 Minutes](https://www.youtube.com/watch?v=7_LPdttKXPc){:target="_blank"}
