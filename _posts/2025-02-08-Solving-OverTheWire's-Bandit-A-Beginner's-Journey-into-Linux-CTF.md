@@ -431,32 +431,32 @@ Use the correct decompression tool based on the file type:
 
 - **If it’s a gzip file (****`.gz`****):**
 
-	
+
 {% raw %}
 ```shell
-	mv data.bin data.gz
-	gunzip data.gz
+mv data.bin data.gz
+gunzip data.gz
 ```
 {% endraw %}
 
 
 - **If it’s a bzip2 file (****`.bz2`****):**
 
-	
+
 {% raw %}
 ```shell
-	mv data.bin data.bz2
-	bzip2 -d data.bz2
+mv data.bin data.bz2
+bzip2 -d data.bz2
 ```
 {% endraw %}
 
 
 - **If it’s a tar archive (****`.tar`** **or** **`.tar.gz`****):**
 
-	
+
 {% raw %}
 ```shell
-	tar xvf data.bin
+tar xvf data.bin
 ```
 {% endraw %}
 
