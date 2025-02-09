@@ -227,6 +227,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         let fmtags = "";
         let fmcats = "";
         let fmheaderImg = "";
+        let fmexcerpt = "";
         let fmgalleryImgs = "";
         let fmprofile = "";
         let fmtoc = "";
@@ -270,14 +271,14 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 }
             }
             fmheaderImg += headerCaption
-                        ? `\n  caption: ${headerCaption.toString()}`
+                        ? `\n  caption: ${headerCaption.join("")}`
                         : "";
             fmheaderImg += ctaUrl
                         ? `\n  cta_url: ${ctaUrl}`
                         : "";
-            fmheaderImg += excerpt
-                        ? `\n  excerpt: ${excerpt.toString()}`
-                        : "";
+        }
+        if (excerpt.length > 0) {
+            fmexcerpt += `\nexcerpt: ${excerpt.join("")}`;
         }
         if (galleryImg.length > 0) {
             fmgalleryImgs += "\ngallery:";

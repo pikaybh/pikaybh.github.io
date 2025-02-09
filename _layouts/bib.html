@@ -76,22 +76,23 @@ layout: default
                 {%- if forloop.last and author_array_limit == author_array_size %}&amp;&nbsp;{% endif -%}
             {% endif %}
             {%- if author_is_self -%}
-                <strong>
-                    {{- author_last_html }}
-                    {{ author.first | slice: 0 }}
-                    {{ "." -}}
-                </strong>
+            <strong>
+                {% assign author_first_names = author.first | split: " " %}
+                {{ author_last_html }}
+                {% for name in author_first_names %}{{- name | slice: 0 -}}.{% endfor -%}
+            </strong>
+                
             {%- else -%}
                 {%- if coauthor_url -%}
                     <a href="{{ coauthor_url }}">
-                        {{- author_last_html }}
-                        {{ author.first | slice: 0 }}
-                        {{ "." -}}
+                        {% assign author_first_names = author.first | split: " " %}
+                        {{ author_last_html }}
+                        {% for name in author_first_names %}{{- name | slice: 0 -}}.{% endfor -%}
                     </a>
                 {%- else -%}
-                    {{- author_last_html }}
-                    {{ author.first | slice: 0 }}
-                    {{ "." -}}
+                    {% assign author_first_names = author.first | split: " " %}
+                    {{ author_last_html }}
+                    {% for name in author_first_names %}{{- name | slice: 0 -}}.{% endfor -%}
                 {% endif %}
             {%- endif -%}
         {% endfor %}
@@ -198,6 +199,11 @@ layout: default
         {% if entry.article-number %}
             {% capture numbers %}{{ numbers }}{{ ", " }}{{ entry.article-number }}{% endcapture %}
         {% endif %}
+        
+        <!-- Article Pages -->
+        {% if entry.pages %}
+        {% capture numbers %}{{ numbers }}{{ entry.pages }}{% endcapture %}
+        {% endif %}
 
         {{ numbers }}{{ "." }}
         {{ entry.note | strip }}
@@ -206,7 +212,7 @@ layout: default
         {% if entry.doi %}
             {% capture uri %}{{ "https://doi.org/" }}{{ entry.doi }}{% endcapture %}
             <a href="{{ uri }}" role="button" target="_blank">{{ uri }}</a>
-            <hr/>
+            <br/><br/>
             <a href="{{ uri }}" 
                 class="btn btn--primary btn--info"
                 role="button"

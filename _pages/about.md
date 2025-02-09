@@ -51,20 +51,19 @@ Apart from research, I enjoy crafting quirky gadgets, playing wargames, solving 
 | **Major** | Architectural Engineering | |
 -->
 
+## Publications
+
+1. **Yoo B.**, Kim J., Park S., Ahn C.R., & Oh T. (2024). Harnessing Generative Pre-Trained Transformers for Construction Accident Prediction with Saliency Visualization. *Applied Sciences, 14*(2), 664. [https://doi.org/10.3390/app14020664](https://doi.org/10.3390/app14020664)
+
+## Conferences
+
+1. **YOO B.**,  WOO Y.,  KIM J.,  PARK M., &  AHN C.R. (2024, Jul). Improving Explainability of Generative Pre-trained Transformer Model for Classification of Construction Accident Types: Validation of Saliency Visualization. *International conference on construction engineering and project management*, 1284-1284. [https://doi.org/https://doi.org/10.6106/ICCEPM.2024.1284](https://doi.org/https://doi.org/10.6106/ICCEPM.2024.1284)
+2. **Yoo B.**, Ahn S., & Ahn C.R. (2024, May). Automating construction safety management documentation through integration of retrieval augmented generation with large language models. *In Proceedings of the 2024 Spring Conference of the Korean Society of Safety*.
+
 ## Projects
 
-- Korea Infrastructure Safety & Technology Corporation (KISTEC), **Research on the Investigation and Analysis of Data for Risk Assessment in Construction Accident Prediction**, 50,000,000 KRW / $ 37,000, May. 2024 - Nov. 2024, *Research Assistant (PI: Ahn, C. R)*
-- National Research Foundation of Korea (NRF), **Establishment of a Digital Twin Platform Reflecting Precise Behavior of Structures and Utilization of Cyber-Physical Systems**, Mar. 2022 - Aug. 2022, *Research Assistant (PI: Kim, J)*
-
-<!--
-# Publications
-
-- **Yoo, B.**, Kim, J., Park, S., Ahn, C. R., & Oh, T. (2024). Harnessing Generative Pre-Trained Transformers for Construction Accident Prediction with Saliency Visualization. *Applied Sciences, 14*(2), 664.
-
-# Conferences
-
-- **Yoo, B.**, Ahn, S., & Ahn, C. R. (2024, May). Automating construction safety management documentation through integration of retrieval augmented generation with large language models. *In Proceedings of the 2024 Spring Conference of the Korean Society of Safety*.
--->
+1. Korea Infrastructure Safety & Technology Corporation (KISTEC), **Research on the Investigation and Analysis of Data for Risk Assessment in Construction Accident Prediction**, 50,000,000 KRW / $ 37,000, May. 2024 - Nov. 2024, *Research Assistant (PI: Ahn, C. R)*
+2. National Research Foundation of Korea (NRF), **Establishment of a Digital Twin Platform Reflecting Precise Behavior of Structures and Utilization of Cyber-Physical Systems**, Mar. 2022 - Aug. 2022, *Research Assistant (PI: Kim, J)*
 
 ## Research Experience
 
