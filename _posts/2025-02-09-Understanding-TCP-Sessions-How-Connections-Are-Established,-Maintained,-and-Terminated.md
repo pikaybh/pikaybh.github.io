@@ -43,7 +43,7 @@ The initiation of a TCP session involves a process called the **three-way handsh
 This handshake ensures that both devices are synchronized and agree upon the initial sequence numbers, laying the groundwork for reliable communication.
 
 
-{% include gallery caption="TCP states visited by a client TCP [Source: [**GeeksforGeeks**](https://www.geeksforgeeks.org/tcp-connection-termination/){:target="_blank"}]" %}
+{% include gallery caption=’TCP states visited by a client TCP [Source: [**GeeksforGeeks**](https://www.geeksforgeeks.org/tcp-connection-termination/){:target="_blank"}]’ %}
 
 
 ## Data Transmission Within a TCP Session
