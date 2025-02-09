@@ -1,5 +1,5 @@
 ---
-title: 'Solving OverTheWire's Bandit: A Beginner's Journey into Linux CTF'
+title: 'Solving OverTheWires Bandit: A Beginners Journey into Linux CTF'
 categories:
   - Wargame
 tags:
@@ -7,9 +7,9 @@ tags:
 header:
   overlay_image: assets/images/headers/domokitten.png
   teaser: assets/images/headers/download.png
-  caption: [object Object]
+  caption: 
   cta_url: https://overthewire.org/wargames/bandit/
-  excerpt: [object Object],[object Object]
+  excerpt: 
 author_profile: false
 toc: true
 ---
@@ -25,8 +25,7 @@ toc: true
 Bandit is a CTF-style wargame hosted on OverTheWire that teaches fundamental Linux security concepts. The challenge consists of multiple levels, each requiring players to find a password that grants access to the next level. These levels introduce various Linux commands, file manipulation techniques, permissions handling, and some basic scripting concepts.
 
 
-<p class="notice notice--danger">🚧 <strong>Disclaimer</strong>  </p>
-<p class="notice">This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.</p>
+<p class="notice notice--danger">🚧 <strong>Disclaimer</strong> This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.</p>
 
 
 ## Getting Started

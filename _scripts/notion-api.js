@@ -194,7 +194,12 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         let teaserImg = r.properties?.["Teaser"]?.["files"];
 
         // header caption
-        let headerCaption = r.properties?.["Header Caption"]?.["rich_text"];
+        let headerCaption = []
+        let pheaderCaption = r.properties?.["Header Caption"]?.["rich_text"];
+        for (const t of pheaderCaption) {
+            const n = t?.["plan_text"];
+            if (n) headerCaption.push(n);
+        }
         console.log("headerCaption:", headerCaption);
 
         // header caption
@@ -210,7 +215,12 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         let toc = r.properties?.["ToC"]?.["checkbox"] ? "true" : "false";
 
         // excerpt
-        let excerpt = r.properties?.["Excerpt"]?.["rich_text"];
+        let excerpt = [];
+        let pexcerpt = r.properties?.["Excerpt"]?.["rich_text"];
+        for (const t of pexcerpt) {
+            const n = t?.["plan_text"];
+            if (n) excerpt.push(n);
+        }
         console.log("excerpt:", excerpt);
 
         // frontmatter
@@ -260,13 +270,13 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 }
             }
             fmheaderImg += headerCaption
-                        ? `\n  caption: ${headerCaption}`
+                        ? `\n  caption: ${headerCaption.toString()}`
                         : "";
             fmheaderImg += ctaUrl
                         ? `\n  cta_url: ${ctaUrl}`
                         : "";
             fmheaderImg += excerpt
-                        ? `\n  excerpt: ${excerpt}`
+                        ? `\n  excerpt: ${excerpt.toString()}`
                         : "";
         }
         if (galleryImg.length > 0) {
@@ -288,7 +298,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         if (toc) fmtoc += "\ntoc: " + toc;
 
         const fm = "---\ntitle: "
-            + "'" + title + "'"
+            + '"' + title + '"'
             + fmcats
             + fmtags
             + fmheaderImg

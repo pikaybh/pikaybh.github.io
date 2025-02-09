@@ -10,6 +10,8 @@ main:
     url: /publications/
   # - title: "<i class='fa-solid fa-house'></i>"
   #   url: /home/
+  - title: "<i class='fa-solid fa-clock-rotate-left'></i>"
+    url: /year-archive/
   - title: "<i class='fa-solid fa-folder-open'></i>"
     url: /categories/
   - title: "<i class='fa-solid fa-tags'></i>"
