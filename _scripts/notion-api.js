@@ -43,11 +43,9 @@ function replaceCalloutBlocks(body) {
 }
 
 function replaceVideoBlock(body) {
-    // 유튜브 URL을 감지하는 정규식
-    const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/g;
+    const videoLinkRegex = /\[video\]\((https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+))\)/g;
 
-    return body.replace(youtubeRegex, (match, videoId) => {
-        console.log(body);
+    return body.replace(videoLinkRegex, (match, url, videoId) => {
         return `{% include video id="${videoId}" provider="youtube" %}`;
     });
 }
@@ -333,8 +331,8 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         md = escapeCodeBlock(md);
         md = replaceTitleOutsideRawBlocks(md);
         md = replaceCalloutBlocks(md);
-        md = addTarget2urlBlock(md);
         md = replaceVideoBlock(md);
+        md = addTarget2urlBlock(md);
 
         const imgtitle = `${date}-${title.replaceAll(" ", "-").replaceAll(":", "")}`
         const ftitle = `${imgtitle}.md`;
