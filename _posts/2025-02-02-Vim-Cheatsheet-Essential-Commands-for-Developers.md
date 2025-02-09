@@ -12,6 +12,7 @@ header:
   caption: 
 author_profile: false
 toc: true
+toc_sticky: true
 ---
 Vim is a powerful text editor that can significantly enhance productivity when mastered. This cheatsheet covers fundamental to advanced commands, helping both beginners and experienced developers navigate Vim effectively.
 

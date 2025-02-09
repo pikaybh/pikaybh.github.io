@@ -4,15 +4,16 @@ categories:
   - Wargames
 tags:
   - Linux
+excerpt: Disclaimer This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.
+author_profile: false
+toc: true
 header:
   overlay_image: assets/images/headers/domokitten.png
   teaser: assets/images/headers/download.png
   caption: I think the kitten is pretty cute :3 [**OverTheWire**](https://overthewire.org){:target="_blank"}
   cta_url: https://overthewire.org/wargames/bandit/
-excerpt: Disclaimer This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.
-author_profile: false
-toc: true
 ---
+
 ## Introduction
 
 
@@ -569,10 +570,7 @@ This method allows you to **bypass the permissions issue** by logging in as `ban
 
 To retrieve the password for the next level, you need to **send** the current level's password to **port 30000** on `localhost`.
 
-
-[video](https://www.youtube.com/watch?v=7_LPdttKXPc)
-
-
+{% include video id="7_LPdttKXPc" provider="youtube" %}
 
 {% raw %}
 ```shell

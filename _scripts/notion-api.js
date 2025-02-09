@@ -51,6 +51,14 @@ function replaceVideoBlock(body) {
     });
 }
 
+function addTarget2urlBlock(body) {
+    const urlRegex = /(?<!!)\[(.*?)\]\((.*?)\)/g; // `!!`로 이미지 링크 제외
+
+    return body.replace(urlRegex, (match, text, url) => {
+        return `[${text}](${url}){:target="_blank"}`;
+    });
+}
+
 function replaceTitleOutsideRawBlocks(body) {
     const rawBlocks = [];
     const placeholder = "%%RAW_BLOCK%%";
@@ -212,6 +220,9 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 
         // toc
         let toc = r.properties?.["ToC"]?.["checkbox"] ? "true" : "false";
+        
+        // toc sticky
+        let toc_sticky = r.properties?.["ToC Sticky"]?.["checkbox"] ? "true" : "false";
 
         // excerpt
         let excerpt = [];
@@ -294,18 +305,23 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             }
         }        
         if (profile) fmprofile += "\nauthor_profile: " + profile;
-        if (toc) fmtoc += "\ntoc: " + toc;
+        if (toc) {
+            fmtoc += "\ntoc: " + toc;
+            fmtoc += toc_sticky
+                    ? `\ntoc_sticky: ` + toc_sticky
+                    : "";
+        }
 
         const fm = "---\ntitle: "
             + '"' + title + '"'
             + fmcats
             + fmtags
-            + fmheaderImg
             + fmexcerpt
             + fmgalleryImgs
             + fmprofile
             + fmtoc
-            + "\n---";
+            + fmheaderImg
+            + "\n---\n";
 
         const mdblocks = await n2m.pageToMarkdown(id);
         let md = n2m.toMarkdownString(mdblocks)["parent"];
@@ -316,6 +332,8 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         md = escapeCodeBlock(md);
         md = replaceTitleOutsideRawBlocks(md);
         md = replaceCalloutBlocks(md);
+        md = addTarget2urlBlock(md);
+        md = replaceVideoBlock(md);
 
         const imgtitle = `${date}-${title.replaceAll(" ", "-").replaceAll(":", "")}`
         const ftitle = `${imgtitle}.md`;
