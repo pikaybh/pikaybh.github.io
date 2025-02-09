@@ -1,7 +1,7 @@
 ---
 title: "Solving OverTheWire's Bandit: A Beginner's Journey into Linux CTF"
 categories:
-  - Wargame
+  - Wargames
 tags:
   - Linux
 header:
@@ -9,7 +9,6 @@ header:
   teaser: assets/images/headers/download.png
   caption: I think the kitten is pretty cute :3 [**OverTheWire**](https://overthewire.org){:target="_blank"}
   cta_url: https://overthewire.org/wargames/bandit/
-excerpt: "**Disclaimer** This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet."
 author_profile: false
 toc: true
 ---

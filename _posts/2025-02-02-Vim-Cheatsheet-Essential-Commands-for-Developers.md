@@ -10,7 +10,6 @@ header:
   overlay_image: assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png
   teaser: assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png
   caption: 
-  excerpt: 
 author_profile: false
 toc: true
 ---
