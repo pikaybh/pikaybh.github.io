@@ -1,5 +1,5 @@
 ---
-title: Solving OverTheWire's Bandit: A Beginner's Journey into Linux CTF
+title: "Solving OverTheWire's Bandit: A Beginner's Journey into Linux CTF"
 categories:
   - Wargames
 tags:
@@ -35,7 +35,7 @@ To begin, you need SSH access to OverTheWire’s Bandit server. The first level 
 
 
 {% raw %}
-```bash
+```shell
 ssh bandit0@bandit.labs.overthewire.org -p 2220
 ```
 {% endraw %}

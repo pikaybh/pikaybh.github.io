@@ -45,7 +45,6 @@ jobs:
               esac
           done
           rm -rf assets/images/headers/*
-          rm -rf _articles/*
           rm -rf _posts/*
           rm -rf _projects/*
       

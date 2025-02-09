@@ -396,15 +396,15 @@ collections:
   # portfolio:
   #   output: true
   #   permalink: /:collection/:path/
-  articles:
-    output: true
-    permalink: /:collection/:path/
+  # articles:
+  #   output: true
+  #   permalink: /:collection/:title/  # /:collection/:path/
   posts:
     output: true
-    permalink: /:path/
+    permalink: /:title/  # /:path/
   projects:
     output: true
-    permalink: /:collection/:path/
+    permalink: /:collection/:title/  # /:collection/:path/
   # publications:
   #   output: true
   #   permalink: /:collection/:path/
@@ -415,18 +415,18 @@ collections:
 
 # Defaults
 defaults:
-  # _articles
-  - scope:
-      path: ""
-      type: articles
-    values:
-      layout: single
-      author_profile: true
-      read_time: true
-      comments: true
-      share: true
-      related: true
-      show_date: true
+  # # _articles
+  # - scope:
+  #     path: ""
+  #     type: articles
+  #   values:
+  #     layout: single
+  #     author_profile: true
+  #     read_time: true
+  #     comments: true
+  #     share: true
+  #     related: true
+  #     show_date: true
   # _posts
   - scope:
       path: ""

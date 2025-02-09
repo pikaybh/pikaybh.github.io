@@ -2,18 +2,18 @@
 main:
   - title: "About"
     url: /about/
-  - title: "Articles"
-    url: /articles/
-  - title: "Posts"
-    url: /posts/
+  # - title: "Posts"
+  #   url: /posts/
   - title: "Projects"
     url: /projects/
   - title: "Publications"
     url: /publications/
-  # - title: "<i class='fa-solid fa-folder-open'></i>"
-  #   url: /categories/
-  # - title: "<i class='fa-solid fa-tags'></i>"
-  #   url: /tags/
+  # - title: "<i class='fa-solid fa-house'></i>"
+  #   url: /home/
+  - title: "<i class='fa-solid fa-folder-open'></i>"
+    url: /categories/
+  - title: "<i class='fa-solid fa-tags'></i>"
+    url: /tags/
 
   # - title: "Quick-Start Guide"
   #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/

@@ -4,6 +4,7 @@ const moment = require("moment");
 const path = require("path");
 const fs = require("fs");
 const axios = require("axios");
+const marked = require("marked");
 
 
 const notion = new Client({
@@ -11,22 +12,19 @@ const notion = new Client({
 });
 
 /**
-	 * 문자열이 빈 문자열인지 체크하여 기본 문자열로 리턴한다. 
-	 * @param str			: 체크할 문자열
-	 * @param defaultStr	: 문자열이 비어있을경우 리턴할 기본 문자열
-	 */	
-	function nvl(str, defaultStr){
-		
-		if(typeof str == "undefined" || str === undefined || str == null || str == "")
-			str = defaultStr ;
-		
-		return str ;
-	}
+ * 문자열이 빈 문자열인지 체크하여 기본 문자열로 리턴한다. 
+ * @param str			: 체크할 문자열
+ * @param defaultStr	: 문자열이 비어있을경우 리턴할 기본 문자열
+ */	
+function nvl(str, defaultStr){
+    
+    if(typeof str == "undefined" || str === undefined || str == null || str == "")
+        str = defaultStr ;
+    
+    return str ;
+}
 
 function escapeCodeBlock(body) {
-    // Null body pass
-    // if (!body || body.trim() == "undefined") return " ";
-
     const regex = /```([\s\S]*?)```/g;
     return body.replace(regex, function (match, htmlBlock) {
         return "\n{% raw %}\n```" + htmlBlock.trim() + "\n```\n{% endraw %}\n";
@@ -34,22 +32,26 @@ function escapeCodeBlock(body) {
 }
 
 function replaceCalloutBlocks(body) {
-    // Null body pass
-    if (!body || body.trim() == "undefined") return "";
-
     return body.replace(/^>\s*([\u{1F300}-\u{1F6FF}])?\s*(\{([a-zA-Z0-9_-]+)\})?\s*(.*)$/gum, 
         (match, emoji, _, className, content) => {
             const noticeClass = className ? `notice notice--${className}` : "notice";
             const emojiPart = emoji ? `${emoji} ` : "";
-            return `<p class="${noticeClass}">${emojiPart}${content}</p>`;
+            const htmlContent = marked.parseInline(content);
+            return `<p class="${noticeClass}">${emojiPart}${htmlContent}</p>`;
         }
     );
 }
 
-function replaceTitleOutsideRawBlocks(body) {
-    // Null body pass
-    if (!body || body.trim() == "undefined") return "";
+function replaceVideoBlock(body) {
+    // 유튜브 URL을 감지하는 정규식
+    const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/g;
 
+    return body.replace(youtubeRegex, (match, videoId) => {
+        return `{% include video id="${videoId}" provider="youtube" %}`;
+    });
+}
+
+function replaceTitleOutsideRawBlocks(body) {
     const rawBlocks = [];
     const placeholder = "%%RAW_BLOCK%%";
     body = body.replace(/{% raw %}[\s\S]*?{% endraw %}/g, (match) => {
@@ -193,6 +195,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 
         // header caption
         let headerCaption = r.properties?.["Header Caption"]?.["rich_text"];
+        console.log("headerCaption:", headerCaption);
 
         // header caption
         let ctaUrl = r.properties?.["CTA URL"]?.["url"];
@@ -205,6 +208,10 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 
         // toc
         let toc = r.properties?.["ToC"]?.["checkbox"] ? "true" : "false";
+
+        // excerpt
+        let excerpt = r.properties?.["Excerpt"]?.["rich_text"];
+        console.log("excerpt:", excerpt);
 
         // frontmatter
         let fmtags = "";
@@ -258,6 +265,9 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             fmheaderImg += ctaUrl
                         ? `\n  cta_url: ${ctaUrl}`
                         : "";
+            fmheaderImg += excerpt
+                        ? `\n  excerpt: ${excerpt}`
+                        : "";
         }
         if (galleryImg.length > 0) {
             fmgalleryImgs += "\ngallery:";
@@ -278,7 +288,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         if (toc) fmtoc += "\ntoc: " + toc;
 
         const fm = "---\ntitle: "
-            + title
+            + "'" + title + "'"
             + fmcats
             + fmtags
             + fmheaderImg
