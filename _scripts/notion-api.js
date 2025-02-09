@@ -197,7 +197,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         let headerCaption = []
         let pheaderCaption = r.properties?.["Header Caption"]?.["rich_text"];
         for (const t of pheaderCaption) {
-            const n = t?.["plan_text"];
+            const n = t?.["plain_text"];
             if (n) headerCaption.push(n);
         }
         console.log("headerCaption:", headerCaption);
@@ -218,7 +218,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         let excerpt = [];
         let pexcerpt = r.properties?.["Excerpt"]?.["rich_text"];
         for (const t of pexcerpt) {
-            const n = t?.["plan_text"];
+            const n = t?.["plain_text"];
             if (n) excerpt.push(n);
         }
         console.log("excerpt:", excerpt);
