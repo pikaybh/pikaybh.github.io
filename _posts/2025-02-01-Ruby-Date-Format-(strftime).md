@@ -1,5 +1,5 @@
 ---
-title: 'Ruby Date Format (strftime)'
+title: "Ruby Date Format (strftime)"
 categories:
   - Cheatsheet
 tags:

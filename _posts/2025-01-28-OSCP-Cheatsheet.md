@@ -1,5 +1,5 @@
 ---
-title: 'OSCP Cheatsheet'
+title: "OSCP Cheatsheet"
 categories:
   - Cheatsheet
 tags:

@@ -1,5 +1,5 @@
 ---
-title: 'Solving OverTheWires Bandit: A Beginners Journey into Linux CTF'
+title: "Solving OverTheWire's Bandit: A Beginner's Journey into Linux CTF"
 categories:
   - Wargame
 tags:
@@ -46,8 +46,7 @@ ssh bandit0@bandit.labs.overthewire.org -p 2220
 The password for `bandit0` is provided on the official site, and from there, each level presents a unique problem requiring different Linux utilities to solve.
 
 
-<p class="notice notice--success">💡 <strong>TIP</strong>  </p>
-<p class="notice">Instead of using the standard login command, I used the following format to streamline the process:</p>
+<p class="notice notice--success">💡 <strong>TIP</strong> Instead of using the standard login command, I used the following format to streamline the process:</p>
 
 
 
