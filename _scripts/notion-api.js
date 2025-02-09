@@ -200,7 +200,6 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             const n = t?.["plain_text"];
             if (n) headerCaption.push(n);
         }
-        console.log("headerCaption:", headerCaption);
 
         // header caption
         let ctaUrl = r.properties?.["CTA URL"]?.["url"];
@@ -221,7 +220,6 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             const n = t?.["plain_text"];
             if (n) excerpt.push(n);
         }
-        console.log("excerpt:", excerpt);
 
         // frontmatter
         let fmtags = "";
@@ -303,6 +301,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
             + fmcats
             + fmtags
             + fmheaderImg
+            + fmexcerpt
             + fmgalleryImgs
             + fmprofile
             + fmtoc
