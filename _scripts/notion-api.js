@@ -275,7 +275,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 
                 // 🔹 결과를 하나씩 추가
                 if (overlayFilterRed && overlayFilterGreen && overlayFilterBlue && overlayFilterTrans) {
-                    fmheaderImg += `\n  overlay_filter: "rgba(${overlayFilterRed}, ${overlayFilterGreen}, ${overlayFilterBlue}, ${overlayFilterTrans})"`;
+                    fmheaderImg += `\n  overlay_filter: rgba(${overlayFilterRed}, ${overlayFilterGreen}, ${overlayFilterBlue}, ${overlayFilterTrans})`;
                 }
             }
             if (teaserImg.length > 0) {
