@@ -11,7 +11,7 @@ author_profile: true
 toc: false
 toc_sticky: false
 header:
-  teaser: assets/images/headers/effective-hazard-prevention-1.png
+  teaser: assets/images/headers/RaWMwfQQvUkWLvgQfNIVTccL0ZeUPXnIQ79FzEXH2DkYlXNwjHlbVX4ekYUx12hjCKBN8O9tOQbSBxGrQAeR5w.svg
   caption: 
 ---
 
