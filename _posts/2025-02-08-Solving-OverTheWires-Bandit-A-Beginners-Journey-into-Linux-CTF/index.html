@@ -1,0 +1,871 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Solving OverTheWire’s Bandit: A Beginner’s Journey into Linux CTF | pikaybh</title>
+<meta name="description" content="Disclaimer This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.">
+
+
+  <meta name="author" content="Byunghee Yoo">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="pikaybh">
+<meta property="og:title" content="Solving OverTheWire’s Bandit: A Beginner’s Journey into Linux CTF">
+<meta property="og:url" content="https://pikaybh.github.io/_posts/2025-02-08-Solving-OverTheWires-Bandit-A-Beginners-Journey-into-Linux-CTF/">
+
+
+  <meta property="og:description" content="Disclaimer This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.">
+
+
+
+  <meta property="og:image" content="https://pikaybh.github.io/assets/images/headers/domokitten.png">
+
+
+
+  <meta name="twitter:site" content="@pikaybh">
+  <meta name="twitter:title" content="Solving OverTheWire’s Bandit: A Beginner’s Journey into Linux CTF">
+  <meta name="twitter:description" content="Disclaimer This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.">
+  <meta name="twitter:url" content="https://pikaybh.github.io/_posts/2025-02-08-Solving-OverTheWires-Bandit-A-Beginners-Journey-into-Linux-CTF/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://pikaybh.github.io/assets/images/headers/domokitten.png">
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://pikaybh.github.io/_posts/2025-02-08-Solving-OverTheWires-Bandit-A-Beginners-Journey-into-Linux-CTF/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Byunghee Yoo",
+      "url": "https://pikaybh.github.io/",
+      "sameAs": ["https://github.com/pikaybh","https://instagram.com/pikaybh","https://twitter.com/pikaybh","https://linkedin.com/in/byunghee-yoo"]
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="bKcX97OXuORoUNTABljbGnv6tdiP1mzkoEhVuDGxODs" />
+
+
+  <meta name="msvalidate.01" content="866fb5e6a17f73fd746a967cb1ea1b55">
+
+
+
+
+  <meta name="naver-site-verification" content="928cdc1b66327dabb879b896a805922d3d123e35">
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="pikaybh Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="icon" href="/assets/images/favicon.png" type="image/x-icon">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({            
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}            
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<meta name="msvalidate.01" content="6E65A1C2143D9DFFABB3FFFB489176D7" />
+<meta name="naver-site-verification" content="928cdc1b66327dabb879b896a805922d3d123e35" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFNMYR5P88"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MFNMYR5P88');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5250081198751558"
+    crossorigin="anonymous">
+</script>
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          pikaybh
+          <span class="site-subtitle">pikaybh.github.io</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/publications/">Publications</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/"><i class='fa-solid fa-clock-rotate-left'></i></a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/"><i class='fa-solid fa-folder-open'></i></a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/"><i class='fa-solid fa-tags'></i></a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: url('/assets/images/headers/domokitten.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Solving OverTheWire’s Bandit: A Beginner’s Journey into Linux CTF
+
+        
+      </h1>
+      
+        <p class="page__lead">Disclaimer This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.
+</p>
+      
+      
+
+
+      
+        <p><a href="https://overthewire.org/wargames/bandit/" class="btn btn--light-outline btn--large" target="_blank">Learn more&nbsp;<i class="fa fa-arrow-up-right-from-square"></i></a></p>
+      
+      
+    </div>
+  
+  
+    <span class="page__hero-caption">I think the kitten is pretty cute :3 <a href="https://overthewire.org"><strong>OverTheWire</strong></a>
+</span>
+  
+</div>
+
+
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/home/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/_posts" itemprop="item"><span itemprop="name">_posts</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Solving OverTheWire's Bandit: A Beginner's Journey into Linux CTF</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Solving OverTheWire’s Bandit: A Beginner’s Journey into Linux CTF">
+    <meta itemprop="description" content="Disclaimer This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#introduction">Introduction</a></li><li><a href="#what-is-bandit">What is Bandit?</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#key-takeaways-from-bandit">Key Takeaways from Bandit</a><ul><li><a href="#1-mastering-basic-linux-commands">1. Mastering Basic Linux Commands</a></li><li><a href="#2-understanding-hidden-files-and-permissions">2. Understanding Hidden Files and Permissions</a></li><li><a href="#3-handling-unusual-file-names">3. Handling Unusual File Names</a></li><li><a href="#4-utilizing-ssh-and-scp-for-secure-access">4. Utilizing ssh and scp for Secure Access</a></li><li><a href="#5-understanding-process-manipulation">5. Understanding Process Manipulation</a></li></ul></li><li><a href="#my-favorite-challenges">My Favorite Challenges</a><ul><li><a href="#level-4-retrieving-files-encoded-in-ascii-text">Level 4: Retrieving Files Encoded in ASCII Text</a></li><li><a href="#level-5-find-by-size-and-type">Level 5: Find by Size and Type</a></li><li><a href="#level-6-finding-a-password-file-with-specific-ownership-and-size">Level 6: Finding a Password File with Specific Ownership and Size</a></li><li><a href="#level-8-finding-the-unique-password-line">Level 8: Finding the Unique Password Line</a></li><li><a href="#level-9-extracting-data">Level 9: Extracting data</a></li><li><a href="#level-10-decoding-base64">Level 10: Decoding Base64</a></li><li><a href="#level-11-decoding-a-rot13-encrypted-password">Level 11: Decoding a ROT13 Encrypted Password</a></li><li><a href="#level-12-extracting-a-password-from-a-repeatedly-compressed-hexdump">Level 12: Extracting a Password from a Repeatedly Compressed Hexdump</a></li><li><a href="#level-12-step-1-create-a-temporary-working-directory">Level 12. Step 1: Create a Temporary Working Directory</a></li><li><a href="#level-12-step-2-copy-and-convert-the-hexdump-back-to-a-file">Level 12. Step 2: Copy and Convert the Hexdump Back to a File</a></li><li><a href="#level-12-step-3-identify-compression-type-and-extract">Level 12. Step 3: Identify Compression Type and Extract</a></li><li><a href="#level-12-step-4-retrieve-the-password">Level 12. Step 4: Retrieve the Password</a></li><li><a href="#level-13-accessing-bandit14-using-an-ssh-key">Level 13: Accessing bandit14 Using an SSH Key</a></li><li><a href="#level-13-step-1-locate-the-private-ssh-key">Level 13. Step 1: Locate the Private SSH Key</a></li><li><a href="#level-13-step-2-use-the-ssh-key-to-switch-to-bandit14">Level 13. Step 2: Use the SSH Key to Switch to bandit14</a></li><li><a href="#level-13-step-3-retrieve-the-password-for-bandit15">Level 13. Step 3: Retrieve the Password for bandit15</a></li><li><a href="#level-14-retrieving-the-password-via-netcat">Level 14: Retrieving the Password via Netcat</a></li><li><a href="#level-16-port-forwarding">Level 16: Port Forwarding</a></li><li><a href="#level-20-dealing-with-cron-jobs">Level 20: Dealing with Cron Jobs</a></li></ul></li><li><a href="#final-thoughts">Final Thoughts</a><ul><li><a href="#recommendations-for-beginners">Recommendations for Beginners</a></li></ul></li><li><a href="#reference">Reference</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="introduction">Introduction</h2>
+
+<p><a href="https://overthewire.org/wargames/" target="_blank">OverTheWire</a>’s <a href="https://overthewire.org/wargames/bandit/" target="_blank"><strong>Bandit</strong></a> wargame is an excellent starting point for anyone looking to improve their Linux command-line skills, especially in the context of cybersecurity and Capture The Flag (CTF) challenges. This blog post outlines my experience solving Bandit, the key lessons I learned, and tips for beginners tackling the challenge.</p>
+
+<h2 id="what-is-bandit">What is Bandit?</h2>
+
+<p>Bandit is a CTF-style wargame hosted on OverTheWire that teaches fundamental Linux security concepts. The challenge consists of multiple levels, each requiring players to find a password that grants access to the next level. These levels introduce various Linux commands, file manipulation techniques, permissions handling, and some basic scripting concepts.</p>
+
+<p class="notice notice--danger">🚧 <strong>Disclaimer</strong> This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>To begin, you need SSH access to OverTheWire’s Bandit server. The first level provides credentials to log in:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh bandit0@bandit.labs.overthewire.org <span class="nt">-p</span> 2220
+</code></pre></div></div>
+
+<p>The password for <code class="language-plaintext highlighter-rouge">bandit0</code> is provided on the official site, and from there, each level presents a unique problem requiring different Linux utilities to solve.</p>
+
+<p class="notice notice--success">💡 <strong>TIP</strong> Instead of using the standard login command, I used the following format to streamline the process:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-p</span> 2220 <span class="nt">-l</span> bandit00 bandit.labs.overthewire.org
+</code></pre></div></div>
+
+<p>Each time I progressed to the next level, I simply recalled the previous command and changed the last digit accordingly, making the login process faster.</p>
+
+<h2 id="key-takeaways-from-bandit">Key Takeaways from Bandit</h2>
+
+<h3 id="1-mastering-basic-linux-commands">1. Mastering Basic Linux Commands</h3>
+
+<p>Many early levels require fundamental Linux commands such as:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ls</code> (list files)</li>
+  <li><code class="language-plaintext highlighter-rouge">cat</code> (display file contents)</li>
+  <li><code class="language-plaintext highlighter-rouge">cd</code> (change directory)</li>
+  <li><code class="language-plaintext highlighter-rouge">find</code> (locate files based on conditions)</li>
+  <li><code class="language-plaintext highlighter-rouge">grep</code> (search within files)</li>
+  <li><code class="language-plaintext highlighter-rouge">strings</code> (extract readable text from binary files)</li>
+</ul>
+
+<p>Example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>readme
+</code></pre></div></div>
+
+<p>This command simply outputs the password stored in <code class="language-plaintext highlighter-rouge">readme</code>.</p>
+
+<h3 id="2-understanding-hidden-files-and-permissions">2. Understanding Hidden Files and Permissions</h3>
+
+<p>Some levels store passwords in hidden files (e.g., filenames starting with <code class="language-plaintext highlighter-rouge">.</code>) or restrict access based on permissions. The following commands were particularly useful:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ls -la</code> (lists all files, including hidden ones, with detailed permissions)</li>
+  <li><code class="language-plaintext highlighter-rouge">chmod</code> (modifies file permissions)</li>
+  <li><code class="language-plaintext highlighter-rouge">sudo</code> (executes commands with superuser privileges, though rarely needed in Bandit)</li>
+</ul>
+
+<p>Example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-la</span>
+<span class="nb">cat</span> .hidden
+</code></pre></div></div>
+
+<p>This helps find and read hidden files.</p>
+
+<h3 id="3-handling-unusual-file-names">3. Handling Unusual File Names</h3>
+
+<p>Some passwords are hidden in files with special characters, spaces, or unusual names. Escape sequences or quotes are often needed to handle them:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="s2">"filename with spaces"</span>
+<span class="nb">cat</span> ./-filename
+<span class="nb">cat</span> <span class="si">$(</span>find <span class="nb">.</span> <span class="nt">-type</span> f<span class="si">)</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">find</code> command is especially useful when a file’s name is unknown.</p>
+
+<h3 id="4-utilizing-ssh-and-scp-for-secure-access">4. Utilizing <code class="language-plaintext highlighter-rouge">ssh</code> and <code class="language-plaintext highlighter-rouge">scp</code> for Secure Access</h3>
+
+<p>Several levels require transferring files or connecting remotely to retrieve information. Using <code class="language-plaintext highlighter-rouge">scp</code> (secure copy) was necessary for moving files between local and remote machines.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scp <span class="nt">-P</span> 2220 banditX@bandit.labs.overthewire.org:/tmp/file ./
+</code></pre></div></div>
+
+<p>This downloads a file from the remote Bandit server to my local machine.</p>
+
+<h3 id="5-understanding-process-manipulation">5. Understanding Process Manipulation</h3>
+
+<p>Some challenges involve running processes in the background or interacting with ongoing processes. Useful commands include:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ps aux</code> (lists running processes)</li>
+  <li><code class="language-plaintext highlighter-rouge">kill -9 &lt;PID&gt;</code> (terminates a process)</li>
+  <li><code class="language-plaintext highlighter-rouge">lsof -i</code> (lists open network connections)</li>
+</ul>
+
+<p>A level involved reading data from a listening port:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvnp</span> 1234
+</code></pre></div></div>
+
+<p>This establishes a netcat listener, a common technique in penetration testing.</p>
+
+<h2 id="my-favorite-challenges">My Favorite Challenges</h2>
+
+<p>While many levels were straightforward, a few stood out:</p>
+
+<h3 id="level-4-retrieving-files-encoded-in-ascii-text">Level 4: Retrieving Files Encoded in ASCII Text</h3>
+
+<p>A file contained a password in the only human-readable file. The solution involved for loop using:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-type</span> f <span class="nt">-exec</span> file <span class="o">{}</span> + | <span class="nb">grep </span>ASCII | <span class="nb">cut</span> <span class="nt">-d</span> : <span class="nt">-f1</span> | xargs <span class="nb">cat</span>
+</code></pre></div></div>
+
+<h3 id="level-5-find-by-size-and-type">Level 5: Find by Size and Type</h3>
+
+<p>The password for the next level is stored in a file somewhere under the <strong>inhere</strong> directory and has all of the following properties:</p>
+
+<ul>
+  <li>human-readable</li>
+  <li>1033 bytes in size</li>
+  <li>not executable</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find inhere <span class="nt">-type</span> f <span class="nt">-size</span> 1033c <span class="o">!</span> <span class="nt">-executable</span> | xargs <span class="nb">cat</span>
+</code></pre></div></div>
+
+<h3 id="level-6-finding-a-password-file-with-specific-ownership-and-size"><strong>Level 6: Finding a Password File with Specific Ownership and Size</strong></h3>
+
+<p>The password for the next level is stored somewhere on the server and has all of the following properties:</p>
+
+<ul>
+  <li>Owned by user <strong>bandit7</strong></li>
+  <li>Owned by group <strong>bandit6</strong></li>
+  <li>33 bytes in size</li>
+</ul>
+
+<p>To locate and display the password, use the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / <span class="nt">-type</span> f <span class="nt">-user</span> bandit7 <span class="nt">-group</span> bandit6 <span class="nt">-size</span> 33c 2&gt;/dev/null | xargs <span class="nb">cat</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/</code> → Search the entire file system</li>
+  <li><code class="language-plaintext highlighter-rouge">type f</code> → Look for files (not directories)</li>
+  <li><code class="language-plaintext highlighter-rouge">user bandit7</code> → Filter files owned by user <strong>bandit7</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">group bandit6</code> → Filter files owned by group <strong>bandit6</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">size 33c</code> → Find files that are exactly <strong>33 bytes</strong> in size</li>
+  <li><code class="language-plaintext highlighter-rouge">2&gt;/dev/null</code> → Suppress permission errors</li>
+  <li><code class="language-plaintext highlighter-rouge">xargs cat</code> → Print the content of the found file</li>
+</ul>
+
+<h3 id="level-8-finding-the-unique-password-line"><strong>Level 8: Finding the Unique Password Line</strong></h3>
+
+<p>The password for the next level is stored in the file <strong>data.txt</strong> and is the only line of text that appears <strong>only once</strong> in the file.</p>
+
+<p>To extract this unique line, use the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sort </span>data.txt | <span class="nb">uniq</span> <span class="nt">-u</span>
+</code></pre></div></div>
+
+<p><strong>Explanation:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sort data.txt</code> → Sorts the file so that duplicate lines are adjacent.</li>
+  <li><code class="language-plaintext highlighter-rouge">uniq -u</code> → Filters out lines that appear more than once, leaving only the unique line.</li>
+</ul>
+
+<h3 id="level-9-extracting-data"><strong>Level 9: Extracting data</strong></h3>
+
+<p>The password for the next level is stored in the file <strong><code class="language-plaintext highlighter-rouge">data.txt</code></strong>, hidden among various non-human-readable characters. It is one of the <strong>few human-readable strings</strong> and is <strong>preceded by several</strong> <strong><code class="language-plaintext highlighter-rouge">=</code></strong> <strong>characters</strong>.</p>
+
+<p>To extract the password, use the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>strings data.txt | <span class="nb">grep</span> <span class="s1">'=='</span> | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'=+'</span> <span class="s1">'{print $2}'</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">strings data.txt</code> → Extracts human-readable strings from <code class="language-plaintext highlighter-rouge">data.txt</code>, filtering out non-printable characters.</li>
+  <li><code class="language-plaintext highlighter-rouge">grep '=='</code> → Filters lines that contain <code class="language-plaintext highlighter-rouge">==</code>, ensuring only relevant lines are processed.</li>
+  <li><code class="language-plaintext highlighter-rouge">awk -F '=+' '{print $2}'</code> →
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">F '=+'</code> → Uses one or more <code class="language-plaintext highlighter-rouge">=</code> characters as the field separator.</li>
+      <li><code class="language-plaintext highlighter-rouge">{print $2}</code> → Prints the portion of the line after the <code class="language-plaintext highlighter-rouge">=</code> characters, extracting the password.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="level-10-decoding-base64">Level 10: Decoding Base64</h3>
+
+<p>A file contained a password encoded in Base64. The solution involved decoding it using:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>data.txt | <span class="nb">base64</span> <span class="nt">-d</span>
+</code></pre></div></div>
+
+<p>This revealed the plaintext password. You can see the difference below:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit10@bandit:~<span class="nv">$ </span><span class="nb">cat </span>data.txt
+<span class="nv">VGhlIHBhc3N3b3JkIGlzIGR0UjE3M2ZaS2IwUlJzREZTR3NnMlJXbnBOVmozcVJyCg</span><span class="o">==</span>
+bandit10@bandit:~<span class="nv">$ </span><span class="nb">cat </span>data.txt | <span class="nb">base64</span> <span class="nt">-d</span>
+The password is &lt;PASSWORD&gt;
+</code></pre></div></div>
+
+<h3 id="level-11-decoding-a-rot13-encrypted-password"><strong>Level 11: Decoding a ROT13 Encrypted Password</strong></h3>
+
+<p>The password for the next level is stored in the file <strong><code class="language-plaintext highlighter-rouge">data.txt</code></strong>, where all lowercase (<code class="language-plaintext highlighter-rouge">a-z</code>) and uppercase (<code class="language-plaintext highlighter-rouge">A-Z</code>) letters have been <strong>rotated by 13 positions (ROT13 encryption)</strong>.</p>
+
+<p>To decode the password, use the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>data.txt | <span class="nb">tr</span> <span class="s1">'A-Za-z'</span> <span class="s1">'N-ZA-Mn-za-m'</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">cat data.txt</code> → Displays the content of <code class="language-plaintext highlighter-rouge">data.txt</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">tr 'A-Za-z' 'N-ZA-Mn-za-m'</code> →
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">tr</code> (translate) replaces characters using ROT13.</li>
+      <li><code class="language-plaintext highlighter-rouge">'A-Za-z'</code> represents all uppercase and lowercase letters.</li>
+      <li><code class="language-plaintext highlighter-rouge">'N-ZA-Mn-za-m'</code> shifts each letter <strong>13 places forward</strong>, effectively decoding ROT13.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="level-12-extracting-a-password-from-a-repeatedly-compressed-hexdump"><strong>Level 12: Extracting a Password from a Repeatedly Compressed Hexdump</strong></h3>
+
+<p>The password for the next level is stored in <code class="language-plaintext highlighter-rouge">data.txt</code>, which is a <strong>hexdump</strong> of a file that has been <strong>repeatedly compressed</strong>. To recover the password, follow these steps:</p>
+
+<h3 id="level-12-step-1-create-a-temporary-working-directory"><strong>Level 12. Step 1: Create a Temporary Working Directory</strong></h3>
+
+<p>Since multiple decompression steps are required, it’s best to work in a temporary directory:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">DIR</span><span class="o">=</span><span class="si">$(</span><span class="nb">mktemp</span> <span class="nt">-d</span><span class="si">)</span>
+<span class="nb">chmod </span>u+w <span class="nv">$DIR</span>
+<span class="nb">cd</span> <span class="nv">$DIR</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mktemp -d</code> → Creates a unique temporal directory name.</li>
+  <li><code class="language-plaintext highlighter-rouge">chmod</code> → Change permission.</li>
+  <li><code class="language-plaintext highlighter-rouge">cd</code> → Moves into the directory.</li>
+</ul>
+
+<h3 id="level-12-step-2-copy-and-convert-the-hexdump-back-to-a-file"><strong>Level 12. Step 2: Copy and Convert the Hexdump Back to a File</strong></h3>
+
+<p>Copy the <code class="language-plaintext highlighter-rouge">data.txt</code> file to your working directory:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> ~/data.txt <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Convert the <strong>hexdump</strong> back into a binary file:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xxd <span class="nt">-r</span> data.txt <span class="o">&gt;</span> data.bin
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">xxd -r</code> → Reverses the hex dump, restoring the original compressed file.</li>
+</ul>
+
+<h3 id="level-12-step-3-identify-compression-type-and-extract"><strong>Level 12. Step 3: Identify Compression Type and Extract</strong></h3>
+
+<p>Check the file type:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>file data.bin
+</code></pre></div></div>
+
+<p>This will return something like:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data.bin: gzip compressed data, was "file.gz", last modified ...
+</code></pre></div></div>
+
+<p>Use the correct decompression tool based on the file type:</p>
+
+<ul>
+  <li><strong>If it’s a gzip file (</strong><strong><code class="language-plaintext highlighter-rouge">.gz</code></strong><strong>):</strong></li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mv </span>data.bin data.gz
+<span class="nb">gunzip </span>data.gz
+</code></pre></div></div>
+
+<ul>
+  <li><strong>If it’s a bzip2 file (</strong><strong><code class="language-plaintext highlighter-rouge">.bz2</code></strong><strong>):</strong></li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mv </span>data.bin data.bz2
+bzip2 <span class="nt">-d</span> data.bz2
+</code></pre></div></div>
+
+<ul>
+  <li><strong>If it’s a tar archive (</strong><strong><code class="language-plaintext highlighter-rouge">.tar</code></strong> <strong>or</strong> <strong><code class="language-plaintext highlighter-rouge">.tar.gz</code></strong><strong>):</strong></li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar </span>xvf data.bin
+</code></pre></div></div>
+
+<p>Repeat <strong>checking the file type and decompressing</strong> as needed. Some files may be compressed multiple times, so you may need to <strong>repeat the process</strong> multiple times until you get a readable text file.</p>
+
+<h3 id="level-12-step-4-retrieve-the-password"><strong>Level 12. Step 4: Retrieve the Password</strong></h3>
+
+<p>Once you’ve fully extracted the file, use <code class="language-plaintext highlighter-rouge">cat</code> command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit12@bandit:/tmp/tmp.yCXB8kJkVI<span class="nv">$ </span>file data8
+data8: ASCII text
+bandit12@bandit:/tmp/tmp.yCXB8kJkVI<span class="nv">$ </span><span class="nb">cat </span>data8
+The password is &lt;PASSWORD&gt;
+</code></pre></div></div>
+
+<p>This will display the password for the next level.</p>
+
+<h3 id="level-13-accessing-bandit14-using-an-ssh-key"><strong>Level 13: Accessing</strong> <strong><code class="language-plaintext highlighter-rouge">bandit14</code></strong> <strong>Using an SSH Key</strong></h3>
+
+<p>The password for the next level is stored in:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/bandit_pass/bandit14
+</code></pre></div></div>
+
+<p>However, <strong>only user</strong> <strong><code class="language-plaintext highlighter-rouge">bandit14</code></strong> has permission to read it. You are not provided with the password directly, but you have a <strong>private SSH key</strong> that allows you to log in as <code class="language-plaintext highlighter-rouge">bandit14</code>.</p>
+
+<h3 id="level-13-step-1-locate-the-private-ssh-key"><strong>Level 13. Step 1: Locate the Private SSH Key</strong></h3>
+
+<p>In your home directory (<code class="language-plaintext highlighter-rouge">~</code>), there should be a private SSH key, likely named <strong><code class="language-plaintext highlighter-rouge">sshkey.private</code></strong>. Verify this by running:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-l</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-rw-r-----</span> 1 bandit14 bandit13 1679 Sep 19 07:08 sshkey.private
+</code></pre></div></div>
+
+<h3 id="level-13-step-2-use-the-ssh-key-to-switch-to-bandit14"><strong>Level 13. Step 2: Use the SSH Key to Switch to</strong> <strong><code class="language-plaintext highlighter-rouge">bandit14</code></strong></h3>
+
+<p>Since <code class="language-plaintext highlighter-rouge">localhost</code> refers to the current machine, use SSH with the key to log in as <code class="language-plaintext highlighter-rouge">bandit14</code>:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-i</span> sshkey.private bandit14@localhost <span class="nt">-p</span> 2220
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ssh -i sshkey.private</code> → Specifies the private key for authentication</li>
+  <li><code class="language-plaintext highlighter-rouge">bandit14@localhost</code> → Logs in as <code class="language-plaintext highlighter-rouge">bandit14</code> on the same machine</li>
+</ul>
+
+<p>Then, try logging in again.</p>
+
+<h3 id="level-13-step-3-retrieve-the-password-for-bandit15"><strong>Level 13. Step 3: Retrieve the Password for</strong> <strong><code class="language-plaintext highlighter-rouge">bandit15</code></strong></h3>
+
+<p>Once logged in as <code class="language-plaintext highlighter-rouge">bandit14</code>, retrieve the next level’s password with:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /etc/bandit_pass/bandit14
+</code></pre></div></div>
+
+<p>This method allows you to <strong>bypass the permissions issue</strong> by logging in as <code class="language-plaintext highlighter-rouge">bandit14</code> using the SSH key.</p>
+
+<h3 id="level-14-retrieving-the-password-via-netcat"><strong>Level 14: Retrieving the Password via Netcat</strong></h3>
+
+<p>To retrieve the password for the next level, you need to <strong>send</strong> the current level’s password to <strong>port 30000</strong> on <code class="language-plaintext highlighter-rouge">localhost</code>.</p>
+
+<!-- Courtesy of embedresponsively.com -->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/7_LPdttKXPc" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc localhost 30000
+</code></pre></div></div>
+
+<h3 id="level-16-port-forwarding">Level 16: Port Forwarding</h3>
+
+<p>This level introduced <code class="language-plaintext highlighter-rouge">nc</code> (netcat) to communicate with a remote service and extract the next password. Understanding networking basics and listening on specific ports was crucial here.</p>
+
+<h3 id="level-20-dealing-with-cron-jobs">Level 20: Dealing with Cron Jobs</h3>
+
+<p>One challenge required analyzing automated scheduled tasks using <code class="language-plaintext highlighter-rouge">cron</code>. Checking the <code class="language-plaintext highlighter-rouge">cron.d</code> directory and inspecting scripts helped identify how passwords were being stored and accessed.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /etc/cron.d/cronjob
+</code></pre></div></div>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>Bandit is an excellent way to gain hands-on experience with Linux security concepts. It reinforced my knowledge of command-line operations, process handling, networking basics, and file system navigation. For beginners interested in ethical hacking, penetration testing, or CTF challenges, Bandit provides a solid foundation.</p>
+
+<h3 id="recommendations-for-beginners">Recommendations for Beginners</h3>
+
+<ol>
+  <li><strong>Take Notes</strong> – Document each level’s command and solution.</li>
+  <li><strong>Read the Man Pages</strong> – Use <code class="language-plaintext highlighter-rouge">man &lt;command&gt;</code> to understand options and parameters.</li>
+  <li><strong>Experiment Beyond the Challenge</strong> – Try different ways to achieve the same result.</li>
+  <li><strong>Join CTF Communities</strong> – Forums and Discord groups can help with explanations and hints.</li>
+</ol>
+
+<p>Next, I plan to explore <strong>Narnia</strong> and <strong>Leviathan</strong>, two other OverTheWire wargames that focus on binary exploitation and privilege escalation.</p>
+
+<p>If you’re new to Linux security, I highly recommend giving Bandit a try. Happy hacking!</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://overthewire.org/wargames/" target="_blank">OverTheWire</a></li>
+  <li><a href="https://overthewire.org/wargames/bandit/" target="_blank">Bandit</a></li>
+  <li><a href="https://www.youtube.com/watch?v=7_LPdttKXPc" target="_blank">How the Internet Works in 5 Minutes</a></li>
+</ul>
+
+        
+        
+        <hr/>
+    
+        <a href="#" class="back-to-top">Back to top &uarr;</a>
+        <!--<a href="#page-title" class="back-to-top">Back to top &uarr;</a>-->
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#linux" class="page__taxonomy-item p-category" rel="tag">Linux</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#wargames" class="page__taxonomy-item p-category" rel="tag">Wargames</a>
+    
+    </span>
+  </p>
+
+
+        
+
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <div class="adsbygoogle--wrapper" align="center" style="margin: 1em 0;">
+      <ins 
+        class="adsbygoogle"
+        style="display:block; border-bottom: initial;"
+        data-ad-client="ca-pub-5250081198751558"
+        data-ad-slot="7854803270"
+        data-ad-format="auto"
+      ></ins>
+    </div>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <style>
+      ins.adsbygoogle[data-ad-status="unfilled"] {
+        display: none !important;
+      }
+    </style>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/byunghee-yoo" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://twitter.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i> (Twitter)</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://instagram.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml" target="{ _blank }"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="https://pikaybh.github.io">pikaybh</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow" target="{ _blank }">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow" target="{ _blank }">Minimal Mistakes</a>.</div>
+<!--<div class="page__footer-copyright">&copy; 2025 <a href="mailto:" rel="me" class="u-email"><meta itemprop="email" content="" />Byunghee Yoo</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow" target="{ _blank }">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow" target="{ _blank }">Minimal Mistakes</a>.</div>-->
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'G-MFNMYR5P88']);
+  
+    _gaq.push(['_gat._anonymizeIp']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

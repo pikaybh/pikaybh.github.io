@@ -1,0 +1,990 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Comprehensive Guide to Network Scanning with Nmap | pikaybh</title>
+<meta name="description" content="Nmap (Network Mapper) is an essential tool for network security assessment and vulnerability analysis. This post provides an in-depth guide to Nmap’s key features and applications.">
+
+
+  <meta name="author" content="Byunghee Yoo">
+  
+  <meta property="article:author" content="Byunghee Yoo">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="pikaybh">
+<meta property="og:title" content="Comprehensive Guide to Network Scanning with Nmap">
+<meta property="og:url" content="https://pikaybh.github.io/Comprehensive-Guide-to-Network-Scanning-with-Nmap/">
+
+
+  <meta property="og:description" content="Nmap (Network Mapper) is an essential tool for network security assessment and vulnerability analysis. This post provides an in-depth guide to Nmap’s key features and applications.">
+
+
+
+  <meta property="og:image" content="https://pikaybh.github.io/assets/images/og_unsplash.jpg">
+
+
+
+  <meta name="twitter:site" content="@pikaybh">
+  <meta name="twitter:title" content="Comprehensive Guide to Network Scanning with Nmap">
+  <meta name="twitter:description" content="Nmap (Network Mapper) is an essential tool for network security assessment and vulnerability analysis. This post provides an in-depth guide to Nmap’s key features and applications.">
+  <meta name="twitter:url" content="https://pikaybh.github.io/Comprehensive-Guide-to-Network-Scanning-with-Nmap/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://pikaybh.github.io/assets/images/og_unsplash.jpg">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2025-01-30T00:00:00+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://pikaybh.github.io/Comprehensive-Guide-to-Network-Scanning-with-Nmap/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Byunghee Yoo",
+      "url": "https://pikaybh.github.io/",
+      "sameAs": ["https://github.com/pikaybh","https://instagram.com/pikaybh","https://twitter.com/pikaybh","https://linkedin.com/in/byunghee-yoo"]
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="bKcX97OXuORoUNTABljbGnv6tdiP1mzkoEhVuDGxODs" />
+
+
+  <meta name="msvalidate.01" content="866fb5e6a17f73fd746a967cb1ea1b55">
+
+
+
+
+  <meta name="naver-site-verification" content="928cdc1b66327dabb879b896a805922d3d123e35">
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="pikaybh Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="icon" href="/assets/images/favicon.png" type="image/x-icon">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({            
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}            
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<meta name="msvalidate.01" content="6E65A1C2143D9DFFABB3FFFB489176D7" />
+<meta name="naver-site-verification" content="928cdc1b66327dabb879b896a805922d3d123e35" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFNMYR5P88"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MFNMYR5P88');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5250081198751558"
+    crossorigin="anonymous">
+</script>
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          pikaybh
+          <span class="site-subtitle">pikaybh.github.io</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/publications/">Publications</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/"><i class='fa-solid fa-clock-rotate-left'></i></a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/"><i class='fa-solid fa-folder-open'></i></a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/"><i class='fa-solid fa-tags'></i></a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/home/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        <li class="current">Comprehensive Guide to Network Scanning with Nmap</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Comprehensive Guide to Network Scanning with Nmap">
+    <meta itemprop="description" content="Nmap (Network Mapper) is an essential tool for network security assessment and vulnerability analysis. This post provides an in-depth guide to Nmap’s key features and applications.">
+    <meta itemprop="datePublished" content="2025-01-30T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://pikaybh.github.io/Comprehensive-Guide-to-Network-Scanning-with-Nmap/" class="u-url" itemprop="url">Comprehensive Guide to Network Scanning with Nmap
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-01-30T00:00:00+00:00">January 30, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#1-basic-nmap-scan">1. Basic Nmap Scan</a><ul><li><a href="#-basic-port-scan-1000-common-ports">🔹 Basic Port Scan (1,000 Common Ports)</a></li><li><a href="#-full-port-scan-all-65535-ports">🔹 Full Port Scan (All 65,535 Ports)</a></li><li><a href="#-fast-scan-top-100-ports">🔹 Fast Scan (Top 100 Ports)</a></li></ul></li><li><a href="#2-service-and-operating-system-os-detection">2. Service and Operating System (OS) Detection</a><ul><li><a href="#-detect-running-services-and-versions">🔹 Detect Running Services and Versions</a></li><li><a href="#-detect-operating-system-os">🔹 Detect Operating System (OS)</a></li><li><a href="#-detect-both-services-and-os">🔹 Detect Both Services and OS</a></li></ul></li><li><a href="#3-scanning-specific-ports">3. Scanning Specific Ports</a><ul><li><a href="#-scan-specific-ports">🔹 Scan Specific Ports</a></li><li><a href="#-scan-a-range-of-ports">🔹 Scan a Range of Ports</a></li></ul></li><li><a href="#4-firewall-evasion-and-stealth-scanning">4. Firewall Evasion and Stealth Scanning</a><ul><li><a href="#-scan-without-ping-bypass-firewall-restrictions">🔹 Scan Without Ping (Bypass Firewall Restrictions)</a></li><li><a href="#-tcp-syn-scan-stealth-scan">🔹 TCP SYN Scan (Stealth Scan)</a></li><li><a href="#-tcp-connect-scan-for-non-admin-users">🔹 TCP Connect Scan (For Non-Admin Users)</a></li></ul></li><li><a href="#5-scanning-an-entire-network">5. Scanning an Entire Network</a><ul><li><a href="#-find-live-hosts-in-a-network">🔹 Find Live Hosts in a Network</a></li><li><a href="#-find-open-ports-in-a-network">🔹 Find Open Ports in a Network</a></li></ul></li><li><a href="#6-using-nse-nmap-scripting-engine">6. Using NSE (Nmap Scripting Engine)</a><ul><li><a href="#-scan-for-vulnerabilities">🔹 Scan for Vulnerabilities</a></li><li><a href="#-extract-webpage-titles">🔹 Extract Webpage Titles</a></li><li><a href="#-scan-for-malware-and-backdoors">🔹 Scan for Malware and Backdoors</a></li></ul></li><li><a href="#7-saving-and-exporting-results">7. Saving and Exporting Results</a><ul><li><a href="#-save-output-in-plain-text">🔹 Save Output in Plain Text</a></li><li><a href="#-save-output-in-xml-format">🔹 Save Output in XML Format</a></li></ul></li><li><a href="#-quick-summary-for-reference">📌 Quick Summary (For Reference)</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p><a href="https://nmap.org/" target="_blank">Nmap (Network Mapper)</a> is an essential tool for network security assessment and vulnerability analysis. This post provides an in-depth guide to Nmap’s key features and applications.</p>
+
+<p>For demonstration purposes, we will use <a href="http://localhost/" target="_blank"><strong>127.0.0.1</strong></a><a href="http://localhost/" target="_blank"> (localhost)</a> as an example.</p>
+
+<h2 id="1-basic-nmap-scan"><strong>1. Basic Nmap Scan</strong></h2>
+
+<h3 id="-basic-port-scan-1000-common-ports">🔹 Basic Port Scan (1,000 Common Ports)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Checks if the target is online and scans the 1,000 most commonly used ports.</li>
+  <li><strong>Example use case:</strong> When testing a newly deployed local server to ensure it is accessible.</li>
+</ul>
+
+<h3 id="-full-port-scan-all-65535-ports">🔹 Full Port Scan (All 65,535 Ports)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-p-</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Scans all ports to detect open services.</li>
+  <li><strong>Example use case:</strong> When performing an exhaustive security audit on a machine to check for any unexpected open ports.</li>
+</ul>
+
+<h3 id="-fast-scan-top-100-ports">🔹 Fast Scan (Top 100 Ports)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-F</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Quickly scans only the 100 most commonly used ports.</li>
+  <li><strong>Example use case:</strong> When troubleshooting connectivity issues and checking if essential services (e.g., HTTP, SSH) are available.</li>
+</ul>
+
+<h2 id="2-service-and-operating-system-os-detection"><strong>2. Service and Operating System (OS) Detection</strong></h2>
+
+<h3 id="-detect-running-services-and-versions">🔹 Detect Running Services and Versions</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sV</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Identifies services running on open ports along with their versions.</li>
+  <li><strong>Example use case:</strong> When verifying software versions on a web server before applying security patches.</li>
+</ul>
+
+<h3 id="-detect-operating-system-os">🔹 Detect Operating System (OS)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-O</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Determines the OS type of the target machine (requires admin privileges).</li>
+  <li><strong>Example use case:</strong> When analyzing a network to understand the OS distribution for compatibility testing.</li>
+</ul>
+
+<h3 id="-detect-both-services-and-os">🔹 Detect Both Services and OS</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sV</span> <span class="nt">-O</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Combines service and OS detection in one scan.</li>
+  <li><strong>Example use case:</strong> When conducting a preliminary security assessment of a machine to gather essential information.</li>
+</ul>
+
+<h2 id="3-scanning-specific-ports"><strong>3. Scanning Specific Ports</strong></h2>
+
+<h3 id="-scan-specific-ports">🔹 Scan Specific Ports</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-p</span> 22,80,443 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Checks only the specified ports: SSH (22), HTTP (80), and HTTPS (443).</li>
+  <li><strong>Example use case:</strong> When ensuring that only necessary services are running on a secure system.</li>
+</ul>
+
+<h3 id="-scan-a-range-of-ports">🔹 Scan a Range of Ports</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-p</span> 20-100 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Scans ports 20 to 100.</li>
+  <li><strong>Example use case:</strong> When testing an internal server where services may be running within a known port range.</li>
+</ul>
+
+<h2 id="4-firewall-evasion-and-stealth-scanning"><strong>4. Firewall Evasion and Stealth Scanning</strong></h2>
+
+<h3 id="-scan-without-ping-bypass-firewall-restrictions">🔹 Scan Without Ping (Bypass Firewall Restrictions)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-Pn</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Forces scanning even if the target does not respond to pings.</li>
+  <li><strong>Example use case:</strong> When testing a server protected by a firewall that blocks ICMP requests.</li>
+</ul>
+
+<h3 id="-tcp-syn-scan-stealth-scan">🔹 TCP SYN Scan (Stealth Scan)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sS</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Sends SYN packets without completing a full handshake to avoid detection.</li>
+  <li><strong>Example use case:</strong> When performing a penetration test to see which ports can be probed undetected.</li>
+</ul>
+
+<h3 id="-tcp-connect-scan-for-non-admin-users">🔹 TCP Connect Scan (For Non-Admin Users)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sT</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Establishes full TCP connections for scanning.</li>
+  <li><strong>Example use case:</strong> When running scans from a non-root user without elevated privileges.</li>
+</ul>
+
+<h2 id="5-scanning-an-entire-network"><strong>5. Scanning an Entire Network</strong></h2>
+
+<h3 id="-find-live-hosts-in-a-network">🔹 Find Live Hosts in a Network</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sP</span> 127.0.0.0/24
+</code></pre></div></div>
+
+<ul>
+  <li>Detects active IP addresses in the specified subnet.</li>
+  <li><strong>Example use case:</strong> When mapping a corporate network to identify all connected devices.</li>
+</ul>
+
+<h3 id="-find-open-ports-in-a-network">🔹 Find Open Ports in a Network</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-p</span> 22,80,443 127.0.0.0/24
+</code></pre></div></div>
+
+<ul>
+  <li>Searches for devices with SSH, HTTP, or HTTPS ports open.</li>
+  <li><strong>Example use case:</strong> When auditing an organization’s network for unauthorized services.</li>
+</ul>
+
+<h2 id="6-using-nse-nmap-scripting-engine"><strong>6. Using NSE (Nmap Scripting Engine)</strong></h2>
+
+<h3 id="-scan-for-vulnerabilities">🔹 Scan for Vulnerabilities</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">--script</span><span class="o">=</span>vuln 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Runs vulnerability detection scripts.</li>
+  <li><strong>Example use case:</strong> When assessing a server for known security flaws before deploying it to production.</li>
+</ul>
+
+<h3 id="-extract-webpage-titles">🔹 Extract Webpage Titles</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">--script</span><span class="o">=</span>http-title <span class="nt">-p</span> 80,443 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Retrieves the title of webpages hosted on the target.</li>
+  <li><strong>Example use case:</strong> When identifying hosted web applications without manually accessing each site.</li>
+</ul>
+
+<h3 id="-scan-for-malware-and-backdoors">🔹 Scan for Malware and Backdoors</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">--script</span><span class="o">=</span>malware 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Checks for signs of malicious software or compromised services.</li>
+  <li><strong>Example use case:</strong> When investigating a potentially infected server for security breaches.</li>
+</ul>
+
+<h2 id="7-saving-and-exporting-results"><strong>7. Saving and Exporting Results</strong></h2>
+
+<h3 id="-save-output-in-plain-text">🔹 Save Output in Plain Text</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-oN</span> scan_results.txt 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Saves scan results in a text file.</li>
+  <li><strong>Example use case:</strong> When documenting security assessments for further analysis.</li>
+</ul>
+
+<h3 id="-save-output-in-xml-format">🔹 Save Output in XML Format</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-oX</span> scan_results.xml 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Exports scan results in XML format for automation.</li>
+  <li><strong>Example use case:</strong> When integrating Nmap results with security monitoring tools.</li>
+</ul>
+
+<h2 id="-quick-summary-for-reference"><strong>📌 Quick Summary (For Reference)</strong></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Purpose</th>
+      <th>Command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Basic scan</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Full port scan</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -p- 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Detect services</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -sV 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Detect OS</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -O 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Scan specific ports</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -p 22,80,443 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Scan UDP ports</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -sU -p 53 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Bypass firewalls</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -Pn 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Stealth scan</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -sS 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Scan entire network</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -sP 127.0.0.0/24</code></td>
+    </tr>
+    <tr>
+      <td>Vulnerability scan</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap --script=vuln 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Save results</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -oN results.txt 127.0.0.1</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="notice notice--info">🚀 With this guide, you can effectively use Nmap to analyze and secure your network!</p>
+
+
+        
+        
+        <hr/>
+    
+        <a href="#" class="back-to-top">Back to top &uarr;</a>
+        <!--<a href="#page-title" class="back-to-top">Back to top &uarr;</a>-->
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#nmap" class="page__taxonomy-item p-category" rel="tag">Nmap</a><span class="sep">, </span>
+    
+      <a href="/tags/#oscp" class="page__taxonomy-item p-category" rel="tag">OSCP</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#cheatsheet" class="page__taxonomy-item p-category" rel="tag">Cheatsheet</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-01-30T00:00:00+00:00">January 30, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=pikaybh&text=Comprehensive+Guide+to+Network+Scanning+with+Nmap%20https%3A%2F%2Fpikaybh.github.io%2FComprehensive-Guide-to-Network-Scanning-with-Nmap%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpikaybh.github.io%2FComprehensive-Guide-to-Network-Scanning-with-Nmap%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fpikaybh.github.io%2FComprehensive-Guide-to-Network-Scanning-with-Nmap%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/OSCP-Cheatsheet/" class="pagination--pager" title="OSCP Cheatsheet
+">Previous</a>
+    
+    
+      <a href="/Ruby-Date-Format-strftime/" class="pagination--pager" title="Ruby Date Format (strftime)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/headers/img.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Why-Use-Axios-Over-Fetch-in-JavaScript/" rel="permalink">Why Use Axios Over Fetch in JavaScript?
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-02-21T00:00:00+00:00">February 21, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">When working with HTTP requests in JavaScript, you might wonder why many developers prefer axios over the built-in fetch API. While fetch is natively availab...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/headers/DALL%C2%B7E%202025-02-10%2001.47.53%20-%20A%20wide-angle%20realistic%20illustration%20of%20two%20hands%20shaking%20in%20a%20professional%20handshake.%20The%20handshake%20symbolizes%20agreement,%20connection,%20and%20trust.%20The%20b.webp" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Understanding-TCP-Sessions-How-Connections-Are-Established-Maintained-and-Terminated/" rel="permalink">Understanding TCP Sessions: How Connections Are Established, Maintained, and Terminated
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-02-09T00:00:00+00:00">February 9, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">In the realm of computer networking, the Transmission Control Protocol (TCP) plays a pivotal role in ensuring reliable communication between devices. A funda...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/headers/download.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Solving-OverTheWires-Bandit-A-Beginners-Journey-into-Linux-CTF/" rel="permalink">Solving OverTheWire’s Bandit: A Beginner’s Journey into Linux CTF
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-02-08T00:00:00+00:00">February 8, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Disclaimer This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Vim-Cheatsheet-Essential-Commands-for-Developers/" rel="permalink">Vim Cheatsheet: Essential Commands for Developers
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-02-02T00:00:00+00:00">February 2, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Vim is a powerful text editor that can significantly enhance productivity when mastered. This cheatsheet covers fundamental to advanced commands, helping bot...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <div class="adsbygoogle--wrapper" align="center" style="margin: 1em 0;">
+      <ins 
+        class="adsbygoogle"
+        style="display:block; border-bottom: initial;"
+        data-ad-client="ca-pub-5250081198751558"
+        data-ad-slot="7854803270"
+        data-ad-format="auto"
+      ></ins>
+    </div>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <style>
+      ins.adsbygoogle[data-ad-status="unfilled"] {
+        display: none !important;
+      }
+    </style>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/byunghee-yoo" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://twitter.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i> (Twitter)</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://instagram.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml" target="{ _blank }"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="https://pikaybh.github.io">pikaybh</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow" target="{ _blank }">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow" target="{ _blank }">Minimal Mistakes</a>.</div>
+<!--<div class="page__footer-copyright">&copy; 2025 <a href="mailto:" rel="me" class="u-email"><meta itemprop="email" content="" />Byunghee Yoo</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow" target="{ _blank }">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow" target="{ _blank }">Minimal Mistakes</a>.</div>-->
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'G-MFNMYR5P88']);
+  
+    _gaq.push(['_gat._anonymizeIp']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'pikaybh/pikaybh.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

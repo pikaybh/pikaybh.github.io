@@ -1,0 +1,840 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Ruby Date Format (strftime) | pikaybh</title>
+<meta name="description" content="A personal blog about computer science, engineering, hobbies, and all sorts of random stuffs.">
+
+
+  <meta name="author" content="Byunghee Yoo">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="pikaybh">
+<meta property="og:title" content="Ruby Date Format (strftime)">
+<meta property="og:url" content="https://pikaybh.github.io/_posts/2025-02-01-Ruby-Date-Format-strftime/">
+
+
+  <meta property="og:description" content="A personal blog about computer science, engineering, hobbies, and all sorts of random stuffs.">
+
+
+
+  <meta property="og:image" content="https://pikaybh.github.io/assets/images/og_unsplash.jpg">
+
+
+
+  <meta name="twitter:site" content="@pikaybh">
+  <meta name="twitter:title" content="Ruby Date Format (strftime)">
+  <meta name="twitter:description" content="A personal blog about computer science, engineering, hobbies, and all sorts of random stuffs.">
+  <meta name="twitter:url" content="https://pikaybh.github.io/_posts/2025-02-01-Ruby-Date-Format-strftime/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://pikaybh.github.io/assets/images/og_unsplash.jpg">
+    
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://pikaybh.github.io/_posts/2025-02-01-Ruby-Date-Format-strftime/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Byunghee Yoo",
+      "url": "https://pikaybh.github.io/",
+      "sameAs": ["https://github.com/pikaybh","https://instagram.com/pikaybh","https://twitter.com/pikaybh","https://linkedin.com/in/byunghee-yoo"]
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="bKcX97OXuORoUNTABljbGnv6tdiP1mzkoEhVuDGxODs" />
+
+
+  <meta name="msvalidate.01" content="866fb5e6a17f73fd746a967cb1ea1b55">
+
+
+
+
+  <meta name="naver-site-verification" content="928cdc1b66327dabb879b896a805922d3d123e35">
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="pikaybh Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="icon" href="/assets/images/favicon.png" type="image/x-icon">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({            
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}            
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<meta name="msvalidate.01" content="6E65A1C2143D9DFFABB3FFFB489176D7" />
+<meta name="naver-site-verification" content="928cdc1b66327dabb879b896a805922d3d123e35" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFNMYR5P88"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MFNMYR5P88');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5250081198751558"
+    crossorigin="anonymous">
+</script>
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          pikaybh
+          <span class="site-subtitle">pikaybh.github.io</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/publications/">Publications</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/"><i class='fa-solid fa-clock-rotate-left'></i></a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/"><i class='fa-solid fa-folder-open'></i></a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/"><i class='fa-solid fa-tags'></i></a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/home/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/_posts" itemprop="item"><span itemprop="name">_posts</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Ruby Date Format (strftime)</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Ruby Date Format (strftime)">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://pikaybh.github.io/_posts/2025-02-01-Ruby-Date-Format-strftime/" class="u-url" itemprop="url">Ruby Date Format (strftime)
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#date-formatting">Date Formatting</a></li><li><a href="#flags">Flags</a></li><li><a href="#time-formatting">Time Formatting</a></li><li><a href="#time-zone-formatting">Time Zone Formatting</a></li><li><a href="#weekday-formatting">Weekday Formatting</a></li><li><a href="#week-formatting">Week Formatting</a></li><li><a href="#seconds-formatting">Seconds Formatting</a></li><li><a href="#literal-strings">Literal Strings</a></li><li><a href="#combination">Combination</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="date-formatting">Date Formatting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%Y</code></td>
+      <td>Year with century (e.g. 2015, 1995, etc)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%m</code></td>
+      <td>Month of the year, zero-padded (01..12)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%B</code></td>
+      <td>The full month name (e.g. January)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%b</code></td>
+      <td>The abbreviated month name (e.g. Jan)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%d</code></td>
+      <td>Day of the month, zero-padded (01..31)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%j</code></td>
+      <td>Day of the year (001..366)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%C</code></td>
+      <td>Year / 100 (round down, e.g. 20 in 2015)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%y</code></td>
+      <td>Year % 100 (00…99)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%_m</code></td>
+      <td>Month of the year, blank-padded (_1..12)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%-m</code></td>
+      <td>Month of the year, no-padding (1..12)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%^B</code></td>
+      <td>The full month name uppercased (e.g. JANUARY)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%^b</code></td>
+      <td>The abbreviated month name uppercased (e.g. JAN)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%h</code></td>
+      <td>Equivalent to <code class="language-plaintext highlighter-rouge">%b</code> (abbreviated month name)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%-d</code></td>
+      <td>Day of the month, no-padding (1..31)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%e</code></td>
+      <td>Day of the month, blank-padded (_1..31)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="flags">Flags</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Flag</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-</code></td>
+      <td>Don’t pad a numerical output</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_</code></td>
+      <td>Use spaces for padding</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">0</code></td>
+      <td>Use zeros for padding</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">^</code></td>
+      <td>Upcase the result string</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">#</code></td>
+      <td>Change case</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:</code></td>
+      <td>Use colons for <code class="language-plaintext highlighter-rouge">%z</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="time-formatting">Time Formatting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%H</code></td>
+      <td>Hour of the day, 24-hour clock, zero-padded (00..23)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%k</code></td>
+      <td>Hour of the day, 24-hour clock, blank-padded (_0..23)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%I</code></td>
+      <td>Hour of the day, 12-hour clock, zero-padded (01..12)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%l</code></td>
+      <td>Hour of the day, 12-hour clock, blank-padded (_1..12)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%P</code></td>
+      <td>Meridian indicator, lowercase (am or pm)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%p</code></td>
+      <td>Meridian indicator, uppercase (AM or PM)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%M</code></td>
+      <td>Minute of the hour (00..59)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%S</code></td>
+      <td>Second of the minute (00..59)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%L</code></td>
+      <td>Millisecond of the second (000..999)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%N</code></td>
+      <td>Nanosecond (9 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%3N</code></td>
+      <td>Millisecond (3 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%6N</code></td>
+      <td>Microsecond (6 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%12N</code></td>
+      <td>Picosecond (12 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%15N</code></td>
+      <td>Femtosecond (15 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%18N</code></td>
+      <td>Attosecond (18 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%21N</code></td>
+      <td>Zeptosecond (21 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%24N</code></td>
+      <td>Yoctosecond (24 digits)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="time-zone-formatting">Time Zone Formatting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%z</code></td>
+      <td>Time zone as hour and minute offset from UTC (e.g. +0900)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%:z</code></td>
+      <td>Time zone hour and minute offset from UTC with a colon (e.g. +09:00)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%::z</code></td>
+      <td>Time zone hour, minute, and second offset from UTC (e.g. +09:00:00)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%:::z</code></td>
+      <td>Time zone hour, minute, and second offset from UTC (e.g. +09, +09:30, +09:30:30)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%Z</code></td>
+      <td>Time zone abbreviation name or similar information</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="weekday-formatting">Weekday Formatting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%A</code></td>
+      <td>The full weekday name (e.g. Sunday)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%^A</code></td>
+      <td>The full weekday name uppercased (e.g. SUNDAY)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%a</code></td>
+      <td>The abbreviated weekday name (e.g. Sun)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%^a</code></td>
+      <td>The abbreviated weekday name uppercased (e.g. SUN)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%u</code></td>
+      <td>Day of the week starting Monday (1..7)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%w</code></td>
+      <td>Day of the week starting Sunday (0..6)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="week-formatting">Week Formatting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%G</code></td>
+      <td>The week-based year</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%g</code></td>
+      <td>The last 2 digits of the week-based year (00..99)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%V</code></td>
+      <td>Week number of the week-based year (01..53)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%U</code></td>
+      <td>Week number of the year. Week starts with Sunday (00..53)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%W</code></td>
+      <td>Week number of the year. Week starts with Monday (00..53)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="seconds-formatting">Seconds Formatting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%s</code></td>
+      <td>Number of seconds since 1970-01-01 00:00:00 UTC</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%Q</code></td>
+      <td>Number of milliseconds since 1970-01-01 00:00:00 UTC</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="literal-strings">Literal Strings</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%n</code></td>
+      <td>Newline character (<code class="language-plaintext highlighter-rouge">\n</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%t</code></td>
+      <td>Tab character (<code class="language-plaintext highlighter-rouge">\t</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%%</code></td>
+      <td>Literal ‘%’ character</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="combination">Combination</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%c</code></td>
+      <td>Date and time (<code class="language-plaintext highlighter-rouge">%a %b %e %T %Y</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%D</code></td>
+      <td>Date (<code class="language-plaintext highlighter-rouge">%m/%d/%y</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%F</code></td>
+      <td>The ISO 8601 date format (<code class="language-plaintext highlighter-rouge">%Y-%m-%d</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%v</code></td>
+      <td>VMS date (<code class="language-plaintext highlighter-rouge">%e-%b-%Y</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%x</code></td>
+      <td>Same as <code class="language-plaintext highlighter-rouge">%D</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%X</code></td>
+      <td>Same as <code class="language-plaintext highlighter-rouge">%T</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%r</code></td>
+      <td>12-hour time (<code class="language-plaintext highlighter-rouge">%I:%M:%S %p</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%R</code></td>
+      <td>24-hour time (<code class="language-plaintext highlighter-rouge">%H:%M</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%T</code></td>
+      <td>24-hour time (<code class="language-plaintext highlighter-rouge">%H:%M:%S</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%+</code></td>
+      <td><code class="language-plaintext highlighter-rouge">date(1)</code> (<code class="language-plaintext highlighter-rouge">%a %b %e %H:%M:%S %Z %Y</code>)</td>
+    </tr>
+  </tbody>
+</table>
+
+
+        
+        
+        <hr/>
+    
+        <a href="#" class="back-to-top">Back to top &uarr;</a>
+        <!--<a href="#page-title" class="back-to-top">Back to top &uarr;</a>-->
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#oscp" class="page__taxonomy-item p-category" rel="tag">OSCP</a><span class="sep">, </span>
+    
+      <a href="/tags/#ruby" class="page__taxonomy-item p-category" rel="tag">Ruby</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#cheatsheet" class="page__taxonomy-item p-category" rel="tag">Cheatsheet</a>
+    
+    </span>
+  </p>
+
+
+        
+
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <div class="adsbygoogle--wrapper" align="center" style="margin: 1em 0;">
+      <ins 
+        class="adsbygoogle"
+        style="display:block; border-bottom: initial;"
+        data-ad-client="ca-pub-5250081198751558"
+        data-ad-slot="7854803270"
+        data-ad-format="auto"
+      ></ins>
+    </div>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <style>
+      ins.adsbygoogle[data-ad-status="unfilled"] {
+        display: none !important;
+      }
+    </style>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/byunghee-yoo" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://twitter.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i> (Twitter)</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://instagram.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml" target="{ _blank }"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="https://pikaybh.github.io">pikaybh</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow" target="{ _blank }">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow" target="{ _blank }">Minimal Mistakes</a>.</div>
+<!--<div class="page__footer-copyright">&copy; 2025 <a href="mailto:" rel="me" class="u-email"><meta itemprop="email" content="" />Byunghee Yoo</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow" target="{ _blank }">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow" target="{ _blank }">Minimal Mistakes</a>.</div>-->
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'G-MFNMYR5P88']);
+  
+    _gaq.push(['_gat._anonymizeIp']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
