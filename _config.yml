@@ -123,9 +123,9 @@ author:
     - label: "Curriculum Vitae"
       icon : "fas fa-fw fa-file"
       url  : "https://docs.google.com/document/d/1xMlR_X3EoKSymeJDFh1Qj6kzUgDlIkfkVsgbSaHWRe0/edit?usp=sharing"
-    - label: "Links"
-      icon : "fas fa-fw fa-link"
-      url  : "/"
+    # - label: "Links"
+    #   icon : "fas fa-fw fa-link"
+    #   url  : "/"
     - label: "GitHub"
       icon : "fab fa-fw fa-github"
       url  : *github

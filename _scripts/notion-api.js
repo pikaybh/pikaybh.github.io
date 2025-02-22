@@ -200,6 +200,12 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         // teaser
         let teaserImg = r.properties?.["Teaser"]?.["files"];
 
+        // overlay filter
+        let overlayFilterRed = r.properties?.["Red"]?.["number"];
+        let overlayFilterGreen = r.properties?.["Green"]?.["number"];
+        let overlayFilterBlue = r.properties?.["Blue"]?.["number"];
+        let overlayFilterTrans = r.properties?.["Transparency"]?.["number"];
+
         // header caption
         let headerCaption = []
         let pheaderCaption = r.properties?.["Header Caption"]?.["rich_text"];
@@ -266,6 +272,11 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                         fmheaderImg += `\n  overlay_image: ${pimg}`;
                     }
                 }
+
+                // 🔹 결과를 하나씩 추가
+                if (overlayFilterRed && overlayFilterGreen && overlayFilterBlue && overlayFilterTrans) {
+                    fmheaderImg += `\n  overlay_filter: "rgba(${overlayFilterRed}, ${overlayFilterGreen}, ${overlayFilterBlue}, ${overlayFilterTrans})"`;
+                }
             }
             if (teaserImg.length > 0) {
                 // 🔹 병렬 처리로 모든 이미지 다운로드
@@ -279,7 +290,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
                 }
             }
             fmheaderImg += headerCaption
-                        ? `\n  caption: ${headerCaption.join("")}`
+                        ? `\n  caption: "${headerCaption.join("")}"`
                         : "";
             fmheaderImg += ctaUrl
                         ? `\n  cta_url: ${ctaUrl}`
