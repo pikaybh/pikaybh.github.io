@@ -10,8 +10,9 @@ toc: true
 toc_sticky: true
 header:
   overlay_image: assets/images/headers/img.jpeg
+  overlay_filter: "rgba(255, 255, 255, 0.5)"
   teaser: assets/images/headers/img.jpeg
-  caption: Source [**AXIOS**](https://axios-http.com){:target="_blank"}
+  caption: "Source [**AXIOS**](https://axios-http.com)"
   cta_url: https://axios-http.com/
 ---
 

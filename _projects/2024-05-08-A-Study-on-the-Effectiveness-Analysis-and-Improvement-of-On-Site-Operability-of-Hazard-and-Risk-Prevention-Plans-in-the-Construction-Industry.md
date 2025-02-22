@@ -12,7 +12,7 @@ toc: false
 toc_sticky: false
 header:
   teaser: assets/images/headers/RaWMwfQQvUkWLvgQfNIVTccL0ZeUPXnIQ79FzEXH2DkYlXNwjHlbVX4ekYUx12hjCKBN8O9tOQbSBxGrQAeR5w.svg
-  caption: 
+  caption: ""
 ---
 
 | with **KOSHA(Korea Occupational Safety and Health Agency)** | _2024.05 ~ 2024.11_

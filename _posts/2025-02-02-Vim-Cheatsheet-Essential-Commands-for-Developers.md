@@ -12,7 +12,7 @@ toc_sticky: true
 header:
   overlay_image: assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png
   teaser: assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png
-  caption: 
+  caption: ""
 ---
 
 Vim is a powerful text editor that can significantly enhance productivity when mastered. This cheatsheet covers fundamental to advanced commands, helping both beginners and experienced developers navigate Vim effectively.

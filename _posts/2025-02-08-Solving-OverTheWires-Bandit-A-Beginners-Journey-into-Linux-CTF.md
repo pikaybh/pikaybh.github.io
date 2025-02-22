@@ -11,7 +11,7 @@ toc_sticky: false
 header:
   overlay_image: assets/images/headers/domokitten.png
   teaser: assets/images/headers/download.png
-  caption: I think the kitten is pretty cute :3 [**OverTheWire**](https://overthewire.org){:target="_blank"}
+  caption: "I think the kitten is pretty cute :3 [**OverTheWire**](https://overthewire.org)"
   cta_url: https://overthewire.org/wargames/bandit/
 ---
 

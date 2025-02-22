@@ -19,7 +19,7 @@ toc_sticky: true
 header:
   overlay_image: assets/images/headers/DALL·E 2025-02-10 01.47.53 - A wide-angle realistic illustration of two hands shaking in a professional handshake. The handshake symbolizes agreement, connection, and trust. The b.webp
   teaser: assets/images/headers/DALL·E 2025-02-10 01.47.53 - A wide-angle realistic illustration of two hands shaking in a professional handshake. The handshake symbolizes agreement, connection, and trust. The b.webp
-  caption: 
+  caption: ""
 ---
 
 In the realm of computer networking, the **Transmission Control Protocol (TCP)** plays a pivotal role in ensuring reliable communication between devices. A fundamental concept within TCP is the **TCP session**, which facilitates structured and dependable data exchange.

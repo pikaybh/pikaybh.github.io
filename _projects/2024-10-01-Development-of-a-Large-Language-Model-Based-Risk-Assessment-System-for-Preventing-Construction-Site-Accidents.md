@@ -12,7 +12,7 @@ toc: false
 toc_sticky: false
 header:
   teaser: assets/images/headers/4916_7556_3548.jpg
-  caption: 
+  caption: ""
 ---
 
 | with **Ministry of SMEs and Startups** | _2024.10 ~ 2025.09_
