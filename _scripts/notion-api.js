@@ -334,7 +334,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
         md = replaceVideoBlock(md);
         md = addTarget2urlBlock(md);
 
-        const imgtitle = `${date}-${title.replaceAll(" ", "-").replaceAll(":", "")}`
+        const imgtitle = `${date}-${title.replaceAll(/\s+/g, "-").replaceAll(/[^\w-]/g, "")}`
         const ftitle = `${imgtitle}.md`;
 
         let index = 0;
