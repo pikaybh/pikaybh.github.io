@@ -1,0 +1,565 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Understanding TCP Sessions: How Connections Are Established, Maintained, and Terminated | pikaybh</title>
+<meta name="description" content="A personal blog about computer science, engineering, hobbies, and all sorts of random stuffs.">
+
+
+  <meta name="author" content="Byunghee Yoo">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="pikaybh">
+<meta property="og:title" content="Understanding TCP Sessions: How Connections Are Established, Maintained, and Terminated">
+<meta property="og:url" content="https://pikaybh.github.io/_posts/2025-02-09-Understanding-TCP-Sessions-How-Connections-Are-Established-Maintained-and-Terminated/">
+
+
+  <meta property="og:description" content="A personal blog about computer science, engineering, hobbies, and all sorts of random stuffs.">
+
+
+
+  <meta property="og:image" content="https://pikaybh.github.io/assets/images/headers/DALL%C2%B7E%202025-02-10%2001.47.53%20-%20A%20wide-angle%20realistic%20illustration%20of%20two%20hands%20shaking%20in%20a%20professional%20handshake.%20The%20handshake%20symbolizes%20agreement,%20connection,%20and%20trust.%20The%20b.webp">
+
+
+
+  <meta name="twitter:site" content="@pikaybh">
+  <meta name="twitter:title" content="Understanding TCP Sessions: How Connections Are Established, Maintained, and Terminated">
+  <meta name="twitter:description" content="A personal blog about computer science, engineering, hobbies, and all sorts of random stuffs.">
+  <meta name="twitter:url" content="https://pikaybh.github.io/_posts/2025-02-09-Understanding-TCP-Sessions-How-Connections-Are-Established-Maintained-and-Terminated/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://pikaybh.github.io/assets/images/headers/DALL%C2%B7E%202025-02-10%2001.47.53%20-%20A%20wide-angle%20realistic%20illustration%20of%20two%20hands%20shaking%20in%20a%20professional%20handshake.%20The%20handshake%20symbolizes%20agreement,%20connection,%20and%20trust.%20The%20b.webp">
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://pikaybh.github.io/_posts/2025-02-09-Understanding-TCP-Sessions-How-Connections-Are-Established-Maintained-and-Terminated/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Byunghee Yoo",
+      "url": "https://pikaybh.github.io/",
+      "sameAs": ["https://github.com/pikaybh","https://instagram.com/pikaybh","https://twitter.com/pikaybh","https://linkedin.com/in/byunghee-yoo"]
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="bKcX97OXuORoUNTABljbGnv6tdiP1mzkoEhVuDGxODs" />
+
+
+  <meta name="msvalidate.01" content="866fb5e6a17f73fd746a967cb1ea1b55">
+
+
+
+
+  <meta name="naver-site-verification" content="928cdc1b66327dabb879b896a805922d3d123e35">
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="pikaybh Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="icon" href="/assets/images/favicon.png" type="image/x-icon">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({            
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}            
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<meta name="msvalidate.01" content="6E65A1C2143D9DFFABB3FFFB489176D7" />
+<meta name="naver-site-verification" content="928cdc1b66327dabb879b896a805922d3d123e35" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFNMYR5P88"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MFNMYR5P88');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5250081198751558"
+    crossorigin="anonymous">
+</script>
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          pikaybh
+          <span class="site-subtitle">pikaybh.github.io</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/publications/">Publications</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/"><i class='fa-solid fa-clock-rotate-left'></i></a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/"><i class='fa-solid fa-folder-open'></i></a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/"><i class='fa-solid fa-tags'></i></a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: url('/assets/images/headers/DALL%C2%B7E%202025-02-10%2001.47.53%20-%20A%20wide-angle%20realistic%20illustration%20of%20two%20hands%20shaking%20in%20a%20professional%20handshake.%20The%20handshake%20symbolizes%20agreement,%20connection,%20and%20trust.%20The%20b.webp');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Understanding TCP Sessions: How Connections Are Established, Maintained, and Terminated
+
+        
+      </h1>
+      
+      
+
+
+      
+      
+    </div>
+  
+  
+    <span class="page__hero-caption">
+</span>
+  
+</div>
+
+
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/home/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/_posts" itemprop="item"><span itemprop="name">_posts</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Understanding TCP Sessions: How Connections Are Established, Maintained, and Terminated</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Understanding TCP Sessions: How Connections Are Established, Maintained, and Terminated">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#what-is-a-tcp-session">What is a TCP Session?</a></li><li><a href="#establishing-a-tcp-session-the-three-way-handshake">Establishing a TCP Session: The Three-Way Handshake</a></li><li><a href="#data-transmission-within-a-tcp-session">Data Transmission Within a TCP Session</a></li><li><a href="#terminating-a-tcp-session-the-four-way-handshake">Terminating a TCP Session: The Four-Way Handshake</a></li><li><a href="#key-characteristics-of-tcp-sessions">Key Characteristics of TCP Sessions</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#visual-explanation">Visual Explanation</a></li><li><a href="#references">References</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>In the realm of computer networking, the <strong>Transmission Control Protocol (TCP)</strong> plays a pivotal role in ensuring reliable communication between devices. A fundamental concept within TCP is the <strong>TCP session</strong>, which facilitates structured and dependable data exchange.</p>
+
+<h2 id="what-is-a-tcp-session">What is a TCP Session?</h2>
+
+<p>A <strong>TCP session</strong>, also known as a TCP connection, is a communication link established between two devices (commonly referred to as hosts) over a network. This session ensures that data transmitted between the devices is delivered accurately and in sequence, providing a reliable stream of information. The session is maintained from the initiation of the connection until its termination.</p>
+
+<h2 id="establishing-a-tcp-session-the-three-way-handshake">Establishing a TCP Session: The Three-Way Handshake</h2>
+
+<p>The initiation of a TCP session involves a process called the <strong>three-way handshake</strong>, which sets up the connection parameters and ensures both parties are ready for data transmission. This handshake comprises three steps:</p>
+
+<ol>
+  <li><strong>SYN (Synchronize):</strong> The initiating device (Client) sends a SYN packet to the receiving device (Server), indicating a request to establish a connection.</li>
+  <li><strong>SYN-ACK (Synchronize-Acknowledge):</strong> Upon receiving the SYN packet, the Server responds with a SYN-ACK packet, acknowledging the receipt of the SYN and expressing its readiness to establish the connection.</li>
+  <li><strong>ACK (Acknowledge):</strong> The Client sends an ACK packet back to the Server, confirming the successful receipt of the SYN-ACK. With this exchange, the connection is established, and the TCP session begins.</li>
+</ol>
+
+<p>This handshake ensures that both devices are synchronized and agree upon the initial sequence numbers, laying the groundwork for reliable communication.</p>
+
+<figure class="half ">
+  
+    
+      <a href="/assets/images/headers/CN-2.png">
+          <img src="/assets/images/headers/CN-2.png" alt="placeholder assets/images/headers/CN-2.png" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/headers/CN-1.png">
+          <img src="/assets/images/headers/CN-1.png" alt="placeholder assets/images/headers/CN-1.png" />
+      </a>
+    
+  
+  
+    <figcaption>TCP states visited by a client TCP [Source: <a href="https://www.geeksforgeeks.org/tcp-connection-termination/" target="_blank"><strong>GeeksforGeeks</strong></a>]
+</figcaption>
+  
+</figure>
+
+<h2 id="data-transmission-within-a-tcp-session">Data Transmission Within a TCP Session</h2>
+
+<p>Once the session is established, data transmission can commence. TCP manages this process by segmenting large data streams into smaller packets, each assigned with sequence numbers. These sequence numbers allow the receiving device to reassemble the packets in the correct order, even if they arrive out of sequence.</p>
+
+<p>Additionally, TCP employs acknowledgment packets (ACKs) to confirm the successful receipt of data. If a packet is lost or corrupted during transmission, the lack of an acknowledgment prompts the sender to retransmit the affected packet, ensuring data integrity.</p>
+
+<h2 id="terminating-a-tcp-session-the-four-way-handshake">Terminating a TCP Session: The Four-Way Handshake</h2>
+
+<p>The conclusion of a TCP session is managed through a process known as the <strong>four-way handshake</strong>, which gracefully terminates the connection:</p>
+
+<ol>
+  <li><strong>FIN (Finish):</strong> The device wishing to terminate the connection (e.g., the Client) sends a FIN packet to the other device (e.g., the Server), indicating that it has finished sending data.</li>
+  <li><strong>ACK:</strong> The receiving device acknowledges the FIN packet with an ACK, confirming receipt.</li>
+  <li><strong>FIN:</strong> The receiving device then sends its own FIN packet, indicating that it has also finished sending data.</li>
+  <li><strong>ACK:</strong> The initiating device responds with an ACK, acknowledging the receipt of the FIN packet. With this final exchange, the TCP session is fully terminated.</li>
+</ol>
+
+<p>This orderly termination ensures that both devices are aware that the connection has ended and that all transmitted data has been received.</p>
+
+<h2 id="key-characteristics-of-tcp-sessions">Key Characteristics of TCP Sessions</h2>
+
+<ul>
+  <li><strong>Connection-Oriented:</strong> TCP sessions require an established connection between two devices before data transmission can occur, ensuring a dedicated path for communication.</li>
+  <li><strong>Reliable Data Transfer:</strong> Through sequence numbers and acknowledgments, TCP guarantees that data is delivered accurately and in the correct order.</li>
+  <li><strong>Flow Control:</strong> TCP manages the rate of data transmission based on the receiver’s capacity, preventing overwhelming the receiving device.</li>
+  <li><strong>Error Detection and Recovery:</strong> TCP detects errors in data transmission and facilitates the retransmission of lost or corrupted packets.</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>A <strong>TCP session</strong> is a cornerstone of reliable network communication, providing a structured method for devices to exchange data accurately and efficiently. Understanding the mechanics of TCP sessions, from the initial handshake to data transmission and termination, is essential for comprehending how modern networks maintain robust and error-free communication channels.</p>
+
+<h2 id="visual-explanation">Visual Explanation</h2>
+
+<p>For a visual explanation of TCP sessions, you might find this video helpful:</p>
+
+<!-- Courtesy of embedresponsively.com -->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/K4BE4Qf2Uf8" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<p>You can see the short version as well (funny version):</p>
+
+<p><a href="https://www.youtube.com/shorts/R6WN4_bBB1Q" target="_blank">video</a></p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol" target="_blank">Transmission Control Protocol - Wikipedia</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Handshake_%28computing%29" target="_blank">Handshake (computing) - Wikipedia</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Session_%28computer_science%29" target="_blank">Session (computer science) - Wikipedia</a></li>
+  <li><a href="https://www.geeksforgeeks.org/tcp-connection-termination/" target="_blank">https://www.geeksforgeeks.org/tcp-connection-termination/</a></li>
+  <li><a href="https://www.youtube.com/watch?v=K4BE4Qf2Uf8" target="_blank">https://www.youtube.com/watch?v=K4BE4Qf2Uf8</a></li>
+  <li><a href="https://www.youtube.com/shorts/R6WN4_bBB1Q" target="_blank">https://www.youtube.com/shorts/R6WN4_bBB1Q</a></li>
+</ul>
+
+        
+        
+        <hr/>
+    
+        <a href="#" class="back-to-top">Back to top &uarr;</a>
+        <!--<a href="#page-title" class="back-to-top">Back to top &uarr;</a>-->
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ipv4" class="page__taxonomy-item p-category" rel="tag">IPv4</a><span class="sep">, </span>
+    
+      <a href="/tags/#ipv6" class="page__taxonomy-item p-category" rel="tag">IPv6</a><span class="sep">, </span>
+    
+      <a href="/tags/#tcp-udp" class="page__taxonomy-item p-category" rel="tag">TCP/UDP</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#notes" class="page__taxonomy-item p-category" rel="tag">Notes</a>
+    
+    </span>
+  </p>
+
+
+        
+
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <div class="adsbygoogle--wrapper" align="center" style="margin: 1em 0;">
+      <ins 
+        class="adsbygoogle"
+        style="display:block; border-bottom: initial;"
+        data-ad-client="ca-pub-5250081198751558"
+        data-ad-slot="7854803270"
+        data-ad-format="auto"
+      ></ins>
+    </div>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <style>
+      ins.adsbygoogle[data-ad-status="unfilled"] {
+        display: none !important;
+      }
+    </style>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/byunghee-yoo" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://twitter.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i> (Twitter)</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://instagram.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml" target="{ _blank }"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="https://pikaybh.github.io">pikaybh</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow" target="{ _blank }">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow" target="{ _blank }">Minimal Mistakes</a>.</div>
+<!--<div class="page__footer-copyright">&copy; 2025 <a href="mailto:" rel="me" class="u-email"><meta itemprop="email" content="" />Byunghee Yoo</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow" target="{ _blank }">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow" target="{ _blank }">Minimal Mistakes</a>.</div>-->
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'G-MFNMYR5P88']);
+  
+    _gaq.push(['_gat._anonymizeIp']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

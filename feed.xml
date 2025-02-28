@@ -1,0 +1,2009 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://pikaybh.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pikaybh.github.io/" rel="alternate" type="text/html" /><updated>2025-02-28T11:31:32+00:00</updated><id>https://pikaybh.github.io/feed.xml</id><title type="html">pikaybh</title><subtitle>A personal blog about computer science, engineering, hobbies, and all sorts of random stuffs.</subtitle><author><name>Byunghee Yoo</name></author><entry><title type="html">Why Use Axios Over Fetch in JavaScript?</title><link href="https://pikaybh.github.io/Why-Use-Axios-Over-Fetch-in-JavaScript/" rel="alternate" type="text/html" title="Why Use Axios Over Fetch in JavaScript?" /><published>2025-02-21T00:00:00+00:00</published><updated>2025-02-21T00:00:00+00:00</updated><id>https://pikaybh.github.io/Why-Use-Axios-Over-Fetch-in-JavaScript</id><content type="html" xml:base="https://pikaybh.github.io/Why-Use-Axios-Over-Fetch-in-JavaScript/"><![CDATA[<p>When working with HTTP requests in JavaScript, you might wonder why many developers prefer <code class="language-plaintext highlighter-rouge">axios</code> over the built-in <code class="language-plaintext highlighter-rouge">fetch</code> API. While <code class="language-plaintext highlighter-rouge">fetch</code> is natively available and works well for basic requests, <code class="language-plaintext highlighter-rouge">axios</code> offers several advantages that make it a more convenient choice in real-world applications.</p>
+
+<p>In this article, we’ll compare <code class="language-plaintext highlighter-rouge">fetch</code> and <code class="language-plaintext highlighter-rouge">axios</code> with practical examples to illustrate why many developers still prefer <code class="language-plaintext highlighter-rouge">axios</code> despite <code class="language-plaintext highlighter-rouge">fetch</code> being a built-in function.</p>
+
+<h2 id="1-cleaner-and-more-readable-code">1. Cleaner and More Readable Code</h2>
+
+<p>With <code class="language-plaintext highlighter-rouge">fetch</code>, you need to manually check the response status and convert it to JSON:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.example.com/data</span><span class="dl">"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Network response was not ok</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nf">json</span><span class="p">();</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Fetch error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>In contrast, <code class="language-plaintext highlighter-rouge">axios</code> automatically parses JSON and handles HTTP errors more cleanly:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">axios</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.example.com/data</span><span class="dl">"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Axios error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h2 id="2-automatic-json-conversion">2. Automatic JSON Conversion</h2>
+
+<p>With <code class="language-plaintext highlighter-rouge">fetch</code>, you need to call <code class="language-plaintext highlighter-rouge">response.json()</code> manually:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.example.com/data</span><span class="dl">"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nf">json</span><span class="p">())</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>With <code class="language-plaintext highlighter-rouge">axios</code>, the response is already parsed:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">axios</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.example.com/data</span><span class="dl">"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h2 id="3-better-error-handling">3. Better Error Handling</h2>
+
+<p><code class="language-plaintext highlighter-rouge">fetch</code> does <strong>not</strong> reject the promise on HTTP errors (e.g., 404 or 500). Instead, you must manually check <code class="language-plaintext highlighter-rouge">response.ok</code>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.example.com/data</span><span class="dl">"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="dl">"</span><span class="s2">HTTP error! Status: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nf">json</span><span class="p">();</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Fetch error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">axios</code> automatically throws an error for non-2xx responses, which simplifies error handling:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">axios</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.example.com/data</span><span class="dl">"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Axios error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h2 id="4-timeout-support">4. Timeout Support</h2>
+
+<p><code class="language-plaintext highlighter-rouge">fetch</code> does not support request timeouts natively. You have to use <code class="language-plaintext highlighter-rouge">AbortController</code>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AbortController</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">timeoutId</span> <span class="o">=</span> <span class="nf">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">controller</span><span class="p">.</span><span class="nf">abort</span><span class="p">(),</span> <span class="mi">5000</span><span class="p">);</span>
+
+<span class="nf">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.example.com/data</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">signal</span><span class="p">:</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">signal</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nf">json</span><span class="p">())</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Timeout or fetch error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>With <code class="language-plaintext highlighter-rouge">axios</code>, you can set a timeout with a simple option:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">axios</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.example.com/data</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">timeout</span><span class="p">:</span> <span class="mi">5000</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Timeout or other error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h2 id="5-request-and-response-interceptors">5. Request and Response Interceptors</h2>
+
+<p><code class="language-plaintext highlighter-rouge">fetch</code> does not provide built-in support for request and response interception. You need to wrap it in a function manually.</p>
+
+<p>In contrast, <code class="language-plaintext highlighter-rouge">axios</code> allows you to modify requests and responses easily with interceptors:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">axios</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="nx">config</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">config</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">Authorization</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Bearer my-token</span><span class="dl">"</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">config</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>This is particularly useful for adding authentication tokens or modifying requests dynamically.</p>
+
+<h2 id="6-request-cancellation">6. Request Cancellation</h2>
+
+<p><code class="language-plaintext highlighter-rouge">fetch</code> requires <code class="language-plaintext highlighter-rouge">AbortController</code> for canceling requests, which can be cumbersome.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AbortController</span><span class="p">();</span>
+<span class="nf">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.example.com/data</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">signal</span><span class="p">:</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">signal</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nf">json</span><span class="p">())</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Fetch error:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+
+<span class="c1">// Cancel the request</span>
+<span class="nx">controller</span><span class="p">.</span><span class="nf">abort</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">axios</code> provides a simpler <code class="language-plaintext highlighter-rouge">CancelToken</code> API for request cancellation:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">CancelToken</span><span class="p">.</span><span class="nf">source</span><span class="p">();</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.example.com/data</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">cancelToken</span><span class="p">:</span> <span class="nx">source</span><span class="p">.</span><span class="nx">token</span> <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">thrown</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">axios</span><span class="p">.</span><span class="nf">isCancel</span><span class="p">(</span><span class="nx">thrown</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Request canceled</span><span class="dl">"</span><span class="p">,</span> <span class="nx">thrown</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+<span class="c1">// Cancel the request</span>
+<span class="nx">source</span><span class="p">.</span><span class="nf">cancel</span><span class="p">(</span><span class="dl">"</span><span class="s2">Operation canceled by the user.</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="7-better-browser-compatibility">7. Better Browser Compatibility</h2>
+
+<p><code class="language-plaintext highlighter-rouge">fetch</code> is <strong>not</strong> supported in older browsers like Internet Explorer without a polyfill.</p>
+
+<p><code class="language-plaintext highlighter-rouge">axios</code> works in older browsers out of the box and provides a more consistent experience across different environments.</p>
+
+<h2 id="conclusion-when-to-use-fetch-and-when-to-use-axios">Conclusion: When to Use Fetch and When to Use Axios?</h2>
+
+<ul>
+  <li>If you’re making a simple request and don’t need advanced features, <code class="language-plaintext highlighter-rouge">fetch</code> is fine.</li>
+  <li>If you need <strong>better error handling, request/response interception, timeouts, request cancellation, or browser compatibility</strong>, <code class="language-plaintext highlighter-rouge">axios</code> is a better choice.</li>
+</ul>
+
+<p>While <code class="language-plaintext highlighter-rouge">fetch</code> is a powerful native API, <code class="language-plaintext highlighter-rouge">axios</code> simplifies many common HTTP request scenarios, making it the preferred choice for many developers. If your project involves multiple API calls, error handling, and authentication, <code class="language-plaintext highlighter-rouge">axios</code> will save you time and make your code more maintainable.</p>
+
+<p>Do you use <code class="language-plaintext highlighter-rouge">fetch</code> or <code class="language-plaintext highlighter-rouge">axios</code> in your projects? Let us know in the comments!</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://github.com/axios/axios" target="_blank">Axios GitHub Repository</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">MDN Web Docs - Fetch API</a></li>
+  <li><a href="https://axios-http.com/" target="_blank">Axios Documentation</a></li>
+</ul>]]></content><author><name>Byunghee Yoo</name></author><category term="Blog" /><category term="Javascript" /><category term="Node.js" /><summary type="html"><![CDATA[When working with HTTP requests in JavaScript, you might wonder why many developers prefer axios over the built-in fetch API. While fetch is natively available and works well for basic requests, axios offers several advantages that make it a more convenient choice in real-world applications.]]></summary></entry><entry><title type="html">Understanding TCP Sessions: How Connections Are Established, Maintained, and Terminated</title><link href="https://pikaybh.github.io/Understanding-TCP-Sessions-How-Connections-Are-Established-Maintained-and-Terminated/" rel="alternate" type="text/html" title="Understanding TCP Sessions: How Connections Are Established, Maintained, and Terminated" /><published>2025-02-09T00:00:00+00:00</published><updated>2025-02-09T00:00:00+00:00</updated><id>https://pikaybh.github.io/Understanding-TCP-Sessions-How-Connections-Are-Established-Maintained-and-Terminated</id><content type="html" xml:base="https://pikaybh.github.io/Understanding-TCP-Sessions-How-Connections-Are-Established-Maintained-and-Terminated/"><![CDATA[<p>In the realm of computer networking, the <strong>Transmission Control Protocol (TCP)</strong> plays a pivotal role in ensuring reliable communication between devices. A fundamental concept within TCP is the <strong>TCP session</strong>, which facilitates structured and dependable data exchange.</p>
+
+<h2 id="what-is-a-tcp-session">What is a TCP Session?</h2>
+
+<p>A <strong>TCP session</strong>, also known as a TCP connection, is a communication link established between two devices (commonly referred to as hosts) over a network. This session ensures that data transmitted between the devices is delivered accurately and in sequence, providing a reliable stream of information. The session is maintained from the initiation of the connection until its termination.</p>
+
+<h2 id="establishing-a-tcp-session-the-three-way-handshake">Establishing a TCP Session: The Three-Way Handshake</h2>
+
+<p>The initiation of a TCP session involves a process called the <strong>three-way handshake</strong>, which sets up the connection parameters and ensures both parties are ready for data transmission. This handshake comprises three steps:</p>
+
+<ol>
+  <li><strong>SYN (Synchronize):</strong> The initiating device (Client) sends a SYN packet to the receiving device (Server), indicating a request to establish a connection.</li>
+  <li><strong>SYN-ACK (Synchronize-Acknowledge):</strong> Upon receiving the SYN packet, the Server responds with a SYN-ACK packet, acknowledging the receipt of the SYN and expressing its readiness to establish the connection.</li>
+  <li><strong>ACK (Acknowledge):</strong> The Client sends an ACK packet back to the Server, confirming the successful receipt of the SYN-ACK. With this exchange, the connection is established, and the TCP session begins.</li>
+</ol>
+
+<p>This handshake ensures that both devices are synchronized and agree upon the initial sequence numbers, laying the groundwork for reliable communication.</p>
+
+<figure class="half ">
+  
+    
+      <a href="/assets/images/headers/CN-2.png">
+          <img src="/assets/images/headers/CN-2.png" alt="placeholder assets/images/headers/CN-2.png" />
+      </a>
+    
+  
+    
+      <a href="/assets/images/headers/CN-1.png">
+          <img src="/assets/images/headers/CN-1.png" alt="placeholder assets/images/headers/CN-1.png" />
+      </a>
+    
+  
+  
+    <figcaption>TCP states visited by a client TCP [Source: <a href="https://www.geeksforgeeks.org/tcp-connection-termination/" target="_blank"><strong>GeeksforGeeks</strong></a>]
+</figcaption>
+  
+</figure>
+
+<h2 id="data-transmission-within-a-tcp-session">Data Transmission Within a TCP Session</h2>
+
+<p>Once the session is established, data transmission can commence. TCP manages this process by segmenting large data streams into smaller packets, each assigned with sequence numbers. These sequence numbers allow the receiving device to reassemble the packets in the correct order, even if they arrive out of sequence.</p>
+
+<p>Additionally, TCP employs acknowledgment packets (ACKs) to confirm the successful receipt of data. If a packet is lost or corrupted during transmission, the lack of an acknowledgment prompts the sender to retransmit the affected packet, ensuring data integrity.</p>
+
+<h2 id="terminating-a-tcp-session-the-four-way-handshake">Terminating a TCP Session: The Four-Way Handshake</h2>
+
+<p>The conclusion of a TCP session is managed through a process known as the <strong>four-way handshake</strong>, which gracefully terminates the connection:</p>
+
+<ol>
+  <li><strong>FIN (Finish):</strong> The device wishing to terminate the connection (e.g., the Client) sends a FIN packet to the other device (e.g., the Server), indicating that it has finished sending data.</li>
+  <li><strong>ACK:</strong> The receiving device acknowledges the FIN packet with an ACK, confirming receipt.</li>
+  <li><strong>FIN:</strong> The receiving device then sends its own FIN packet, indicating that it has also finished sending data.</li>
+  <li><strong>ACK:</strong> The initiating device responds with an ACK, acknowledging the receipt of the FIN packet. With this final exchange, the TCP session is fully terminated.</li>
+</ol>
+
+<p>This orderly termination ensures that both devices are aware that the connection has ended and that all transmitted data has been received.</p>
+
+<h2 id="key-characteristics-of-tcp-sessions">Key Characteristics of TCP Sessions</h2>
+
+<ul>
+  <li><strong>Connection-Oriented:</strong> TCP sessions require an established connection between two devices before data transmission can occur, ensuring a dedicated path for communication.</li>
+  <li><strong>Reliable Data Transfer:</strong> Through sequence numbers and acknowledgments, TCP guarantees that data is delivered accurately and in the correct order.</li>
+  <li><strong>Flow Control:</strong> TCP manages the rate of data transmission based on the receiver’s capacity, preventing overwhelming the receiving device.</li>
+  <li><strong>Error Detection and Recovery:</strong> TCP detects errors in data transmission and facilitates the retransmission of lost or corrupted packets.</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>A <strong>TCP session</strong> is a cornerstone of reliable network communication, providing a structured method for devices to exchange data accurately and efficiently. Understanding the mechanics of TCP sessions, from the initial handshake to data transmission and termination, is essential for comprehending how modern networks maintain robust and error-free communication channels.</p>
+
+<h2 id="visual-explanation">Visual Explanation</h2>
+
+<p>For a visual explanation of TCP sessions, you might find this video helpful:</p>
+
+<!-- Courtesy of embedresponsively.com -->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/K4BE4Qf2Uf8" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<p>You can see the short version as well (funny version):</p>
+
+<p><a href="https://www.youtube.com/shorts/R6WN4_bBB1Q" target="_blank">video</a></p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol" target="_blank">Transmission Control Protocol - Wikipedia</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Handshake_%28computing%29" target="_blank">Handshake (computing) - Wikipedia</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Session_%28computer_science%29" target="_blank">Session (computer science) - Wikipedia</a></li>
+  <li><a href="https://www.geeksforgeeks.org/tcp-connection-termination/" target="_blank">https://www.geeksforgeeks.org/tcp-connection-termination/</a></li>
+  <li><a href="https://www.youtube.com/watch?v=K4BE4Qf2Uf8" target="_blank">https://www.youtube.com/watch?v=K4BE4Qf2Uf8</a></li>
+  <li><a href="https://www.youtube.com/shorts/R6WN4_bBB1Q" target="_blank">https://www.youtube.com/shorts/R6WN4_bBB1Q</a></li>
+</ul>]]></content><author><name>Byunghee Yoo</name></author><category term="Notes" /><category term="TCP/UDP" /><category term="IPv4" /><category term="IPv6" /><summary type="html"><![CDATA[In the realm of computer networking, the Transmission Control Protocol (TCP) plays a pivotal role in ensuring reliable communication between devices. A fundamental concept within TCP is the TCP session, which facilitates structured and dependable data exchange.]]></summary></entry><entry><title type="html">Solving OverTheWire’s Bandit: A Beginner’s Journey into Linux CTF</title><link href="https://pikaybh.github.io/Solving-OverTheWires-Bandit-A-Beginners-Journey-into-Linux-CTF/" rel="alternate" type="text/html" title="Solving OverTheWire’s Bandit: A Beginner’s Journey into Linux CTF" /><published>2025-02-08T00:00:00+00:00</published><updated>2025-02-08T00:00:00+00:00</updated><id>https://pikaybh.github.io/Solving-OverTheWires-Bandit-A-Beginners-Journey-into-Linux-CTF</id><content type="html" xml:base="https://pikaybh.github.io/Solving-OverTheWires-Bandit-A-Beginners-Journey-into-Linux-CTF/"><![CDATA[<h2 id="introduction">Introduction</h2>
+
+<p><a href="https://overthewire.org/wargames/" target="_blank">OverTheWire</a>’s <a href="https://overthewire.org/wargames/bandit/" target="_blank"><strong>Bandit</strong></a> wargame is an excellent starting point for anyone looking to improve their Linux command-line skills, especially in the context of cybersecurity and Capture The Flag (CTF) challenges. This blog post outlines my experience solving Bandit, the key lessons I learned, and tips for beginners tackling the challenge.</p>
+
+<h2 id="what-is-bandit">What is Bandit?</h2>
+
+<p>Bandit is a CTF-style wargame hosted on OverTheWire that teaches fundamental Linux security concepts. The challenge consists of multiple levels, each requiring players to find a password that grants access to the next level. These levels introduce various Linux commands, file manipulation techniques, permissions handling, and some basic scripting concepts.</p>
+
+<p class="notice notice--danger">🚧 <strong>Disclaimer</strong> This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>To begin, you need SSH access to OverTheWire’s Bandit server. The first level provides credentials to log in:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh bandit0@bandit.labs.overthewire.org <span class="nt">-p</span> 2220
+</code></pre></div></div>
+
+<p>The password for <code class="language-plaintext highlighter-rouge">bandit0</code> is provided on the official site, and from there, each level presents a unique problem requiring different Linux utilities to solve.</p>
+
+<p class="notice notice--success">💡 <strong>TIP</strong> Instead of using the standard login command, I used the following format to streamline the process:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-p</span> 2220 <span class="nt">-l</span> bandit00 bandit.labs.overthewire.org
+</code></pre></div></div>
+
+<p>Each time I progressed to the next level, I simply recalled the previous command and changed the last digit accordingly, making the login process faster.</p>
+
+<h2 id="key-takeaways-from-bandit">Key Takeaways from Bandit</h2>
+
+<h3 id="1-mastering-basic-linux-commands">1. Mastering Basic Linux Commands</h3>
+
+<p>Many early levels require fundamental Linux commands such as:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ls</code> (list files)</li>
+  <li><code class="language-plaintext highlighter-rouge">cat</code> (display file contents)</li>
+  <li><code class="language-plaintext highlighter-rouge">cd</code> (change directory)</li>
+  <li><code class="language-plaintext highlighter-rouge">find</code> (locate files based on conditions)</li>
+  <li><code class="language-plaintext highlighter-rouge">grep</code> (search within files)</li>
+  <li><code class="language-plaintext highlighter-rouge">strings</code> (extract readable text from binary files)</li>
+</ul>
+
+<p>Example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>readme
+</code></pre></div></div>
+
+<p>This command simply outputs the password stored in <code class="language-plaintext highlighter-rouge">readme</code>.</p>
+
+<h3 id="2-understanding-hidden-files-and-permissions">2. Understanding Hidden Files and Permissions</h3>
+
+<p>Some levels store passwords in hidden files (e.g., filenames starting with <code class="language-plaintext highlighter-rouge">.</code>) or restrict access based on permissions. The following commands were particularly useful:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ls -la</code> (lists all files, including hidden ones, with detailed permissions)</li>
+  <li><code class="language-plaintext highlighter-rouge">chmod</code> (modifies file permissions)</li>
+  <li><code class="language-plaintext highlighter-rouge">sudo</code> (executes commands with superuser privileges, though rarely needed in Bandit)</li>
+</ul>
+
+<p>Example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-la</span>
+<span class="nb">cat</span> .hidden
+</code></pre></div></div>
+
+<p>This helps find and read hidden files.</p>
+
+<h3 id="3-handling-unusual-file-names">3. Handling Unusual File Names</h3>
+
+<p>Some passwords are hidden in files with special characters, spaces, or unusual names. Escape sequences or quotes are often needed to handle them:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="s2">"filename with spaces"</span>
+<span class="nb">cat</span> ./-filename
+<span class="nb">cat</span> <span class="si">$(</span>find <span class="nb">.</span> <span class="nt">-type</span> f<span class="si">)</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">find</code> command is especially useful when a file’s name is unknown.</p>
+
+<h3 id="4-utilizing-ssh-and-scp-for-secure-access">4. Utilizing <code class="language-plaintext highlighter-rouge">ssh</code> and <code class="language-plaintext highlighter-rouge">scp</code> for Secure Access</h3>
+
+<p>Several levels require transferring files or connecting remotely to retrieve information. Using <code class="language-plaintext highlighter-rouge">scp</code> (secure copy) was necessary for moving files between local and remote machines.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scp <span class="nt">-P</span> 2220 banditX@bandit.labs.overthewire.org:/tmp/file ./
+</code></pre></div></div>
+
+<p>This downloads a file from the remote Bandit server to my local machine.</p>
+
+<h3 id="5-understanding-process-manipulation">5. Understanding Process Manipulation</h3>
+
+<p>Some challenges involve running processes in the background or interacting with ongoing processes. Useful commands include:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ps aux</code> (lists running processes)</li>
+  <li><code class="language-plaintext highlighter-rouge">kill -9 &lt;PID&gt;</code> (terminates a process)</li>
+  <li><code class="language-plaintext highlighter-rouge">lsof -i</code> (lists open network connections)</li>
+</ul>
+
+<p>A level involved reading data from a listening port:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvnp</span> 1234
+</code></pre></div></div>
+
+<p>This establishes a netcat listener, a common technique in penetration testing.</p>
+
+<h2 id="my-favorite-challenges">My Favorite Challenges</h2>
+
+<p>While many levels were straightforward, a few stood out:</p>
+
+<h3 id="level-4-retrieving-files-encoded-in-ascii-text">Level 4: Retrieving Files Encoded in ASCII Text</h3>
+
+<p>A file contained a password in the only human-readable file. The solution involved for loop using:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-type</span> f <span class="nt">-exec</span> file <span class="o">{}</span> + | <span class="nb">grep </span>ASCII | <span class="nb">cut</span> <span class="nt">-d</span> : <span class="nt">-f1</span> | xargs <span class="nb">cat</span>
+</code></pre></div></div>
+
+<h3 id="level-5-find-by-size-and-type">Level 5: Find by Size and Type</h3>
+
+<p>The password for the next level is stored in a file somewhere under the <strong>inhere</strong> directory and has all of the following properties:</p>
+
+<ul>
+  <li>human-readable</li>
+  <li>1033 bytes in size</li>
+  <li>not executable</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find inhere <span class="nt">-type</span> f <span class="nt">-size</span> 1033c <span class="o">!</span> <span class="nt">-executable</span> | xargs <span class="nb">cat</span>
+</code></pre></div></div>
+
+<h3 id="level-6-finding-a-password-file-with-specific-ownership-and-size"><strong>Level 6: Finding a Password File with Specific Ownership and Size</strong></h3>
+
+<p>The password for the next level is stored somewhere on the server and has all of the following properties:</p>
+
+<ul>
+  <li>Owned by user <strong>bandit7</strong></li>
+  <li>Owned by group <strong>bandit6</strong></li>
+  <li>33 bytes in size</li>
+</ul>
+
+<p>To locate and display the password, use the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / <span class="nt">-type</span> f <span class="nt">-user</span> bandit7 <span class="nt">-group</span> bandit6 <span class="nt">-size</span> 33c 2&gt;/dev/null | xargs <span class="nb">cat</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/</code> → Search the entire file system</li>
+  <li><code class="language-plaintext highlighter-rouge">type f</code> → Look for files (not directories)</li>
+  <li><code class="language-plaintext highlighter-rouge">user bandit7</code> → Filter files owned by user <strong>bandit7</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">group bandit6</code> → Filter files owned by group <strong>bandit6</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">size 33c</code> → Find files that are exactly <strong>33 bytes</strong> in size</li>
+  <li><code class="language-plaintext highlighter-rouge">2&gt;/dev/null</code> → Suppress permission errors</li>
+  <li><code class="language-plaintext highlighter-rouge">xargs cat</code> → Print the content of the found file</li>
+</ul>
+
+<h3 id="level-8-finding-the-unique-password-line"><strong>Level 8: Finding the Unique Password Line</strong></h3>
+
+<p>The password for the next level is stored in the file <strong>data.txt</strong> and is the only line of text that appears <strong>only once</strong> in the file.</p>
+
+<p>To extract this unique line, use the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sort </span>data.txt | <span class="nb">uniq</span> <span class="nt">-u</span>
+</code></pre></div></div>
+
+<p><strong>Explanation:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sort data.txt</code> → Sorts the file so that duplicate lines are adjacent.</li>
+  <li><code class="language-plaintext highlighter-rouge">uniq -u</code> → Filters out lines that appear more than once, leaving only the unique line.</li>
+</ul>
+
+<h3 id="level-9-extracting-data"><strong>Level 9: Extracting data</strong></h3>
+
+<p>The password for the next level is stored in the file <strong><code class="language-plaintext highlighter-rouge">data.txt</code></strong>, hidden among various non-human-readable characters. It is one of the <strong>few human-readable strings</strong> and is <strong>preceded by several</strong> <strong><code class="language-plaintext highlighter-rouge">=</code></strong> <strong>characters</strong>.</p>
+
+<p>To extract the password, use the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>strings data.txt | <span class="nb">grep</span> <span class="s1">'=='</span> | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'=+'</span> <span class="s1">'{print $2}'</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">strings data.txt</code> → Extracts human-readable strings from <code class="language-plaintext highlighter-rouge">data.txt</code>, filtering out non-printable characters.</li>
+  <li><code class="language-plaintext highlighter-rouge">grep '=='</code> → Filters lines that contain <code class="language-plaintext highlighter-rouge">==</code>, ensuring only relevant lines are processed.</li>
+  <li><code class="language-plaintext highlighter-rouge">awk -F '=+' '{print $2}'</code> →
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">F '=+'</code> → Uses one or more <code class="language-plaintext highlighter-rouge">=</code> characters as the field separator.</li>
+      <li><code class="language-plaintext highlighter-rouge">{print $2}</code> → Prints the portion of the line after the <code class="language-plaintext highlighter-rouge">=</code> characters, extracting the password.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="level-10-decoding-base64">Level 10: Decoding Base64</h3>
+
+<p>A file contained a password encoded in Base64. The solution involved decoding it using:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>data.txt | <span class="nb">base64</span> <span class="nt">-d</span>
+</code></pre></div></div>
+
+<p>This revealed the plaintext password. You can see the difference below:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit10@bandit:~<span class="nv">$ </span><span class="nb">cat </span>data.txt
+<span class="nv">VGhlIHBhc3N3b3JkIGlzIGR0UjE3M2ZaS2IwUlJzREZTR3NnMlJXbnBOVmozcVJyCg</span><span class="o">==</span>
+bandit10@bandit:~<span class="nv">$ </span><span class="nb">cat </span>data.txt | <span class="nb">base64</span> <span class="nt">-d</span>
+The password is &lt;PASSWORD&gt;
+</code></pre></div></div>
+
+<h3 id="level-11-decoding-a-rot13-encrypted-password"><strong>Level 11: Decoding a ROT13 Encrypted Password</strong></h3>
+
+<p>The password for the next level is stored in the file <strong><code class="language-plaintext highlighter-rouge">data.txt</code></strong>, where all lowercase (<code class="language-plaintext highlighter-rouge">a-z</code>) and uppercase (<code class="language-plaintext highlighter-rouge">A-Z</code>) letters have been <strong>rotated by 13 positions (ROT13 encryption)</strong>.</p>
+
+<p>To decode the password, use the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>data.txt | <span class="nb">tr</span> <span class="s1">'A-Za-z'</span> <span class="s1">'N-ZA-Mn-za-m'</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">cat data.txt</code> → Displays the content of <code class="language-plaintext highlighter-rouge">data.txt</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">tr 'A-Za-z' 'N-ZA-Mn-za-m'</code> →
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">tr</code> (translate) replaces characters using ROT13.</li>
+      <li><code class="language-plaintext highlighter-rouge">'A-Za-z'</code> represents all uppercase and lowercase letters.</li>
+      <li><code class="language-plaintext highlighter-rouge">'N-ZA-Mn-za-m'</code> shifts each letter <strong>13 places forward</strong>, effectively decoding ROT13.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="level-12-extracting-a-password-from-a-repeatedly-compressed-hexdump"><strong>Level 12: Extracting a Password from a Repeatedly Compressed Hexdump</strong></h3>
+
+<p>The password for the next level is stored in <code class="language-plaintext highlighter-rouge">data.txt</code>, which is a <strong>hexdump</strong> of a file that has been <strong>repeatedly compressed</strong>. To recover the password, follow these steps:</p>
+
+<h3 id="level-12-step-1-create-a-temporary-working-directory"><strong>Level 12. Step 1: Create a Temporary Working Directory</strong></h3>
+
+<p>Since multiple decompression steps are required, it’s best to work in a temporary directory:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">DIR</span><span class="o">=</span><span class="si">$(</span><span class="nb">mktemp</span> <span class="nt">-d</span><span class="si">)</span>
+<span class="nb">chmod </span>u+w <span class="nv">$DIR</span>
+<span class="nb">cd</span> <span class="nv">$DIR</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mktemp -d</code> → Creates a unique temporal directory name.</li>
+  <li><code class="language-plaintext highlighter-rouge">chmod</code> → Change permission.</li>
+  <li><code class="language-plaintext highlighter-rouge">cd</code> → Moves into the directory.</li>
+</ul>
+
+<h3 id="level-12-step-2-copy-and-convert-the-hexdump-back-to-a-file"><strong>Level 12. Step 2: Copy and Convert the Hexdump Back to a File</strong></h3>
+
+<p>Copy the <code class="language-plaintext highlighter-rouge">data.txt</code> file to your working directory:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> ~/data.txt <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Convert the <strong>hexdump</strong> back into a binary file:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xxd <span class="nt">-r</span> data.txt <span class="o">&gt;</span> data.bin
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">xxd -r</code> → Reverses the hex dump, restoring the original compressed file.</li>
+</ul>
+
+<h3 id="level-12-step-3-identify-compression-type-and-extract"><strong>Level 12. Step 3: Identify Compression Type and Extract</strong></h3>
+
+<p>Check the file type:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>file data.bin
+</code></pre></div></div>
+
+<p>This will return something like:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data.bin: gzip compressed data, was "file.gz", last modified ...
+</code></pre></div></div>
+
+<p>Use the correct decompression tool based on the file type:</p>
+
+<ul>
+  <li><strong>If it’s a gzip file (</strong><strong><code class="language-plaintext highlighter-rouge">.gz</code></strong><strong>):</strong></li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mv </span>data.bin data.gz
+<span class="nb">gunzip </span>data.gz
+</code></pre></div></div>
+
+<ul>
+  <li><strong>If it’s a bzip2 file (</strong><strong><code class="language-plaintext highlighter-rouge">.bz2</code></strong><strong>):</strong></li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mv </span>data.bin data.bz2
+bzip2 <span class="nt">-d</span> data.bz2
+</code></pre></div></div>
+
+<ul>
+  <li><strong>If it’s a tar archive (</strong><strong><code class="language-plaintext highlighter-rouge">.tar</code></strong> <strong>or</strong> <strong><code class="language-plaintext highlighter-rouge">.tar.gz</code></strong><strong>):</strong></li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar </span>xvf data.bin
+</code></pre></div></div>
+
+<p>Repeat <strong>checking the file type and decompressing</strong> as needed. Some files may be compressed multiple times, so you may need to <strong>repeat the process</strong> multiple times until you get a readable text file.</p>
+
+<h3 id="level-12-step-4-retrieve-the-password"><strong>Level 12. Step 4: Retrieve the Password</strong></h3>
+
+<p>Once you’ve fully extracted the file, use <code class="language-plaintext highlighter-rouge">cat</code> command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit12@bandit:/tmp/tmp.yCXB8kJkVI<span class="nv">$ </span>file data8
+data8: ASCII text
+bandit12@bandit:/tmp/tmp.yCXB8kJkVI<span class="nv">$ </span><span class="nb">cat </span>data8
+The password is &lt;PASSWORD&gt;
+</code></pre></div></div>
+
+<p>This will display the password for the next level.</p>
+
+<h3 id="level-13-accessing-bandit14-using-an-ssh-key"><strong>Level 13: Accessing</strong> <strong><code class="language-plaintext highlighter-rouge">bandit14</code></strong> <strong>Using an SSH Key</strong></h3>
+
+<p>The password for the next level is stored in:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/bandit_pass/bandit14
+</code></pre></div></div>
+
+<p>However, <strong>only user</strong> <strong><code class="language-plaintext highlighter-rouge">bandit14</code></strong> has permission to read it. You are not provided with the password directly, but you have a <strong>private SSH key</strong> that allows you to log in as <code class="language-plaintext highlighter-rouge">bandit14</code>.</p>
+
+<h3 id="level-13-step-1-locate-the-private-ssh-key"><strong>Level 13. Step 1: Locate the Private SSH Key</strong></h3>
+
+<p>In your home directory (<code class="language-plaintext highlighter-rouge">~</code>), there should be a private SSH key, likely named <strong><code class="language-plaintext highlighter-rouge">sshkey.private</code></strong>. Verify this by running:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-l</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-rw-r-----</span> 1 bandit14 bandit13 1679 Sep 19 07:08 sshkey.private
+</code></pre></div></div>
+
+<h3 id="level-13-step-2-use-the-ssh-key-to-switch-to-bandit14"><strong>Level 13. Step 2: Use the SSH Key to Switch to</strong> <strong><code class="language-plaintext highlighter-rouge">bandit14</code></strong></h3>
+
+<p>Since <code class="language-plaintext highlighter-rouge">localhost</code> refers to the current machine, use SSH with the key to log in as <code class="language-plaintext highlighter-rouge">bandit14</code>:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-i</span> sshkey.private bandit14@localhost <span class="nt">-p</span> 2220
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ssh -i sshkey.private</code> → Specifies the private key for authentication</li>
+  <li><code class="language-plaintext highlighter-rouge">bandit14@localhost</code> → Logs in as <code class="language-plaintext highlighter-rouge">bandit14</code> on the same machine</li>
+</ul>
+
+<p>Then, try logging in again.</p>
+
+<h3 id="level-13-step-3-retrieve-the-password-for-bandit15"><strong>Level 13. Step 3: Retrieve the Password for</strong> <strong><code class="language-plaintext highlighter-rouge">bandit15</code></strong></h3>
+
+<p>Once logged in as <code class="language-plaintext highlighter-rouge">bandit14</code>, retrieve the next level’s password with:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /etc/bandit_pass/bandit14
+</code></pre></div></div>
+
+<p>This method allows you to <strong>bypass the permissions issue</strong> by logging in as <code class="language-plaintext highlighter-rouge">bandit14</code> using the SSH key.</p>
+
+<h3 id="level-14-retrieving-the-password-via-netcat"><strong>Level 14: Retrieving the Password via Netcat</strong></h3>
+
+<p>To retrieve the password for the next level, you need to <strong>send</strong> the current level’s password to <strong>port 30000</strong> on <code class="language-plaintext highlighter-rouge">localhost</code>.</p>
+
+<!-- Courtesy of embedresponsively.com -->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/7_LPdttKXPc" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc localhost 30000
+</code></pre></div></div>
+
+<h3 id="level-16-port-forwarding">Level 16: Port Forwarding</h3>
+
+<p>This level introduced <code class="language-plaintext highlighter-rouge">nc</code> (netcat) to communicate with a remote service and extract the next password. Understanding networking basics and listening on specific ports was crucial here.</p>
+
+<h3 id="level-20-dealing-with-cron-jobs">Level 20: Dealing with Cron Jobs</h3>
+
+<p>One challenge required analyzing automated scheduled tasks using <code class="language-plaintext highlighter-rouge">cron</code>. Checking the <code class="language-plaintext highlighter-rouge">cron.d</code> directory and inspecting scripts helped identify how passwords were being stored and accessed.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /etc/cron.d/cronjob
+</code></pre></div></div>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>Bandit is an excellent way to gain hands-on experience with Linux security concepts. It reinforced my knowledge of command-line operations, process handling, networking basics, and file system navigation. For beginners interested in ethical hacking, penetration testing, or CTF challenges, Bandit provides a solid foundation.</p>
+
+<h3 id="recommendations-for-beginners">Recommendations for Beginners</h3>
+
+<ol>
+  <li><strong>Take Notes</strong> – Document each level’s command and solution.</li>
+  <li><strong>Read the Man Pages</strong> – Use <code class="language-plaintext highlighter-rouge">man &lt;command&gt;</code> to understand options and parameters.</li>
+  <li><strong>Experiment Beyond the Challenge</strong> – Try different ways to achieve the same result.</li>
+  <li><strong>Join CTF Communities</strong> – Forums and Discord groups can help with explanations and hints.</li>
+</ol>
+
+<p>Next, I plan to explore <strong>Narnia</strong> and <strong>Leviathan</strong>, two other OverTheWire wargames that focus on binary exploitation and privilege escalation.</p>
+
+<p>If you’re new to Linux security, I highly recommend giving Bandit a try. Happy hacking!</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://overthewire.org/wargames/" target="_blank">OverTheWire</a></li>
+  <li><a href="https://overthewire.org/wargames/bandit/" target="_blank">Bandit</a></li>
+  <li><a href="https://www.youtube.com/watch?v=7_LPdttKXPc" target="_blank">How the Internet Works in 5 Minutes</a></li>
+</ul>]]></content><author><name>Byunghee Yoo</name></author><category term="Wargames" /><category term="Linux" /><summary type="html"><![CDATA[Disclaimer This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.]]></summary></entry><entry><title type="html">Vim Cheatsheet: Essential Commands for Developers</title><link href="https://pikaybh.github.io/Vim-Cheatsheet-Essential-Commands-for-Developers/" rel="alternate" type="text/html" title="Vim Cheatsheet: Essential Commands for Developers" /><published>2025-02-02T00:00:00+00:00</published><updated>2025-02-02T00:00:00+00:00</updated><id>https://pikaybh.github.io/Vim-Cheatsheet-Essential-Commands-for-Developers</id><content type="html" xml:base="https://pikaybh.github.io/Vim-Cheatsheet-Essential-Commands-for-Developers/"><![CDATA[<p>Vim is a powerful text editor that can significantly enhance productivity when mastered. This cheatsheet covers fundamental to advanced commands, helping both beginners and experienced developers navigate Vim effectively.</p>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>Vim is a free and open-source, screen-based text editor that serves as an enhanced version of the original vi editor developed by Bill Joy. Created by Bram Moolenaar, Vim was first released to the public in 1991. The name “Vim” stands for “Vi IMproved,” reflecting its numerous enhancements over the original vi. (<a href="https://en.wikipedia.org/wiki/Vim_%28text_editor%29?utm_source=chatgpt.com" target="_blank">en.wikipedia.org</a>)</p>
+
+<p>Vim is designed for use both from a command-line interface and as a standalone application in a graphical user interface. Since its initial release for the Amiga, cross-platform development has made it available on many other systems. In 2018, it was voted the most popular editor among Linux Journal readers. (<a href="https://en.wikipedia.org/wiki/Vim_%28text_editor%29?utm_source=chatgpt.com" target="_blank">en.wikipedia.org</a>)</p>
+
+<p>Vim’s forerunner, Stevie (ST Editor for VI Enthusiasts), was created by Tim Thompson for the Atari ST in 1987 and further developed by Tony Andrews and G.R. (Fred) Walter. It was one of the first popularized clones of vi and did not use vi’s source code. Basing Vim on the source code for Stevie meant the program could be distributed without requiring the AT&amp;T source license. (<a href="https://en.wikipedia.org/wiki/Vim_%28text_editor%29?utm_source=chatgpt.com" target="_blank">en.wikipedia.org</a>)</p>
+
+<p>Vim has a reputation for its steep learning curve due to its modal nature, where users switch between different modes for editing and command inputs. However, once mastered, it is celebrated for its efficiency and powerful features, making it a favorite among many developers and system administrators.</p>
+
+<p>The enduring rivalry between Vim and Emacs users, often referred to as the “editor war,” has become a notable part of hacker culture and the free software community. (<a href="https://en.wikipedia.org/wiki/Editor_war?utm_source=chatgpt.com" target="_blank">en.wikipedia.org</a>)</p>
+
+<p>Bram Moolenaar, the creator and maintainer of Vim, was a Dutch software engineer and activist. He advocated for ICCF Holland, a non-governmental organization supporting AIDS victims in Uganda, and used the popularity of Vim to encourage donations. Moolenaar passed away on August 3, 2023, at the age of 62. (<a href="https://en.wikipedia.org/wiki/Bram_Moolenaar?utm_source=chatgpt.com" target="_blank">en.wikipedia.org</a>)</p>
+
+<p>Now, let’s learn about how to use Vim commands.</p>
+
+<h2 id="2-commands">2. Commands</h2>
+
+<h3 id="2-1-basics">2. 1. Basics</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">vim filename</code></td>
+      <td>Open a file in Vim</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:q</code></td>
+      <td>Quit Vim</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:q!</code></td>
+      <td>Quit without saving</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:w</code></td>
+      <td>Save file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:wq</code> or <code class="language-plaintext highlighter-rouge">ZZ</code></td>
+      <td>Save and quit</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:x</code></td>
+      <td>Save and quit (only if changes were made)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">i</code></td>
+      <td>Enter Insert mode</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Esc</code></td>
+      <td>Exit Insert mode</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-2-navigation">2. 2. Navigation</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">h</code></td>
+      <td>Move left</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">l</code></td>
+      <td>Move right</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">j</code></td>
+      <td>Move down</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">k</code></td>
+      <td>Move up</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">0</code></td>
+      <td>Move to the beginning of the line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">^</code></td>
+      <td>Move to the first non-blank character of the line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$</code></td>
+      <td>Move to the end of the line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gg</code></td>
+      <td>Go to the beginning of the file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">G</code></td>
+      <td>Go to the end of the file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">5G</code></td>
+      <td>Go to line 5 (replace 5 with any line number)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-d</code></td>
+      <td>Scroll down half a screen</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-u</code></td>
+      <td>Scroll up half a screen</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-f</code></td>
+      <td>Scroll down a full screen</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-b</code></td>
+      <td>Scroll up a full screen</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-3-editing">2. 3. Editing</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">x</code></td>
+      <td>Delete character under the cursor</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dd</code></td>
+      <td>Delete (cut) the current line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">yy</code></td>
+      <td>Copy (yank) the current line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">p</code></td>
+      <td>Paste after the cursor</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">P</code></td>
+      <td>Paste before the cursor</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">u</code></td>
+      <td>Undo the last change</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-r</code></td>
+      <td>Redo the last undone change</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">r&lt;char&gt;</code></td>
+      <td>Replace the character under the cursor with <code class="language-plaintext highlighter-rouge">&lt;char&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cw</code></td>
+      <td>Change the current word</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ciw</code></td>
+      <td>Change the inner word</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">C</code></td>
+      <td>Change to the end of the line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ddp</code></td>
+      <td>Swap current line with the next</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xp</code></td>
+      <td>Swap adjacent characters</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-4-search-and-replace">2. 4. Search and Replace</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/pattern</code></td>
+      <td>Search forward for <code class="language-plaintext highlighter-rouge">pattern</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">?pattern</code></td>
+      <td>Search backward for <code class="language-plaintext highlighter-rouge">pattern</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">n</code></td>
+      <td>Repeat last search forward</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">N</code></td>
+      <td>Repeat last search backward</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:%s/old/new/g</code></td>
+      <td>Replace all occurrences of <code class="language-plaintext highlighter-rouge">old</code> with <code class="language-plaintext highlighter-rouge">new</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:%s/old/new/gc</code></td>
+      <td>Replace with confirmation</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:.,$s/old/new/g</code></td>
+      <td>Replace <code class="language-plaintext highlighter-rouge">old</code> with <code class="language-plaintext highlighter-rouge">new</code> from the current line to the last line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:.,+5s/old/new/g</code></td>
+      <td>Replace <code class="language-plaintext highlighter-rouge">old</code> with <code class="language-plaintext highlighter-rouge">new</code> from the current line to 5 lines down</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-5-visual-mode">2. 5. Visual Mode</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">v</code></td>
+      <td>Start visual mode (character-wise selection)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">V</code></td>
+      <td>Start visual line mode</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-v</code></td>
+      <td>Start visual block mode</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">y</code></td>
+      <td>Yank (copy) selection</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">d</code></td>
+      <td>Delete selection</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&gt;</code></td>
+      <td>Indent selection</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;</code></td>
+      <td>Un-indent selection</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-6-buffers-windows-and-tabs">2. 6. Buffers, Windows, and Tabs</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:e filename</code></td>
+      <td>Open another file in the same window</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:bn</code></td>
+      <td>Go to next buffer</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:bp</code></td>
+      <td>Go to previous buffer</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:bd</code></td>
+      <td>Close current buffer</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:sp filename</code></td>
+      <td>Open a file in a horizontal split</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:vs filename</code></td>
+      <td>Open a file in a vertical split</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-w w</code></td>
+      <td>Switch between split windows</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-w q</code></td>
+      <td>Close current window</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:tabnew filename</code></td>
+      <td>Open a file in a new tab</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gt</code></td>
+      <td>Go to next tab</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gT</code></td>
+      <td>Go to previous tab</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-7-macros-and-registers">2. 7. Macros and Registers</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">q&lt;char&gt;</code></td>
+      <td>Start recording macro into register <code class="language-plaintext highlighter-rouge">&lt;char&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">q</code></td>
+      <td>Stop recording macro</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">@&lt;char&gt;</code></td>
+      <td>Play back macro stored in <code class="language-plaintext highlighter-rouge">&lt;char&gt;</code> register</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">@@</code></td>
+      <td>Repeat last macro</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">"&lt;char&gt;p</code></td>
+      <td>Paste from register <code class="language-plaintext highlighter-rouge">&lt;char&gt;</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-8-advanced-commands">2. 8. Advanced Commands</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set number</code></td>
+      <td>Show line numbers</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set relativenumber</code></td>
+      <td>Show relative line numbers</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set ignorecase</code></td>
+      <td>Ignore case in searches</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set smartcase</code></td>
+      <td>Case-sensitive search if uppercase is used</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set hlsearch</code></td>
+      <td>Highlight search results</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:noh</code></td>
+      <td>Clear search highlights</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set autoindent</code></td>
+      <td>Enable automatic indentation</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set expandtab</code></td>
+      <td>Convert tabs to spaces</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set tabstop=4</code></td>
+      <td>Set tab width to 4 spaces</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set shiftwidth=4</code></td>
+      <td>Set indentation width to 4 spaces</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set wrap</code></td>
+      <td>Enable line wrapping</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set nowrap</code></td>
+      <td>Disable line wrapping</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:w !sudo tee %</code></td>
+      <td>Save file with sudo when opened without proper permissions</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="3-conclusion">3. Conclusion</h2>
+
+<p>Vim is an incredibly efficient editor when properly mastered. This cheatsheet provides a foundation for improving workflow, whether performing basic editing or advanced text manipulation. Practice these commands regularly, and you will unlock Vim’s full potential!</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="http://en.wikipedia.org/" target="_blank">Wikipedia</a></li>
+</ul>]]></content><author><name>Byunghee Yoo</name></author><category term="Cheatsheet" /><category term="OSCP" /><category term="Linux" /><category term="Vim" /><summary type="html"><![CDATA[Vim is a powerful text editor that can significantly enhance productivity when mastered. This cheatsheet covers fundamental to advanced commands, helping both beginners and experienced developers navigate Vim effectively.]]></summary></entry><entry><title type="html">Ruby Date Format (strftime)</title><link href="https://pikaybh.github.io/Ruby-Date-Format-strftime/" rel="alternate" type="text/html" title="Ruby Date Format (strftime)" /><published>2025-02-01T00:00:00+00:00</published><updated>2025-02-01T00:00:00+00:00</updated><id>https://pikaybh.github.io/Ruby-Date-Format-strftime</id><content type="html" xml:base="https://pikaybh.github.io/Ruby-Date-Format-strftime/"><![CDATA[<h2 id="date-formatting">Date Formatting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%Y</code></td>
+      <td>Year with century (e.g. 2015, 1995, etc)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%m</code></td>
+      <td>Month of the year, zero-padded (01..12)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%B</code></td>
+      <td>The full month name (e.g. January)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%b</code></td>
+      <td>The abbreviated month name (e.g. Jan)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%d</code></td>
+      <td>Day of the month, zero-padded (01..31)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%j</code></td>
+      <td>Day of the year (001..366)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%C</code></td>
+      <td>Year / 100 (round down, e.g. 20 in 2015)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%y</code></td>
+      <td>Year % 100 (00…99)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%_m</code></td>
+      <td>Month of the year, blank-padded (_1..12)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%-m</code></td>
+      <td>Month of the year, no-padding (1..12)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%^B</code></td>
+      <td>The full month name uppercased (e.g. JANUARY)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%^b</code></td>
+      <td>The abbreviated month name uppercased (e.g. JAN)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%h</code></td>
+      <td>Equivalent to <code class="language-plaintext highlighter-rouge">%b</code> (abbreviated month name)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%-d</code></td>
+      <td>Day of the month, no-padding (1..31)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%e</code></td>
+      <td>Day of the month, blank-padded (_1..31)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="flags">Flags</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Flag</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-</code></td>
+      <td>Don’t pad a numerical output</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">_</code></td>
+      <td>Use spaces for padding</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">0</code></td>
+      <td>Use zeros for padding</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">^</code></td>
+      <td>Upcase the result string</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">#</code></td>
+      <td>Change case</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:</code></td>
+      <td>Use colons for <code class="language-plaintext highlighter-rouge">%z</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="time-formatting">Time Formatting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%H</code></td>
+      <td>Hour of the day, 24-hour clock, zero-padded (00..23)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%k</code></td>
+      <td>Hour of the day, 24-hour clock, blank-padded (_0..23)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%I</code></td>
+      <td>Hour of the day, 12-hour clock, zero-padded (01..12)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%l</code></td>
+      <td>Hour of the day, 12-hour clock, blank-padded (_1..12)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%P</code></td>
+      <td>Meridian indicator, lowercase (am or pm)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%p</code></td>
+      <td>Meridian indicator, uppercase (AM or PM)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%M</code></td>
+      <td>Minute of the hour (00..59)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%S</code></td>
+      <td>Second of the minute (00..59)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%L</code></td>
+      <td>Millisecond of the second (000..999)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%N</code></td>
+      <td>Nanosecond (9 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%3N</code></td>
+      <td>Millisecond (3 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%6N</code></td>
+      <td>Microsecond (6 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%12N</code></td>
+      <td>Picosecond (12 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%15N</code></td>
+      <td>Femtosecond (15 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%18N</code></td>
+      <td>Attosecond (18 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%21N</code></td>
+      <td>Zeptosecond (21 digits)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%24N</code></td>
+      <td>Yoctosecond (24 digits)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="time-zone-formatting">Time Zone Formatting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%z</code></td>
+      <td>Time zone as hour and minute offset from UTC (e.g. +0900)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%:z</code></td>
+      <td>Time zone hour and minute offset from UTC with a colon (e.g. +09:00)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%::z</code></td>
+      <td>Time zone hour, minute, and second offset from UTC (e.g. +09:00:00)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%:::z</code></td>
+      <td>Time zone hour, minute, and second offset from UTC (e.g. +09, +09:30, +09:30:30)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%Z</code></td>
+      <td>Time zone abbreviation name or similar information</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="weekday-formatting">Weekday Formatting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%A</code></td>
+      <td>The full weekday name (e.g. Sunday)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%^A</code></td>
+      <td>The full weekday name uppercased (e.g. SUNDAY)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%a</code></td>
+      <td>The abbreviated weekday name (e.g. Sun)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%^a</code></td>
+      <td>The abbreviated weekday name uppercased (e.g. SUN)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%u</code></td>
+      <td>Day of the week starting Monday (1..7)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%w</code></td>
+      <td>Day of the week starting Sunday (0..6)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="week-formatting">Week Formatting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%G</code></td>
+      <td>The week-based year</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%g</code></td>
+      <td>The last 2 digits of the week-based year (00..99)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%V</code></td>
+      <td>Week number of the week-based year (01..53)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%U</code></td>
+      <td>Week number of the year. Week starts with Sunday (00..53)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%W</code></td>
+      <td>Week number of the year. Week starts with Monday (00..53)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="seconds-formatting">Seconds Formatting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%s</code></td>
+      <td>Number of seconds since 1970-01-01 00:00:00 UTC</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%Q</code></td>
+      <td>Number of milliseconds since 1970-01-01 00:00:00 UTC</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="literal-strings">Literal Strings</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%n</code></td>
+      <td>Newline character (<code class="language-plaintext highlighter-rouge">\n</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%t</code></td>
+      <td>Tab character (<code class="language-plaintext highlighter-rouge">\t</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%%</code></td>
+      <td>Literal ‘%’ character</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="combination">Combination</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Format</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%c</code></td>
+      <td>Date and time (<code class="language-plaintext highlighter-rouge">%a %b %e %T %Y</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%D</code></td>
+      <td>Date (<code class="language-plaintext highlighter-rouge">%m/%d/%y</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%F</code></td>
+      <td>The ISO 8601 date format (<code class="language-plaintext highlighter-rouge">%Y-%m-%d</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%v</code></td>
+      <td>VMS date (<code class="language-plaintext highlighter-rouge">%e-%b-%Y</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%x</code></td>
+      <td>Same as <code class="language-plaintext highlighter-rouge">%D</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%X</code></td>
+      <td>Same as <code class="language-plaintext highlighter-rouge">%T</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%r</code></td>
+      <td>12-hour time (<code class="language-plaintext highlighter-rouge">%I:%M:%S %p</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%R</code></td>
+      <td>24-hour time (<code class="language-plaintext highlighter-rouge">%H:%M</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%T</code></td>
+      <td>24-hour time (<code class="language-plaintext highlighter-rouge">%H:%M:%S</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%+</code></td>
+      <td><code class="language-plaintext highlighter-rouge">date(1)</code> (<code class="language-plaintext highlighter-rouge">%a %b %e %H:%M:%S %Z %Y</code>)</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name>Byunghee Yoo</name></author><category term="Cheatsheet" /><category term="Ruby" /><category term="OSCP" /><summary type="html"><![CDATA[Date Formatting]]></summary></entry><entry><title type="html">Comprehensive Guide to Network Scanning with Nmap</title><link href="https://pikaybh.github.io/Comprehensive-Guide-to-Network-Scanning-with-Nmap/" rel="alternate" type="text/html" title="Comprehensive Guide to Network Scanning with Nmap" /><published>2025-01-30T00:00:00+00:00</published><updated>2025-01-30T00:00:00+00:00</updated><id>https://pikaybh.github.io/Comprehensive-Guide-to-Network-Scanning-with-Nmap</id><content type="html" xml:base="https://pikaybh.github.io/Comprehensive-Guide-to-Network-Scanning-with-Nmap/"><![CDATA[<p><a href="https://nmap.org/" target="_blank">Nmap (Network Mapper)</a> is an essential tool for network security assessment and vulnerability analysis. This post provides an in-depth guide to Nmap’s key features and applications.</p>
+
+<p>For demonstration purposes, we will use <a href="http://localhost/" target="_blank"><strong>127.0.0.1</strong></a><a href="http://localhost/" target="_blank"> (localhost)</a> as an example.</p>
+
+<h2 id="1-basic-nmap-scan"><strong>1. Basic Nmap Scan</strong></h2>
+
+<h3 id="-basic-port-scan-1000-common-ports">🔹 Basic Port Scan (1,000 Common Ports)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Checks if the target is online and scans the 1,000 most commonly used ports.</li>
+  <li><strong>Example use case:</strong> When testing a newly deployed local server to ensure it is accessible.</li>
+</ul>
+
+<h3 id="-full-port-scan-all-65535-ports">🔹 Full Port Scan (All 65,535 Ports)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-p-</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Scans all ports to detect open services.</li>
+  <li><strong>Example use case:</strong> When performing an exhaustive security audit on a machine to check for any unexpected open ports.</li>
+</ul>
+
+<h3 id="-fast-scan-top-100-ports">🔹 Fast Scan (Top 100 Ports)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-F</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Quickly scans only the 100 most commonly used ports.</li>
+  <li><strong>Example use case:</strong> When troubleshooting connectivity issues and checking if essential services (e.g., HTTP, SSH) are available.</li>
+</ul>
+
+<h2 id="2-service-and-operating-system-os-detection"><strong>2. Service and Operating System (OS) Detection</strong></h2>
+
+<h3 id="-detect-running-services-and-versions">🔹 Detect Running Services and Versions</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sV</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Identifies services running on open ports along with their versions.</li>
+  <li><strong>Example use case:</strong> When verifying software versions on a web server before applying security patches.</li>
+</ul>
+
+<h3 id="-detect-operating-system-os">🔹 Detect Operating System (OS)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-O</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Determines the OS type of the target machine (requires admin privileges).</li>
+  <li><strong>Example use case:</strong> When analyzing a network to understand the OS distribution for compatibility testing.</li>
+</ul>
+
+<h3 id="-detect-both-services-and-os">🔹 Detect Both Services and OS</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sV</span> <span class="nt">-O</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Combines service and OS detection in one scan.</li>
+  <li><strong>Example use case:</strong> When conducting a preliminary security assessment of a machine to gather essential information.</li>
+</ul>
+
+<h2 id="3-scanning-specific-ports"><strong>3. Scanning Specific Ports</strong></h2>
+
+<h3 id="-scan-specific-ports">🔹 Scan Specific Ports</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-p</span> 22,80,443 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Checks only the specified ports: SSH (22), HTTP (80), and HTTPS (443).</li>
+  <li><strong>Example use case:</strong> When ensuring that only necessary services are running on a secure system.</li>
+</ul>
+
+<h3 id="-scan-a-range-of-ports">🔹 Scan a Range of Ports</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-p</span> 20-100 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Scans ports 20 to 100.</li>
+  <li><strong>Example use case:</strong> When testing an internal server where services may be running within a known port range.</li>
+</ul>
+
+<h2 id="4-firewall-evasion-and-stealth-scanning"><strong>4. Firewall Evasion and Stealth Scanning</strong></h2>
+
+<h3 id="-scan-without-ping-bypass-firewall-restrictions">🔹 Scan Without Ping (Bypass Firewall Restrictions)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-Pn</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Forces scanning even if the target does not respond to pings.</li>
+  <li><strong>Example use case:</strong> When testing a server protected by a firewall that blocks ICMP requests.</li>
+</ul>
+
+<h3 id="-tcp-syn-scan-stealth-scan">🔹 TCP SYN Scan (Stealth Scan)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sS</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Sends SYN packets without completing a full handshake to avoid detection.</li>
+  <li><strong>Example use case:</strong> When performing a penetration test to see which ports can be probed undetected.</li>
+</ul>
+
+<h3 id="-tcp-connect-scan-for-non-admin-users">🔹 TCP Connect Scan (For Non-Admin Users)</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sT</span> 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Establishes full TCP connections for scanning.</li>
+  <li><strong>Example use case:</strong> When running scans from a non-root user without elevated privileges.</li>
+</ul>
+
+<h2 id="5-scanning-an-entire-network"><strong>5. Scanning an Entire Network</strong></h2>
+
+<h3 id="-find-live-hosts-in-a-network">🔹 Find Live Hosts in a Network</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sP</span> 127.0.0.0/24
+</code></pre></div></div>
+
+<ul>
+  <li>Detects active IP addresses in the specified subnet.</li>
+  <li><strong>Example use case:</strong> When mapping a corporate network to identify all connected devices.</li>
+</ul>
+
+<h3 id="-find-open-ports-in-a-network">🔹 Find Open Ports in a Network</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-p</span> 22,80,443 127.0.0.0/24
+</code></pre></div></div>
+
+<ul>
+  <li>Searches for devices with SSH, HTTP, or HTTPS ports open.</li>
+  <li><strong>Example use case:</strong> When auditing an organization’s network for unauthorized services.</li>
+</ul>
+
+<h2 id="6-using-nse-nmap-scripting-engine"><strong>6. Using NSE (Nmap Scripting Engine)</strong></h2>
+
+<h3 id="-scan-for-vulnerabilities">🔹 Scan for Vulnerabilities</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">--script</span><span class="o">=</span>vuln 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Runs vulnerability detection scripts.</li>
+  <li><strong>Example use case:</strong> When assessing a server for known security flaws before deploying it to production.</li>
+</ul>
+
+<h3 id="-extract-webpage-titles">🔹 Extract Webpage Titles</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">--script</span><span class="o">=</span>http-title <span class="nt">-p</span> 80,443 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Retrieves the title of webpages hosted on the target.</li>
+  <li><strong>Example use case:</strong> When identifying hosted web applications without manually accessing each site.</li>
+</ul>
+
+<h3 id="-scan-for-malware-and-backdoors">🔹 Scan for Malware and Backdoors</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">--script</span><span class="o">=</span>malware 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Checks for signs of malicious software or compromised services.</li>
+  <li><strong>Example use case:</strong> When investigating a potentially infected server for security breaches.</li>
+</ul>
+
+<h2 id="7-saving-and-exporting-results"><strong>7. Saving and Exporting Results</strong></h2>
+
+<h3 id="-save-output-in-plain-text">🔹 Save Output in Plain Text</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-oN</span> scan_results.txt 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Saves scan results in a text file.</li>
+  <li><strong>Example use case:</strong> When documenting security assessments for further analysis.</li>
+</ul>
+
+<h3 id="-save-output-in-xml-format">🔹 Save Output in XML Format</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-oX</span> scan_results.xml 127.0.0.1
+</code></pre></div></div>
+
+<ul>
+  <li>Exports scan results in XML format for automation.</li>
+  <li><strong>Example use case:</strong> When integrating Nmap results with security monitoring tools.</li>
+</ul>
+
+<h2 id="-quick-summary-for-reference"><strong>📌 Quick Summary (For Reference)</strong></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Purpose</th>
+      <th>Command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Basic scan</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Full port scan</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -p- 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Detect services</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -sV 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Detect OS</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -O 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Scan specific ports</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -p 22,80,443 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Scan UDP ports</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -sU -p 53 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Bypass firewalls</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -Pn 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Stealth scan</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -sS 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Scan entire network</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -sP 127.0.0.0/24</code></td>
+    </tr>
+    <tr>
+      <td>Vulnerability scan</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap --script=vuln 127.0.0.1</code></td>
+    </tr>
+    <tr>
+      <td>Save results</td>
+      <td><code class="language-plaintext highlighter-rouge">nmap -oN results.txt 127.0.0.1</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="notice notice--info">🚀 With this guide, you can effectively use Nmap to analyze and secure your network!</p>]]></content><author><name>Byunghee Yoo</name></author><category term="Cheatsheet" /><category term="Nmap" /><category term="OSCP" /><summary type="html"><![CDATA[Nmap (Network Mapper) is an essential tool for network security assessment and vulnerability analysis. This post provides an in-depth guide to Nmap’s key features and applications.]]></summary></entry><entry><title type="html">OSCP Cheatsheet</title><link href="https://pikaybh.github.io/OSCP-Cheatsheet/" rel="alternate" type="text/html" title="OSCP Cheatsheet" /><published>2025-01-28T00:00:00+00:00</published><updated>2025-01-28T00:00:00+00:00</updated><id>https://pikaybh.github.io/OSCP-Cheatsheet</id><content type="html" xml:base="https://pikaybh.github.io/OSCP-Cheatsheet/"><![CDATA[<h2 id="vi">VI</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:w <span class="o">!</span><span class="nb">sudo </span>tree %
+</code></pre></div></div>
+
+<h2 id="windows-command-formatting">Windows Command Formatting</h2>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">echo</span><span class="w"> </span><span class="s2">"&lt;COMMAND&gt;"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">iconv</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">UTF-8</span><span class="w"> </span><span class="nt">-t</span><span class="w"> </span><span class="nx">UTF-16LE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">base64</span><span class="w"> </span><span class="nt">-w0</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="microsoft-windows">Microsoft Windows</h2>
+
+<h3 id="dir">dir</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dir</span><span class="w"> </span><span class="nx">flag</span><span class="o">*</span><span class="w"> </span><span class="nx">/s</span><span class="w"> </span><span class="nx">/p</span><span class="w">
+</span><span class="n">dir</span><span class="w"> </span><span class="nx">/s</span><span class="w"> </span><span class="nx">/b</span><span class="w"> </span><span class="o">*.</span><span class="nf">log</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="php-webserver">PHP Webserver</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>php <span class="nt">-S</span> 127.0.0.1:80
+</code></pre></div></div>
+
+<h2 id="ping">Ping</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping <span class="nt">-c</span> 1 &lt;RHOST&gt;
+ping <span class="nt">-n</span> 1 &lt;RHOST&gt;
+</code></pre></div></div>
+
+<h2 id="python-webserver">Python Webserver</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>python <span class="nt">-m</span> SimpleHTTPServer 80
+<span class="nb">sudo </span>python3 <span class="nt">-m</span> http.server 80
+</code></pre></div></div>
+
+<h2 id="rdp">RDP</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xfreerdp /v:&lt;RHOST&gt; /u:&lt;USERNAME&gt; /p:&lt;PASSWORD&gt; /dynamic-resolution +clipboard
+xfreerdp /v:&lt;RHOST&gt; /u:&lt;USERNAME&gt; /d: &lt;DOMAIN&gt; /pth: <span class="s1">'&lt;HASH&gt;'</span> /dynamic-resolutoin +clrdesktop &lt;RHOST&gt;
+</code></pre></div></div>
+
+<h2 id="showmount">showmount</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/sbin/showmount <span class="nt">-e</span> &lt;RHOST&gt;
+<span class="nb">sudo </span>showmount <span class="nt">-e</span> &lt;RHOST&gt;
+<span class="nb">chown </span>root:root sid-shell<span class="p">;</span> chomd +s sid-shell
+</code></pre></div></div>]]></content><author><name>Byunghee Yoo</name></author><category term="Cheatsheet" /><category term="OSCP" /><summary type="html"><![CDATA[VI]]></summary></entry><entry><title type="html">1000번: A+B</title><link href="https://pikaybh.github.io/1000-AB/" rel="alternate" type="text/html" title="1000번: A+B" /><published>2022-12-20T00:00:00+00:00</published><updated>2022-12-20T00:00:00+00:00</updated><id>https://pikaybh.github.io/1000-AB</id><content type="html" xml:base="https://pikaybh.github.io/1000-AB/"><![CDATA[<h2 id="개요">개요</h2>
+
+<p class="notice">두 정수 A와 B를 입력받은 다음, A+B를 출력하는 프로그램을 작성하시오.</p>
+
+<h3 id="입력">입력</h3>
+
+<p>첫째 줄에 A와 B가 주어진다. (0 &lt; A, B &lt; 10)</p>
+
+<h3 id="출력">출력</h3>
+
+<p>첫째 줄에 A+B를 출력한다.</p>
+
+<h3 id="예제-입력-1">예제 입력 1</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 2
+</code></pre></div></div>
+
+<h3 id="예제-출력-1">예제 출력 1</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+</code></pre></div></div>
+
+<h2 id="내-풀이">내 풀이</h2>
+
+<h3 id="c">C</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>메모리</th>
+      <th>시간</th>
+      <th>코드 길이</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1112KB</td>
+      <td>0ms</td>
+      <td>186B</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">;</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">B</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">A</span> <span class="o">+</span> <span class="n">B</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="python">Python</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>메모리</th>
+      <th>시간</th>
+      <th>코드 길이</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>30840KB</td>
+      <td>72ms</td>
+      <td>46B</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="nodejs">Node.js</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>메모리</th>
+      <th>시간</th>
+      <th>코드 길이</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>9460KB</td>
+      <td>144ms</td>
+      <td>328B</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">readline</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">readline</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">rl</span> <span class="o">=</span> <span class="nx">readline</span><span class="p">.</span><span class="nf">createInterface</span><span class="p">({</span>
+    <span class="na">input</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">,</span>
+    <span class="na">output</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span>
+<span class="p">});</span>
+
+<span class="kd">let</span> <span class="nx">input</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="nx">rl</span><span class="p">.</span><span class="nf">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">line</span><span class="dl">'</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="nx">line</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">input</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">).</span><span class="nf">map</span><span class="p">((</span><span class="nx">el</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nf">parseInt</span><span class="p">(</span><span class="nx">el</span><span class="p">));</span>
+<span class="p">}).</span><span class="nf">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">close</span><span class="dl">'</span><span class="p">,</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nx">input</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="nx">process</span><span class="p">.</span><span class="nf">exit</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="출처">출처</h2>
+
+<ul>
+  <li><a href="https://www.acmicpc.net/problem/1000" target="_blank">1000번: A+B</a></li>
+</ul>]]></content><author><name>Byunghee Yoo</name></author><category term="BOJ" /><category term="Bronze V" /><category term="C" /><category term="Python" /><category term="Node.js" /><summary type="html"><![CDATA[두 정수 A와 B를 입력받은 다음, A+B를 출력하는 프로그램을 작성하시오.]]></summary></entry><entry><title type="html">1001번: A-B</title><link href="https://pikaybh.github.io/1001-A-B/" rel="alternate" type="text/html" title="1001번: A-B" /><published>2022-12-20T00:00:00+00:00</published><updated>2022-12-20T00:00:00+00:00</updated><id>https://pikaybh.github.io/1001-A-B</id><content type="html" xml:base="https://pikaybh.github.io/1001-A-B/"><![CDATA[<h2 id="개요">개요</h2>
+
+<p class="notice">두 정수 A와 B를 입력받은 다음, A-B를 출력하는 프로그램을 작성하시오.</p>
+
+<h3 id="입력">입력</h3>
+
+<p>첫째 줄에 A와 B가 주어진다. (0 &lt; A, B &lt; 10)</p>
+
+<h3 id="출력">출력</h3>
+
+<p>첫째 줄에 A-B를 출력한다.</p>
+
+<h3 id="예제-입력-1">예제 입력 1</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3 2
+</code></pre></div></div>
+
+<h3 id="예제-출력-1">예제 출력 1</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1
+</code></pre></div></div>
+
+<h2 id="내-풀이">내 풀이</h2>
+
+<h3 id="python-3">Python 3</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>메모리</th>
+      <th>시간</th>
+      <th>코드 길이</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>30840KB</td>
+      <td>68ms</td>
+      <td>47B</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="출처">출처</h2>
+
+<p><a href="https://www.acmicpc.net/problem/1001" target="_blank">1001번: A-B</a></p>]]></content><author><name>Byunghee Yoo</name></author><category term="BOJ" /><category term="Bronze V" /><category term="Python" /><summary type="html"><![CDATA[두 정수 A와 B를 입력받은 다음, A-B를 출력하는 프로그램을 작성하시오.]]></summary></entry><entry><title type="html">1008번: A/B</title><link href="https://pikaybh.github.io/1008-AB/" rel="alternate" type="text/html" title="1008번: A/B" /><published>2022-12-20T00:00:00+00:00</published><updated>2022-12-20T00:00:00+00:00</updated><id>https://pikaybh.github.io/1008-AB</id><content type="html" xml:base="https://pikaybh.github.io/1008-AB/"><![CDATA[<h1 id="개요">개요</h1>
+
+<p class="notice">두 정수 A와 B를 입력받은 다음, A/B를 출력하는 프로그램을 작성하시오.</p>
+
+<h3 id="입력">입력</h3>
+
+<p>첫째 줄에 A와 B가 주어진다. (0 &lt; A, B &lt; 10)</p>
+
+<h3 id="출력">출력</h3>
+
+<p>첫째 줄에 A/B를 출력한다. 실제 정답과 출력값의 절대오차 또는 상대오차가 10-9 이하이면 정답이다.</p>
+
+<h3 id="예제-입력-1">예제 입력 1</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 3
+</code></pre></div></div>
+
+<h3 id="예제-출력-1">예제 출력 1</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.33333333333333333333333333333333
+</code></pre></div></div>
+
+<p>10-9 이하의 오차를 허용한다는 말은 꼭 소수 9번째 자리까지만 출력하라는 뜻이 아니다.</p>
+
+<h3 id="예제-입력-2">예제 입력 2</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 5
+</code></pre></div></div>
+
+<h3 id="예제-출력-2">예제 출력 2</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.8
+</code></pre></div></div>
+
+<h2 id="내-풀이">내 풀이</h2>
+
+<h3 id="python-3">Python 3</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>메모리</th>
+      <th>시간</th>
+      <th>코드 길이</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>30840KB</td>
+      <td>68ms</td>
+      <td>47B</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="출처">출처</h2>
+
+<p><a href="https://www.acmicpc.net/problem/1008" target="_blank">1008번: A/B</a></p>]]></content><author><name>Byunghee Yoo</name></author><category term="BOJ" /><category term="Bronze V" /><category term="Python" /><summary type="html"><![CDATA[두 정수 A와 B를 입력받은 다음, A/B를 출력하는 프로그램을 작성하시오.]]></summary></entry></feed>

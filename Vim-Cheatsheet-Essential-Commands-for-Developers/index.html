@@ -1,0 +1,1206 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Vim Cheatsheet: Essential Commands for Developers | pikaybh</title>
+<meta name="description" content="Vim is a powerful text editor that can significantly enhance productivity when mastered. This cheatsheet covers fundamental to advanced commands, helping both beginners and experienced developers navigate Vim effectively.">
+
+
+  <meta name="author" content="Byunghee Yoo">
+  
+  <meta property="article:author" content="Byunghee Yoo">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="pikaybh">
+<meta property="og:title" content="Vim Cheatsheet: Essential Commands for Developers">
+<meta property="og:url" content="https://pikaybh.github.io/Vim-Cheatsheet-Essential-Commands-for-Developers/">
+
+
+  <meta property="og:description" content="Vim is a powerful text editor that can significantly enhance productivity when mastered. This cheatsheet covers fundamental to advanced commands, helping both beginners and experienced developers navigate Vim effectively.">
+
+
+
+  <meta property="og:image" content="https://pikaybh.github.io/assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png">
+
+
+
+  <meta name="twitter:site" content="@pikaybh">
+  <meta name="twitter:title" content="Vim Cheatsheet: Essential Commands for Developers">
+  <meta name="twitter:description" content="Vim is a powerful text editor that can significantly enhance productivity when mastered. This cheatsheet covers fundamental to advanced commands, helping both beginners and experienced developers navigate Vim effectively.">
+  <meta name="twitter:url" content="https://pikaybh.github.io/Vim-Cheatsheet-Essential-Commands-for-Developers/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://pikaybh.github.io/assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2025-02-02T00:00:00+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://pikaybh.github.io/Vim-Cheatsheet-Essential-Commands-for-Developers/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Byunghee Yoo",
+      "url": "https://pikaybh.github.io/",
+      "sameAs": ["https://github.com/pikaybh","https://instagram.com/pikaybh","https://twitter.com/pikaybh","https://linkedin.com/in/byunghee-yoo"]
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="bKcX97OXuORoUNTABljbGnv6tdiP1mzkoEhVuDGxODs" />
+
+
+  <meta name="msvalidate.01" content="866fb5e6a17f73fd746a967cb1ea1b55">
+
+
+
+
+  <meta name="naver-site-verification" content="928cdc1b66327dabb879b896a805922d3d123e35">
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="pikaybh Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="icon" href="/assets/images/favicon.png" type="image/x-icon">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({            
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}            
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<meta name="msvalidate.01" content="6E65A1C2143D9DFFABB3FFFB489176D7" />
+<meta name="naver-site-verification" content="928cdc1b66327dabb879b896a805922d3d123e35" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFNMYR5P88"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MFNMYR5P88');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5250081198751558"
+    crossorigin="anonymous">
+</script>
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          pikaybh
+          <span class="site-subtitle">pikaybh.github.io</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/publications/">Publications</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/"><i class='fa-solid fa-clock-rotate-left'></i></a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/"><i class='fa-solid fa-folder-open'></i></a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/"><i class='fa-solid fa-tags'></i></a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: url('/assets/images/headers/1_VO98sILElESsQdiq1DLcZQ.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Vim Cheatsheet: Essential Commands for Developers
+
+        
+      </h1>
+      
+        <p class="page__lead">Vim is a powerful text editor that can significantly enhance productivity when mastered. This cheatsheet covers fundamental to advanced commands, helping both beginners and experienced developers navigate Vim effectively.
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-02-02T00:00:00+00:00">February 2, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+    <span class="page__hero-caption">
+</span>
+  
+</div>
+
+
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/home/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        <li class="current">Vim Cheatsheet: Essential Commands for Developers</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Vim Cheatsheet: Essential Commands for Developers">
+    <meta itemprop="description" content="Vim is a powerful text editor that can significantly enhance productivity when mastered. This cheatsheet covers fundamental to advanced commands, helping both beginners and experienced developers navigate Vim effectively.">
+    <meta itemprop="datePublished" content="2025-02-02T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#1-introduction">1. Introduction</a></li><li><a href="#2-commands">2. Commands</a><ul><li><a href="#2-1-basics">2. 1. Basics</a></li><li><a href="#2-2-navigation">2. 2. Navigation</a></li><li><a href="#2-3-editing">2. 3. Editing</a></li><li><a href="#2-4-search-and-replace">2. 4. Search and Replace</a></li><li><a href="#2-5-visual-mode">2. 5. Visual Mode</a></li><li><a href="#2-6-buffers-windows-and-tabs">2. 6. Buffers, Windows, and Tabs</a></li><li><a href="#2-7-macros-and-registers">2. 7. Macros and Registers</a></li><li><a href="#2-8-advanced-commands">2. 8. Advanced Commands</a></li></ul></li><li><a href="#3-conclusion">3. Conclusion</a></li><li><a href="#reference">Reference</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>Vim is a powerful text editor that can significantly enhance productivity when mastered. This cheatsheet covers fundamental to advanced commands, helping both beginners and experienced developers navigate Vim effectively.</p>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>Vim is a free and open-source, screen-based text editor that serves as an enhanced version of the original vi editor developed by Bill Joy. Created by Bram Moolenaar, Vim was first released to the public in 1991. The name “Vim” stands for “Vi IMproved,” reflecting its numerous enhancements over the original vi. (<a href="https://en.wikipedia.org/wiki/Vim_%28text_editor%29?utm_source=chatgpt.com" target="_blank">en.wikipedia.org</a>)</p>
+
+<p>Vim is designed for use both from a command-line interface and as a standalone application in a graphical user interface. Since its initial release for the Amiga, cross-platform development has made it available on many other systems. In 2018, it was voted the most popular editor among Linux Journal readers. (<a href="https://en.wikipedia.org/wiki/Vim_%28text_editor%29?utm_source=chatgpt.com" target="_blank">en.wikipedia.org</a>)</p>
+
+<p>Vim’s forerunner, Stevie (ST Editor for VI Enthusiasts), was created by Tim Thompson for the Atari ST in 1987 and further developed by Tony Andrews and G.R. (Fred) Walter. It was one of the first popularized clones of vi and did not use vi’s source code. Basing Vim on the source code for Stevie meant the program could be distributed without requiring the AT&amp;T source license. (<a href="https://en.wikipedia.org/wiki/Vim_%28text_editor%29?utm_source=chatgpt.com" target="_blank">en.wikipedia.org</a>)</p>
+
+<p>Vim has a reputation for its steep learning curve due to its modal nature, where users switch between different modes for editing and command inputs. However, once mastered, it is celebrated for its efficiency and powerful features, making it a favorite among many developers and system administrators.</p>
+
+<p>The enduring rivalry between Vim and Emacs users, often referred to as the “editor war,” has become a notable part of hacker culture and the free software community. (<a href="https://en.wikipedia.org/wiki/Editor_war?utm_source=chatgpt.com" target="_blank">en.wikipedia.org</a>)</p>
+
+<p>Bram Moolenaar, the creator and maintainer of Vim, was a Dutch software engineer and activist. He advocated for ICCF Holland, a non-governmental organization supporting AIDS victims in Uganda, and used the popularity of Vim to encourage donations. Moolenaar passed away on August 3, 2023, at the age of 62. (<a href="https://en.wikipedia.org/wiki/Bram_Moolenaar?utm_source=chatgpt.com" target="_blank">en.wikipedia.org</a>)</p>
+
+<p>Now, let’s learn about how to use Vim commands.</p>
+
+<h2 id="2-commands">2. Commands</h2>
+
+<h3 id="2-1-basics">2. 1. Basics</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">vim filename</code></td>
+      <td>Open a file in Vim</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:q</code></td>
+      <td>Quit Vim</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:q!</code></td>
+      <td>Quit without saving</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:w</code></td>
+      <td>Save file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:wq</code> or <code class="language-plaintext highlighter-rouge">ZZ</code></td>
+      <td>Save and quit</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:x</code></td>
+      <td>Save and quit (only if changes were made)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">i</code></td>
+      <td>Enter Insert mode</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Esc</code></td>
+      <td>Exit Insert mode</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-2-navigation">2. 2. Navigation</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">h</code></td>
+      <td>Move left</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">l</code></td>
+      <td>Move right</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">j</code></td>
+      <td>Move down</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">k</code></td>
+      <td>Move up</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">0</code></td>
+      <td>Move to the beginning of the line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">^</code></td>
+      <td>Move to the first non-blank character of the line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$</code></td>
+      <td>Move to the end of the line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gg</code></td>
+      <td>Go to the beginning of the file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">G</code></td>
+      <td>Go to the end of the file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">5G</code></td>
+      <td>Go to line 5 (replace 5 with any line number)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-d</code></td>
+      <td>Scroll down half a screen</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-u</code></td>
+      <td>Scroll up half a screen</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-f</code></td>
+      <td>Scroll down a full screen</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-b</code></td>
+      <td>Scroll up a full screen</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-3-editing">2. 3. Editing</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">x</code></td>
+      <td>Delete character under the cursor</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dd</code></td>
+      <td>Delete (cut) the current line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">yy</code></td>
+      <td>Copy (yank) the current line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">p</code></td>
+      <td>Paste after the cursor</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">P</code></td>
+      <td>Paste before the cursor</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">u</code></td>
+      <td>Undo the last change</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-r</code></td>
+      <td>Redo the last undone change</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">r&lt;char&gt;</code></td>
+      <td>Replace the character under the cursor with <code class="language-plaintext highlighter-rouge">&lt;char&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cw</code></td>
+      <td>Change the current word</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ciw</code></td>
+      <td>Change the inner word</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">C</code></td>
+      <td>Change to the end of the line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ddp</code></td>
+      <td>Swap current line with the next</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xp</code></td>
+      <td>Swap adjacent characters</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-4-search-and-replace">2. 4. Search and Replace</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/pattern</code></td>
+      <td>Search forward for <code class="language-plaintext highlighter-rouge">pattern</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">?pattern</code></td>
+      <td>Search backward for <code class="language-plaintext highlighter-rouge">pattern</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">n</code></td>
+      <td>Repeat last search forward</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">N</code></td>
+      <td>Repeat last search backward</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:%s/old/new/g</code></td>
+      <td>Replace all occurrences of <code class="language-plaintext highlighter-rouge">old</code> with <code class="language-plaintext highlighter-rouge">new</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:%s/old/new/gc</code></td>
+      <td>Replace with confirmation</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:.,$s/old/new/g</code></td>
+      <td>Replace <code class="language-plaintext highlighter-rouge">old</code> with <code class="language-plaintext highlighter-rouge">new</code> from the current line to the last line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:.,+5s/old/new/g</code></td>
+      <td>Replace <code class="language-plaintext highlighter-rouge">old</code> with <code class="language-plaintext highlighter-rouge">new</code> from the current line to 5 lines down</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-5-visual-mode">2. 5. Visual Mode</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">v</code></td>
+      <td>Start visual mode (character-wise selection)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">V</code></td>
+      <td>Start visual line mode</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-v</code></td>
+      <td>Start visual block mode</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">y</code></td>
+      <td>Yank (copy) selection</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">d</code></td>
+      <td>Delete selection</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&gt;</code></td>
+      <td>Indent selection</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;</code></td>
+      <td>Un-indent selection</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-6-buffers-windows-and-tabs">2. 6. Buffers, Windows, and Tabs</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:e filename</code></td>
+      <td>Open another file in the same window</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:bn</code></td>
+      <td>Go to next buffer</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:bp</code></td>
+      <td>Go to previous buffer</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:bd</code></td>
+      <td>Close current buffer</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:sp filename</code></td>
+      <td>Open a file in a horizontal split</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:vs filename</code></td>
+      <td>Open a file in a vertical split</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-w w</code></td>
+      <td>Switch between split windows</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ctrl-w q</code></td>
+      <td>Close current window</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:tabnew filename</code></td>
+      <td>Open a file in a new tab</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gt</code></td>
+      <td>Go to next tab</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gT</code></td>
+      <td>Go to previous tab</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-7-macros-and-registers">2. 7. Macros and Registers</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">q&lt;char&gt;</code></td>
+      <td>Start recording macro into register <code class="language-plaintext highlighter-rouge">&lt;char&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">q</code></td>
+      <td>Stop recording macro</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">@&lt;char&gt;</code></td>
+      <td>Play back macro stored in <code class="language-plaintext highlighter-rouge">&lt;char&gt;</code> register</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">@@</code></td>
+      <td>Repeat last macro</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">"&lt;char&gt;p</code></td>
+      <td>Paste from register <code class="language-plaintext highlighter-rouge">&lt;char&gt;</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-8-advanced-commands">2. 8. Advanced Commands</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set number</code></td>
+      <td>Show line numbers</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set relativenumber</code></td>
+      <td>Show relative line numbers</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set ignorecase</code></td>
+      <td>Ignore case in searches</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set smartcase</code></td>
+      <td>Case-sensitive search if uppercase is used</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set hlsearch</code></td>
+      <td>Highlight search results</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:noh</code></td>
+      <td>Clear search highlights</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set autoindent</code></td>
+      <td>Enable automatic indentation</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set expandtab</code></td>
+      <td>Convert tabs to spaces</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set tabstop=4</code></td>
+      <td>Set tab width to 4 spaces</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set shiftwidth=4</code></td>
+      <td>Set indentation width to 4 spaces</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set wrap</code></td>
+      <td>Enable line wrapping</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:set nowrap</code></td>
+      <td>Disable line wrapping</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:w !sudo tee %</code></td>
+      <td>Save file with sudo when opened without proper permissions</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="3-conclusion">3. Conclusion</h2>
+
+<p>Vim is an incredibly efficient editor when properly mastered. This cheatsheet provides a foundation for improving workflow, whether performing basic editing or advanced text manipulation. Practice these commands regularly, and you will unlock Vim’s full potential!</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="http://en.wikipedia.org/" target="_blank">Wikipedia</a></li>
+</ul>
+
+        
+        
+        <hr/>
+    
+        <a href="#" class="back-to-top">Back to top &uarr;</a>
+        <!--<a href="#page-title" class="back-to-top">Back to top &uarr;</a>-->
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#linux" class="page__taxonomy-item p-category" rel="tag">Linux</a><span class="sep">, </span>
+    
+      <a href="/tags/#oscp" class="page__taxonomy-item p-category" rel="tag">OSCP</a><span class="sep">, </span>
+    
+      <a href="/tags/#vim" class="page__taxonomy-item p-category" rel="tag">Vim</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#cheatsheet" class="page__taxonomy-item p-category" rel="tag">Cheatsheet</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-02-02T00:00:00+00:00">February 2, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=pikaybh&text=Vim+Cheatsheet%3A+Essential+Commands+for+Developers%20https%3A%2F%2Fpikaybh.github.io%2FVim-Cheatsheet-Essential-Commands-for-Developers%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpikaybh.github.io%2FVim-Cheatsheet-Essential-Commands-for-Developers%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fpikaybh.github.io%2FVim-Cheatsheet-Essential-Commands-for-Developers%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/Ruby-Date-Format-strftime/" class="pagination--pager" title="Ruby Date Format (strftime)
+">Previous</a>
+    
+    
+      <a href="/Solving-OverTheWires-Bandit-A-Beginners-Journey-into-Linux-CTF/" class="pagination--pager" title="Solving OverTheWire’s Bandit: A Beginner’s Journey into Linux CTF
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/headers/img.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Why-Use-Axios-Over-Fetch-in-JavaScript/" rel="permalink">Why Use Axios Over Fetch in JavaScript?
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-02-21T00:00:00+00:00">February 21, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">When working with HTTP requests in JavaScript, you might wonder why many developers prefer axios over the built-in fetch API. While fetch is natively availab...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/headers/DALL%C2%B7E%202025-02-10%2001.47.53%20-%20A%20wide-angle%20realistic%20illustration%20of%20two%20hands%20shaking%20in%20a%20professional%20handshake.%20The%20handshake%20symbolizes%20agreement,%20connection,%20and%20trust.%20The%20b.webp" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Understanding-TCP-Sessions-How-Connections-Are-Established-Maintained-and-Terminated/" rel="permalink">Understanding TCP Sessions: How Connections Are Established, Maintained, and Terminated
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-02-09T00:00:00+00:00">February 9, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">In the realm of computer networking, the Transmission Control Protocol (TCP) plays a pivotal role in ensuring reliable communication between devices. A funda...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/headers/download.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Solving-OverTheWires-Bandit-A-Beginners-Journey-into-Linux-CTF/" rel="permalink">Solving OverTheWire’s Bandit: A Beginner’s Journey into Linux CTF
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-02-08T00:00:00+00:00">February 8, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Disclaimer This blog post contains spoilers for the Bandit game. Please proceed with caution if you have not played the game yet.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Ruby-Date-Format-strftime/" rel="permalink">Ruby Date Format (strftime)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2025-02-01T00:00:00+00:00">February 1, 2025</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Date Formatting
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <div class="adsbygoogle--wrapper" align="center" style="margin: 1em 0;">
+      <ins 
+        class="adsbygoogle"
+        style="display:block; border-bottom: initial;"
+        data-ad-client="ca-pub-5250081198751558"
+        data-ad-slot="7854803270"
+        data-ad-format="auto"
+      ></ins>
+    </div>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <style>
+      ins.adsbygoogle[data-ad-status="unfilled"] {
+        display: none !important;
+      }
+    </style>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/byunghee-yoo" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+        
+      
+        
+          <li><a href="https://twitter.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i> (Twitter)</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://instagram.com/pikaybh" rel="nofollow noopener noreferrer" target="{ _blank }"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml" target="{ _blank }"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="https://pikaybh.github.io">pikaybh</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow" target="{ _blank }">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow" target="{ _blank }">Minimal Mistakes</a>.</div>
+<!--<div class="page__footer-copyright">&copy; 2025 <a href="mailto:" rel="me" class="u-email"><meta itemprop="email" content="" />Byunghee Yoo</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow" target="{ _blank }">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow" target="{ _blank }">Minimal Mistakes</a>.</div>-->
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'G-MFNMYR5P88']);
+  
+    _gaq.push(['_gat._anonymizeIp']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'pikaybh/pikaybh.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
